@@ -40,8 +40,6 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Printf("svcs:%#v\n", svcs)
-
 	err = writeTemplate("../go/client/client.go", clientTpl, svcs)
 	if err != nil {
 		panic(err)
