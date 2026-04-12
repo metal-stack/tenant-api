@@ -10,7 +10,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
-	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -469,8 +468,6 @@ type Tenant struct {
 	Meta          *Meta                  `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	DefaultQuotas *QuotaSet              `protobuf:"bytes,4,opt,name=default_quotas,json=defaultQuotas,proto3" json:"default_quotas,omitempty"`
-	Quotas        *QuotaSet              `protobuf:"bytes,5,opt,name=quotas,proto3" json:"quotas,omitempty"`
 	IamConfig     *IAMConfig             `protobuf:"bytes,6,opt,name=iam_config,json=iamConfig,proto3" json:"iam_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -525,20 +522,6 @@ func (x *Tenant) GetDescription() string {
 		return x.Description
 	}
 	return ""
-}
-
-func (x *Tenant) GetDefaultQuotas() *QuotaSet {
-	if x != nil {
-		return x.DefaultQuotas
-	}
-	return nil
-}
-
-func (x *Tenant) GetQuotas() *QuotaSet {
-	if x != nil {
-		return x.Quotas
-	}
-	return nil
 }
 
 func (x *Tenant) GetIamConfig() *IAMConfig {
@@ -777,20 +760,14 @@ func (x *TenantGetHistoryRequest) GetAt() *timestamppb.Timestamp {
 }
 
 type TenantFindRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// TODO: remove in next release:
-	//
-	// Deprecated: Marked as deprecated in api/v1/tenant.proto.
-	DeprecatedId *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=deprecated_id,json=deprecatedId,proto3" json:"deprecated_id,omitempty"`
-	// Deprecated: Marked as deprecated in api/v1/tenant.proto.
-	DeprecatedName *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=deprecated_name,json=deprecatedName,proto3" json:"deprecated_name,omitempty"`
-	Paging         *Paging                 `protobuf:"bytes,3,opt,name=paging,proto3" json:"paging,omitempty"`
-	Annotations    map[string]string       `protobuf:"bytes,4,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Id             *string                 `protobuf:"bytes,5,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	Name           *string                 `protobuf:"bytes,6,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Labels         []string                `protobuf:"bytes,7,rep,name=labels,proto3" json:"labels,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Paging        *Paging                `protobuf:"bytes,3,opt,name=paging,proto3" json:"paging,omitempty"`
+	Annotations   map[string]string      `protobuf:"bytes,4,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Id            *string                `protobuf:"bytes,5,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	Name          *string                `protobuf:"bytes,6,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Labels        []string               `protobuf:"bytes,7,rep,name=labels,proto3" json:"labels,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TenantFindRequest) Reset() {
@@ -821,22 +798,6 @@ func (x *TenantFindRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use TenantFindRequest.ProtoReflect.Descriptor instead.
 func (*TenantFindRequest) Descriptor() ([]byte, []int) {
 	return file_api_v1_tenant_proto_rawDescGZIP(), []int{14}
-}
-
-// Deprecated: Marked as deprecated in api/v1/tenant.proto.
-func (x *TenantFindRequest) GetDeprecatedId() *wrapperspb.StringValue {
-	if x != nil {
-		return x.DeprecatedId
-	}
-	return nil
-}
-
-// Deprecated: Marked as deprecated in api/v1/tenant.proto.
-func (x *TenantFindRequest) GetDeprecatedName() *wrapperspb.StringValue {
-	if x != nil {
-		return x.DeprecatedName
-	}
-	return nil
 }
 
 func (x *TenantFindRequest) GetPaging() *Paging {
@@ -975,7 +936,7 @@ var File_api_v1_tenant_proto protoreflect.FileDescriptor
 
 const file_api_v1_tenant_proto_rawDesc = "" +
 	"\n" +
-	"\x13api/v1/tenant.proto\x12\x06api.v1\x1a\x13api/v1/common.proto\x1a\x10api/v1/iam.proto\x1a\x11api/v1/meta.proto\x1a\x14api/v1/project.proto\x1a\x12api/v1/quota.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xa5\x01\n" +
+	"\x13api/v1/tenant.proto\x12\x06api.v1\x1a\x13api/v1/common.proto\x1a\x10api/v1/iam.proto\x1a\x11api/v1/meta.proto\x1a\x14api/v1/project.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa5\x01\n" +
 	" FindParticipatingProjectsRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x120\n" +
 	"\x11include_inherited\x18\x02 \x01(\bH\x00R\x10includeInherited\x88\x01\x01\x12\x1c\n" +
@@ -1018,13 +979,11 @@ const file_api_v1_tenant_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aD\n" +
 	"\x16TenantAnnotationsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf5\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x92\x01\n" +
 	"\x06Tenant\x12 \n" +
 	"\x04meta\x18\x01 \x01(\v2\f.api.v1.MetaR\x04meta\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x127\n" +
-	"\x0edefault_quotas\x18\x04 \x01(\v2\x10.api.v1.QuotaSetR\rdefaultQuotas\x12(\n" +
-	"\x06quotas\x18\x05 \x01(\v2\x10.api.v1.QuotaSetR\x06quotas\x120\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x120\n" +
 	"\n" +
 	"iam_config\x18\x06 \x01(\v2\x11.api.v1.IAMConfigR\tiamConfig\"=\n" +
 	"\x13TenantCreateRequest\x12&\n" +
@@ -1037,10 +996,8 @@ const file_api_v1_tenant_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"U\n" +
 	"\x17TenantGetHistoryRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12*\n" +
-	"\x02at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x02at\"\xb1\x03\n" +
-	"\x11TenantFindRequest\x12E\n" +
-	"\rdeprecated_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x02\x18\x01R\fdeprecatedId\x12I\n" +
-	"\x0fdeprecated_name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x02\x18\x01R\x0edeprecatedName\x12&\n" +
+	"\x02at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x02at\"\x9f\x02\n" +
+	"\x11TenantFindRequest\x12&\n" +
 	"\x06paging\x18\x03 \x01(\v2\x0e.api.v1.PagingR\x06paging\x12L\n" +
 	"\vannotations\x18\x04 \x03(\v2*.api.v1.TenantFindRequest.AnnotationsEntryR\vannotations\x12\x13\n" +
 	"\x02id\x18\x05 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
@@ -1110,11 +1067,9 @@ var file_api_v1_tenant_proto_goTypes = []any{
 	nil,                                       // 21: api.v1.TenantFindRequest.AnnotationsEntry
 	(*Project)(nil),                           // 22: api.v1.Project
 	(*Meta)(nil),                              // 23: api.v1.Meta
-	(*QuotaSet)(nil),                          // 24: api.v1.QuotaSet
-	(*IAMConfig)(nil),                         // 25: api.v1.IAMConfig
-	(*timestamppb.Timestamp)(nil),             // 26: google.protobuf.Timestamp
-	(*wrapperspb.StringValue)(nil),            // 27: google.protobuf.StringValue
-	(*Paging)(nil),                            // 28: api.v1.Paging
+	(*IAMConfig)(nil),                         // 24: api.v1.IAMConfig
+	(*timestamppb.Timestamp)(nil),             // 25: google.protobuf.Timestamp
+	(*Paging)(nil),                            // 26: api.v1.Paging
 }
 var file_api_v1_tenant_proto_depIdxs = []int32{
 	7,  // 0: api.v1.ListTenantMembersResponse.tenants:type_name -> api.v1.TenantWithMembershipAnnotations
@@ -1127,41 +1082,37 @@ var file_api_v1_tenant_proto_depIdxs = []int32{
 	19, // 7: api.v1.TenantWithMembershipAnnotations.project_annotations:type_name -> api.v1.TenantWithMembershipAnnotations.ProjectAnnotationsEntry
 	20, // 8: api.v1.TenantWithMembershipAnnotations.tenant_annotations:type_name -> api.v1.TenantWithMembershipAnnotations.TenantAnnotationsEntry
 	23, // 9: api.v1.Tenant.meta:type_name -> api.v1.Meta
-	24, // 10: api.v1.Tenant.default_quotas:type_name -> api.v1.QuotaSet
-	24, // 11: api.v1.Tenant.quotas:type_name -> api.v1.QuotaSet
-	25, // 12: api.v1.Tenant.iam_config:type_name -> api.v1.IAMConfig
-	8,  // 13: api.v1.TenantCreateRequest.tenant:type_name -> api.v1.Tenant
-	8,  // 14: api.v1.TenantUpdateRequest.tenant:type_name -> api.v1.Tenant
-	26, // 15: api.v1.TenantGetHistoryRequest.at:type_name -> google.protobuf.Timestamp
-	27, // 16: api.v1.TenantFindRequest.deprecated_id:type_name -> google.protobuf.StringValue
-	27, // 17: api.v1.TenantFindRequest.deprecated_name:type_name -> google.protobuf.StringValue
-	28, // 18: api.v1.TenantFindRequest.paging:type_name -> api.v1.Paging
-	21, // 19: api.v1.TenantFindRequest.annotations:type_name -> api.v1.TenantFindRequest.AnnotationsEntry
-	8,  // 20: api.v1.TenantResponse.tenant:type_name -> api.v1.Tenant
-	8,  // 21: api.v1.TenantListResponse.tenants:type_name -> api.v1.Tenant
-	9,  // 22: api.v1.TenantService.Create:input_type -> api.v1.TenantCreateRequest
-	10, // 23: api.v1.TenantService.Update:input_type -> api.v1.TenantUpdateRequest
-	11, // 24: api.v1.TenantService.Delete:input_type -> api.v1.TenantDeleteRequest
-	12, // 25: api.v1.TenantService.Get:input_type -> api.v1.TenantGetRequest
-	13, // 26: api.v1.TenantService.GetHistory:input_type -> api.v1.TenantGetHistoryRequest
-	14, // 27: api.v1.TenantService.Find:input_type -> api.v1.TenantFindRequest
-	2,  // 28: api.v1.TenantService.ListTenantMembers:input_type -> api.v1.ListTenantMembersRequest
-	0,  // 29: api.v1.TenantService.FindParticipatingProjects:input_type -> api.v1.FindParticipatingProjectsRequest
-	1,  // 30: api.v1.TenantService.FindParticipatingTenants:input_type -> api.v1.FindParticipatingTenantsRequest
-	15, // 31: api.v1.TenantService.Create:output_type -> api.v1.TenantResponse
-	15, // 32: api.v1.TenantService.Update:output_type -> api.v1.TenantResponse
-	15, // 33: api.v1.TenantService.Delete:output_type -> api.v1.TenantResponse
-	15, // 34: api.v1.TenantService.Get:output_type -> api.v1.TenantResponse
-	15, // 35: api.v1.TenantService.GetHistory:output_type -> api.v1.TenantResponse
-	16, // 36: api.v1.TenantService.Find:output_type -> api.v1.TenantListResponse
-	3,  // 37: api.v1.TenantService.ListTenantMembers:output_type -> api.v1.ListTenantMembersResponse
-	4,  // 38: api.v1.TenantService.FindParticipatingProjects:output_type -> api.v1.FindParticipatingProjectsResponse
-	5,  // 39: api.v1.TenantService.FindParticipatingTenants:output_type -> api.v1.FindParticipatingTenantsResponse
-	31, // [31:40] is the sub-list for method output_type
-	22, // [22:31] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	24, // 10: api.v1.Tenant.iam_config:type_name -> api.v1.IAMConfig
+	8,  // 11: api.v1.TenantCreateRequest.tenant:type_name -> api.v1.Tenant
+	8,  // 12: api.v1.TenantUpdateRequest.tenant:type_name -> api.v1.Tenant
+	25, // 13: api.v1.TenantGetHistoryRequest.at:type_name -> google.protobuf.Timestamp
+	26, // 14: api.v1.TenantFindRequest.paging:type_name -> api.v1.Paging
+	21, // 15: api.v1.TenantFindRequest.annotations:type_name -> api.v1.TenantFindRequest.AnnotationsEntry
+	8,  // 16: api.v1.TenantResponse.tenant:type_name -> api.v1.Tenant
+	8,  // 17: api.v1.TenantListResponse.tenants:type_name -> api.v1.Tenant
+	9,  // 18: api.v1.TenantService.Create:input_type -> api.v1.TenantCreateRequest
+	10, // 19: api.v1.TenantService.Update:input_type -> api.v1.TenantUpdateRequest
+	11, // 20: api.v1.TenantService.Delete:input_type -> api.v1.TenantDeleteRequest
+	12, // 21: api.v1.TenantService.Get:input_type -> api.v1.TenantGetRequest
+	13, // 22: api.v1.TenantService.GetHistory:input_type -> api.v1.TenantGetHistoryRequest
+	14, // 23: api.v1.TenantService.Find:input_type -> api.v1.TenantFindRequest
+	2,  // 24: api.v1.TenantService.ListTenantMembers:input_type -> api.v1.ListTenantMembersRequest
+	0,  // 25: api.v1.TenantService.FindParticipatingProjects:input_type -> api.v1.FindParticipatingProjectsRequest
+	1,  // 26: api.v1.TenantService.FindParticipatingTenants:input_type -> api.v1.FindParticipatingTenantsRequest
+	15, // 27: api.v1.TenantService.Create:output_type -> api.v1.TenantResponse
+	15, // 28: api.v1.TenantService.Update:output_type -> api.v1.TenantResponse
+	15, // 29: api.v1.TenantService.Delete:output_type -> api.v1.TenantResponse
+	15, // 30: api.v1.TenantService.Get:output_type -> api.v1.TenantResponse
+	15, // 31: api.v1.TenantService.GetHistory:output_type -> api.v1.TenantResponse
+	16, // 32: api.v1.TenantService.Find:output_type -> api.v1.TenantListResponse
+	3,  // 33: api.v1.TenantService.ListTenantMembers:output_type -> api.v1.ListTenantMembersResponse
+	4,  // 34: api.v1.TenantService.FindParticipatingProjects:output_type -> api.v1.FindParticipatingProjectsResponse
+	5,  // 35: api.v1.TenantService.FindParticipatingTenants:output_type -> api.v1.FindParticipatingTenantsResponse
+	27, // [27:36] is the sub-list for method output_type
+	18, // [18:27] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_api_v1_tenant_proto_init() }
@@ -1173,7 +1124,6 @@ func file_api_v1_tenant_proto_init() {
 	file_api_v1_iam_proto_init()
 	file_api_v1_meta_proto_init()
 	file_api_v1_project_proto_init()
-	file_api_v1_quota_proto_init()
 	file_api_v1_tenant_proto_msgTypes[0].OneofWrappers = []any{}
 	file_api_v1_tenant_proto_msgTypes[1].OneofWrappers = []any{}
 	file_api_v1_tenant_proto_msgTypes[2].OneofWrappers = []any{}
