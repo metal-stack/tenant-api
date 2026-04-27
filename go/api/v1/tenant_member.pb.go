@@ -273,8 +273,8 @@ type TenantMemberFindRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TenantId      *string                `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3,oneof" json:"tenant_id,omitempty"`
 	MemberId      *string                `protobuf:"bytes,2,opt,name=member_id,json=memberId,proto3,oneof" json:"member_id,omitempty"`
-	Annotations   map[string]string      `protobuf:"bytes,6,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Namespace     string                 `protobuf:"bytes,7,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	Annotations   map[string]string      `protobuf:"bytes,3,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Namespace     string                 `protobuf:"bytes,4,opt,name=namespace,proto3" json:"namespace,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -446,8 +446,8 @@ const file_api_v1_tenant_member_proto_rawDesc = "" +
 	"\x17TenantMemberFindRequest\x12 \n" +
 	"\ttenant_id\x18\x01 \x01(\tH\x00R\btenantId\x88\x01\x01\x12 \n" +
 	"\tmember_id\x18\x02 \x01(\tH\x01R\bmemberId\x88\x01\x01\x12R\n" +
-	"\vannotations\x18\x06 \x03(\v20.api.v1.TenantMemberFindRequest.AnnotationsEntryR\vannotations\x12\x1c\n" +
-	"\tnamespace\x18\a \x01(\tR\tnamespace\x1a>\n" +
+	"\vannotations\x18\x03 \x03(\v20.api.v1.TenantMemberFindRequest.AnnotationsEntryR\vannotations\x12\x1c\n" +
+	"\tnamespace\x18\x04 \x01(\tR\tnamespace\x1a>\n" +
 	"\x10AnnotationsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\f\n" +

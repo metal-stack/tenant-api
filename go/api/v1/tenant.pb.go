@@ -468,7 +468,7 @@ type Tenant struct {
 	Meta          *Meta                  `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	IamConfig     *IAMConfig             `protobuf:"bytes,6,opt,name=iam_config,json=iamConfig,proto3" json:"iam_config,omitempty"`
+	IamConfig     *IAMConfig             `protobuf:"bytes,4,opt,name=iam_config,json=iamConfig,proto3" json:"iam_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -761,11 +761,11 @@ func (x *TenantGetHistoryRequest) GetAt() *timestamppb.Timestamp {
 
 type TenantFindRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Paging        *Paging                `protobuf:"bytes,3,opt,name=paging,proto3" json:"paging,omitempty"`
-	Annotations   map[string]string      `protobuf:"bytes,4,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Id            *string                `protobuf:"bytes,5,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	Name          *string                `protobuf:"bytes,6,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Labels        []string               `protobuf:"bytes,7,rep,name=labels,proto3" json:"labels,omitempty"`
+	Paging        *Paging                `protobuf:"bytes,1,opt,name=paging,proto3" json:"paging,omitempty"`
+	Annotations   map[string]string      `protobuf:"bytes,2,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Id            *string                `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	Name          *string                `protobuf:"bytes,4,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Labels        []string               `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -985,7 +985,7 @@ const file_api_v1_tenant_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x120\n" +
 	"\n" +
-	"iam_config\x18\x06 \x01(\v2\x11.api.v1.IAMConfigR\tiamConfig\"=\n" +
+	"iam_config\x18\x04 \x01(\v2\x11.api.v1.IAMConfigR\tiamConfig\"=\n" +
 	"\x13TenantCreateRequest\x12&\n" +
 	"\x06tenant\x18\x01 \x01(\v2\x0e.api.v1.TenantR\x06tenant\"=\n" +
 	"\x13TenantUpdateRequest\x12&\n" +
@@ -998,11 +998,11 @@ const file_api_v1_tenant_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12*\n" +
 	"\x02at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x02at\"\x9f\x02\n" +
 	"\x11TenantFindRequest\x12&\n" +
-	"\x06paging\x18\x03 \x01(\v2\x0e.api.v1.PagingR\x06paging\x12L\n" +
-	"\vannotations\x18\x04 \x03(\v2*.api.v1.TenantFindRequest.AnnotationsEntryR\vannotations\x12\x13\n" +
-	"\x02id\x18\x05 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
-	"\x04name\x18\x06 \x01(\tH\x01R\x04name\x88\x01\x01\x12\x16\n" +
-	"\x06labels\x18\a \x03(\tR\x06labels\x1a>\n" +
+	"\x06paging\x18\x01 \x01(\v2\x0e.api.v1.PagingR\x06paging\x12L\n" +
+	"\vannotations\x18\x02 \x03(\v2*.api.v1.TenantFindRequest.AnnotationsEntryR\vannotations\x12\x13\n" +
+	"\x02id\x18\x03 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
+	"\x04name\x18\x04 \x01(\tH\x01R\x04name\x88\x01\x01\x12\x16\n" +
+	"\x06labels\x18\x05 \x03(\tR\x06labels\x1a>\n" +
 	"\x10AnnotationsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x05\n" +

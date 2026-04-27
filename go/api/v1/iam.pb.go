@@ -284,13 +284,13 @@ type ConnectorConfig struct {
 	IdmAccessCode   string `protobuf:"bytes,5,opt,name=idm_access_code,json=idmAccessCode,proto3" json:"idm_access_code,omitempty"`
 	IdmCustomerId   string `protobuf:"bytes,6,opt,name=idm_customer_id,json=idmCustomerId,proto3" json:"idm_customer_id,omitempty"`
 	IdmGroupOu      string `protobuf:"bytes,7,opt,name=idm_group_ou,json=idmGroupOu,proto3" json:"idm_group_ou,omitempty"`
-	IdmDomainName   string `protobuf:"bytes,9,opt,name=idm_domain_name,json=idmDomainName,proto3" json:"idm_domain_name,omitempty"`
-	IdmTenantPrefix string `protobuf:"bytes,10,opt,name=idm_tenant_prefix,json=idmTenantPrefix,proto3" json:"idm_tenant_prefix,omitempty"`
-	IdmSubmitter    string `protobuf:"bytes,11,opt,name=idm_submitter,json=idmSubmitter,proto3" json:"idm_submitter,omitempty"`
-	IdmJobInfo      string `protobuf:"bytes,12,opt,name=idm_job_info,json=idmJobInfo,proto3" json:"idm_job_info,omitempty"`
-	IdmReqSystem    string `protobuf:"bytes,13,opt,name=idm_req_system,json=idmReqSystem,proto3" json:"idm_req_system,omitempty"`
-	IdmReqUser      string `protobuf:"bytes,14,opt,name=idm_req_user,json=idmReqUser,proto3" json:"idm_req_user,omitempty"`
-	IdmReqEmail     string `protobuf:"bytes,15,opt,name=idm_req_email,json=idmReqEmail,proto3" json:"idm_req_email,omitempty"`
+	IdmDomainName   string `protobuf:"bytes,8,opt,name=idm_domain_name,json=idmDomainName,proto3" json:"idm_domain_name,omitempty"`
+	IdmTenantPrefix string `protobuf:"bytes,9,opt,name=idm_tenant_prefix,json=idmTenantPrefix,proto3" json:"idm_tenant_prefix,omitempty"`
+	IdmSubmitter    string `protobuf:"bytes,10,opt,name=idm_submitter,json=idmSubmitter,proto3" json:"idm_submitter,omitempty"`
+	IdmJobInfo      string `protobuf:"bytes,11,opt,name=idm_job_info,json=idmJobInfo,proto3" json:"idm_job_info,omitempty"`
+	IdmReqSystem    string `protobuf:"bytes,12,opt,name=idm_req_system,json=idmReqSystem,proto3" json:"idm_req_system,omitempty"`
+	IdmReqUser      string `protobuf:"bytes,13,opt,name=idm_req_user,json=idmReqUser,proto3" json:"idm_req_user,omitempty"`
+	IdmReqEmail     string `protobuf:"bytes,14,opt,name=idm_req_email,json=idmReqEmail,proto3" json:"idm_req_email,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -444,7 +444,7 @@ const file_api_v1_iam_proto_rawDesc = "" +
 	"\x14expected_groups_list\x18\x02 \x01(\tR\x12expectedGroupsList\x120\n" +
 	"\x14namespace_max_length\x18\x03 \x01(\x05R\x12namespaceMaxLength\x12<\n" +
 	"\x1acluster_groupname_template\x18\x04 \x01(\tR\x18clusterGroupnameTemplate\x12:\n" +
-	"\x19rolebinding_name_template\x18\x05 \x01(\tR\x17rolebindingNameTemplate\"\xb8\x04\n" +
+	"\x19rolebinding_name_template\x18\x05 \x01(\tR\x17rolebindingNameTemplate\"\x9a\x04\n" +
 	"\x0fConnectorConfig\x12\x1e\n" +
 	"\vidm_api_url\x18\x01 \x01(\tR\tidmApiUrl\x12 \n" +
 	"\fidm_api_user\x18\x02 \x01(\tR\n" +
@@ -455,16 +455,16 @@ const file_api_v1_iam_proto_rawDesc = "" +
 	"\x0fidm_customer_id\x18\x06 \x01(\tR\ridmCustomerId\x12 \n" +
 	"\fidm_group_ou\x18\a \x01(\tR\n" +
 	"idmGroupOu\x12&\n" +
-	"\x0fidm_domain_name\x18\t \x01(\tR\ridmDomainName\x12*\n" +
-	"\x11idm_tenant_prefix\x18\n" +
-	" \x01(\tR\x0fidmTenantPrefix\x12#\n" +
-	"\ridm_submitter\x18\v \x01(\tR\fidmSubmitter\x12 \n" +
-	"\fidm_job_info\x18\f \x01(\tR\n" +
+	"\x0fidm_domain_name\x18\b \x01(\tR\ridmDomainName\x12*\n" +
+	"\x11idm_tenant_prefix\x18\t \x01(\tR\x0fidmTenantPrefix\x12#\n" +
+	"\ridm_submitter\x18\n" +
+	" \x01(\tR\fidmSubmitter\x12 \n" +
+	"\fidm_job_info\x18\v \x01(\tR\n" +
 	"idmJobInfo\x12$\n" +
-	"\x0eidm_req_system\x18\r \x01(\tR\fidmReqSystem\x12 \n" +
-	"\fidm_req_user\x18\x0e \x01(\tR\n" +
+	"\x0eidm_req_system\x18\f \x01(\tR\fidmReqSystem\x12 \n" +
+	"\fidm_req_user\x18\r \x01(\tR\n" +
 	"idmReqUser\x12\"\n" +
-	"\ridm_req_email\x18\x0f \x01(\tR\vidmReqEmailJ\x04\b\b\x10\tR\x16idm_groupname_templateB\x82\x01\n" +
+	"\ridm_req_email\x18\x0e \x01(\tR\vidmReqEmailB\x82\x01\n" +
 	"\n" +
 	"com.api.v1B\bIamProtoP\x01Z1github.com/metal-stack/tenant-api/go/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
 
