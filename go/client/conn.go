@@ -19,6 +19,8 @@ type (
 		BaseURL string
 		Token   string
 
+		Namespace string
+
 		// Optional client Interceptors
 		Interceptors []connect.Interceptor
 
