@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"connectrpc.com/connect"
+	v1 "github.com/metal-stack/tenant-api/go/api/v1"
 )
 
 // authinterceptor adds the required auth headers
@@ -64,4 +65,42 @@ func (i *loggingInterceptor) WrapStreamingClient(next connect.StreamingClientFun
 
 func (i *loggingInterceptor) WrapStreamingHandler(next connect.StreamingHandlerFunc) connect.StreamingHandlerFunc {
 	return next
+}
+
+func NamespaceInterceptor(namespace string) connect.UnaryInterceptorFunc {
+	return func(uf connect.UnaryFunc) connect.UnaryFunc {
+		return func(ctx context.Context, ar connect.AnyRequest) (connect.AnyResponse, error) {
+			switch r := ar.Any().(type) {
+			case *v1.TenantMemberCreateRequest:
+				if r.TenantMember.Namespace == "" {
+					r.TenantMember.Namespace = namespace
+				}
+			case *v1.ProjectMemberCreateRequest:
+				if r.ProjectMember.Namespace == "" {
+					r.ProjectMember.Namespace = namespace
+				}
+			case *v1.TenantMemberFindRequest:
+				if r.Namespace == "" {
+					r.Namespace = namespace
+				}
+			case *v1.ProjectMemberFindRequest:
+				if r.Namespace == "" {
+					r.Namespace = namespace
+				}
+			case *v1.FindParticipatingProjectsRequest:
+				if r.Namespace == "" {
+					r.Namespace = namespace
+				}
+			case *v1.FindParticipatingTenantsRequest:
+				if r.Namespace == "" {
+					r.Namespace = namespace
+				}
+			case *v1.ListTenantMembersRequest:
+				if r.Namespace == "" {
+					r.Namespace = namespace
+				}
+			}
+			return uf(ctx, ar)
+		}
+	}
 }
