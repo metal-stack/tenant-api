@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package api.v1;
 
+// Paging contains properties to define how paging in list requests should work.
 message Paging {
   // page is used for pagination, if unset only the first page is returned,
   // the list response contains then the page number for the next page.

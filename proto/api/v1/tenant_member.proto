@@ -4,16 +4,23 @@ package api.v1;
 
 import "api/v1/meta.proto";
 
+// TenantMemberService provides service methods to work with tenant members
 service TenantMemberService {
+  // Create a tenant member
   rpc Create(TenantMemberCreateRequest) returns (TenantMemberResponse);
+  // Update a tenant member
   rpc Update(TenantMemberUpdateRequest) returns (TenantMemberResponse);
+  // Delete a tenant member
   rpc Delete(TenantMemberDeleteRequest) returns (TenantMemberResponse);
+  // Get a tenant member
   rpc Get(TenantMemberGetRequest) returns (TenantMemberResponse);
+  // Find tenant members
   rpc Find(TenantMemberFindRequest) returns (TenantMemberListResponse);
 }
 
 // TenantMember is the database model
 message TenantMember {
+  // Meta of the tenant member
   Meta meta = 1;
   // TenantId is the id of the parent tenant
   string tenant_id = 2;
@@ -23,33 +30,50 @@ message TenantMember {
   string namespace = 4;
 }
 
+// TenantMemberCreateRequest is the request payload to create a tenant member
 message TenantMemberCreateRequest {
+  // TenantMember to create
   TenantMember tenant_member = 1;
 }
 
+// TenantMemberUpdateRequest is the request payload to update a tenant member
 message TenantMemberUpdateRequest {
+  // TenantMember to update
   TenantMember tenant_member = 1;
 }
 
+// TenantMemberDeleteRequest is the request payload to delete a tenant member
 message TenantMemberDeleteRequest {
+  // Id of the tenant member to delete
   string id = 1;
 }
 
+// TenantMemberGetRequest is the request payload to get a tenant member
 message TenantMemberGetRequest {
+  // Id of the tenant member to get
   string id = 1;
 }
 
+// TenantMemberFindRequest is the request payload to find tenant members
 message TenantMemberFindRequest {
+  // TenantId of tenant members to find
   optional string tenant_id = 1;
+  // MemberId of this tenant member to find
   optional string member_id = 2;
+  // Annotations of tenant members to find
   map<string, string> annotations = 3;
+  // Namespace
   string namespace = 4;
 }
 
+// TenantMemberResponse is the response payload of requests
 message TenantMemberResponse {
+  // TenantMember
   TenantMember tenant_member = 1;
 }
 
+// TenantMemberListResponse is the response payload of find requests
 message TenantMemberListResponse {
+  // TenantMembers
   repeated TenantMember tenant_members = 1;
 }

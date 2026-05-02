@@ -2,19 +2,27 @@ syntax = "proto3";
 
 package api.v1;
 
+// IAMConfig
 message IAMConfig {
+  // IssuerConfig
   IssuerConfig issuer_config = 1;
+  // IDMConfig
   IDMConfig idm_config = 2;
+  // GroupConfig
   NamespaceGroupConfig group_config = 3;
 }
 
+// IssuerConfig
 message IssuerConfig {
+  // URL
   string url = 1;
+  // ClientId
   string client_id = 2;
 }
 
 // mandatory config
 message IDMConfig {
+  // IDMType
   string idm_type = 1;
 
   // optional
@@ -45,22 +53,35 @@ message NamespaceGroupConfig {
 
 // optional config if idm webhook is used to automatically create/delete groups/roles in the tenant idm
 message ConnectorConfig {
-  // the following are all mandatory
+  // APIUrl the api url of the idm
   string idm_api_url = 1;
+  // User of the idm
   string idm_api_user = 2;
+  // Password for the idm
   string idm_api_password = 3;
 
+  // SystemId of the idm
   string idm_system_id = 4;
+  // AccessCode of the idm
   string idm_access_code = 5;
+  // CustomerId of the idm
   string idm_customer_id = 6;
+  // GroupOU of the idm
   string idm_group_ou = 7;
 
+  // DomainName of the idm
   string idm_domain_name = 8;
+  // TenantPrefix of the idm
   string idm_tenant_prefix = 9;
 
+  // Submitter
   string idm_submitter = 10;
+  // JobInfo
   string idm_job_info = 11;
+  // ReqSystem
   string idm_req_system = 12;
+  // ReqUser
   string idm_req_user = 13;
+  // ReqEmail
   string idm_req_email = 14;
 }

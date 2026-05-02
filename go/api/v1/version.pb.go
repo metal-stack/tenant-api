@@ -21,6 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// GetVersionRequest is the request payload to get the server version
 type GetVersionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -57,12 +58,17 @@ func (*GetVersionRequest) Descriptor() ([]byte, []int) {
 	return file_api_v1_version_proto_rawDescGZIP(), []int{0}
 }
 
+// GetVersionResponse is the response payload with all version details
 type GetVersionResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Version       string                 `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
-	Revision      string                 `protobuf:"bytes,2,opt,name=revision,proto3" json:"revision,omitempty"`
-	GitSha1       string                 `protobuf:"bytes,3,opt,name=git_sha1,json=gitSha1,proto3" json:"git_sha1,omitempty"`
-	BuildDate     string                 `protobuf:"bytes,4,opt,name=build_date,json=buildDate,proto3" json:"build_date,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Version
+	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
+	// Revision
+	Revision string `protobuf:"bytes,2,opt,name=revision,proto3" json:"revision,omitempty"`
+	// GitSha1
+	GitSha1 string `protobuf:"bytes,3,opt,name=git_sha1,json=gitSha1,proto3" json:"git_sha1,omitempty"`
+	// BuildDate
+	BuildDate     string `protobuf:"bytes,4,opt,name=build_date,json=buildDate,proto3" json:"build_date,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

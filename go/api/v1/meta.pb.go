@@ -22,16 +22,25 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Meta contains properties common to every message
 type Meta struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Kind          string                 `protobuf:"bytes,2,opt,name=kind,proto3" json:"kind,omitempty"`
-	Apiversion    string                 `protobuf:"bytes,3,opt,name=apiversion,proto3" json:"apiversion,omitempty"`
-	Version       int64                  `protobuf:"varint,4,opt,name=version,proto3" json:"version,omitempty"`
-	CreatedTime   *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_time,json=createdTime,proto3" json:"created_time,omitempty"`
-	UpdatedTime   *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=updated_time,json=updatedTime,proto3" json:"updated_time,omitempty"`
-	Annotations   map[string]string      `protobuf:"bytes,7,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Labels        []string               `protobuf:"bytes,8,rep,name=labels,proto3" json:"labels,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Id if this message
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Kind of this message
+	Kind string `protobuf:"bytes,2,opt,name=kind,proto3" json:"kind,omitempty"`
+	// Apiversion of this message
+	Apiversion string `protobuf:"bytes,3,opt,name=apiversion,proto3" json:"apiversion,omitempty"`
+	// Version of this message, e.g. how often this message was modified
+	Version int64 `protobuf:"varint,4,opt,name=version,proto3" json:"version,omitempty"`
+	// CreatedTime when this message was created
+	CreatedTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_time,json=createdTime,proto3" json:"created_time,omitempty"`
+	// UpdatedTime when this message was updated
+	UpdatedTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=updated_time,json=updatedTime,proto3" json:"updated_time,omitempty"`
+	// Annotations to this message
+	Annotations map[string]string `protobuf:"bytes,7,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Labels to this message
+	Labels        []string `protobuf:"bytes,8,rep,name=labels,proto3" json:"labels,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

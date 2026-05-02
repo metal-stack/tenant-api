@@ -51,10 +51,15 @@ const (
 
 // TenantMemberServiceClient is a client for the api.v1.TenantMemberService service.
 type TenantMemberServiceClient interface {
+	// Create a tenant member
 	Create(context.Context, *v1.TenantMemberCreateRequest) (*v1.TenantMemberResponse, error)
+	// Update a tenant member
 	Update(context.Context, *v1.TenantMemberUpdateRequest) (*v1.TenantMemberResponse, error)
+	// Delete a tenant member
 	Delete(context.Context, *v1.TenantMemberDeleteRequest) (*v1.TenantMemberResponse, error)
+	// Get a tenant member
 	Get(context.Context, *v1.TenantMemberGetRequest) (*v1.TenantMemberResponse, error)
+	// Find tenant members
 	Find(context.Context, *v1.TenantMemberFindRequest) (*v1.TenantMemberListResponse, error)
 }
 
@@ -158,10 +163,15 @@ func (c *tenantMemberServiceClient) Find(ctx context.Context, req *v1.TenantMemb
 
 // TenantMemberServiceHandler is an implementation of the api.v1.TenantMemberService service.
 type TenantMemberServiceHandler interface {
+	// Create a tenant member
 	Create(context.Context, *v1.TenantMemberCreateRequest) (*v1.TenantMemberResponse, error)
+	// Update a tenant member
 	Update(context.Context, *v1.TenantMemberUpdateRequest) (*v1.TenantMemberResponse, error)
+	// Delete a tenant member
 	Delete(context.Context, *v1.TenantMemberDeleteRequest) (*v1.TenantMemberResponse, error)
+	// Get a tenant member
 	Get(context.Context, *v1.TenantMemberGetRequest) (*v1.TenantMemberResponse, error)
+	// Find tenant members
 	Find(context.Context, *v1.TenantMemberFindRequest) (*v1.TenantMemberListResponse, error)
 }
 

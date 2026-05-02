@@ -21,11 +21,15 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// IAMConfig
 type IAMConfig struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	IssuerConfig  *IssuerConfig          `protobuf:"bytes,1,opt,name=issuer_config,json=issuerConfig,proto3" json:"issuer_config,omitempty"`
-	IdmConfig     *IDMConfig             `protobuf:"bytes,2,opt,name=idm_config,json=idmConfig,proto3" json:"idm_config,omitempty"`
-	GroupConfig   *NamespaceGroupConfig  `protobuf:"bytes,3,opt,name=group_config,json=groupConfig,proto3" json:"group_config,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// IssuerConfig
+	IssuerConfig *IssuerConfig `protobuf:"bytes,1,opt,name=issuer_config,json=issuerConfig,proto3" json:"issuer_config,omitempty"`
+	// IDMConfig
+	IdmConfig *IDMConfig `protobuf:"bytes,2,opt,name=idm_config,json=idmConfig,proto3" json:"idm_config,omitempty"`
+	// GroupConfig
+	GroupConfig   *NamespaceGroupConfig `protobuf:"bytes,3,opt,name=group_config,json=groupConfig,proto3" json:"group_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -81,10 +85,13 @@ func (x *IAMConfig) GetGroupConfig() *NamespaceGroupConfig {
 	return nil
 }
 
+// IssuerConfig
 type IssuerConfig struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	ClientId      string                 `protobuf:"bytes,2,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// URL
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	// ClientId
+	ClientId      string `protobuf:"bytes,2,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -135,8 +142,9 @@ func (x *IssuerConfig) GetClientId() string {
 
 // mandatory config
 type IDMConfig struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	IdmType string                 `protobuf:"bytes,1,opt,name=idm_type,json=idmType,proto3" json:"idm_type,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// IDMType
+	IdmType string `protobuf:"bytes,1,opt,name=idm_type,json=idmType,proto3" json:"idm_type,omitempty"`
 	// optional
 	ConnectorConfig *ConnectorConfig `protobuf:"bytes,2,opt,name=connector_config,json=connectorConfig,proto3" json:"connector_config,omitempty"`
 	unknownFields   protoimpl.UnknownFields
@@ -276,23 +284,36 @@ func (x *NamespaceGroupConfig) GetRolebindingNameTemplate() string {
 // optional config if idm webhook is used to automatically create/delete groups/roles in the tenant idm
 type ConnectorConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// the following are all mandatory
-	IdmApiUrl       string `protobuf:"bytes,1,opt,name=idm_api_url,json=idmApiUrl,proto3" json:"idm_api_url,omitempty"`
-	IdmApiUser      string `protobuf:"bytes,2,opt,name=idm_api_user,json=idmApiUser,proto3" json:"idm_api_user,omitempty"`
-	IdmApiPassword  string `protobuf:"bytes,3,opt,name=idm_api_password,json=idmApiPassword,proto3" json:"idm_api_password,omitempty"`
-	IdmSystemId     string `protobuf:"bytes,4,opt,name=idm_system_id,json=idmSystemId,proto3" json:"idm_system_id,omitempty"`
-	IdmAccessCode   string `protobuf:"bytes,5,opt,name=idm_access_code,json=idmAccessCode,proto3" json:"idm_access_code,omitempty"`
-	IdmCustomerId   string `protobuf:"bytes,6,opt,name=idm_customer_id,json=idmCustomerId,proto3" json:"idm_customer_id,omitempty"`
-	IdmGroupOu      string `protobuf:"bytes,7,opt,name=idm_group_ou,json=idmGroupOu,proto3" json:"idm_group_ou,omitempty"`
-	IdmDomainName   string `protobuf:"bytes,8,opt,name=idm_domain_name,json=idmDomainName,proto3" json:"idm_domain_name,omitempty"`
+	// APIUrl the api url of the idm
+	IdmApiUrl string `protobuf:"bytes,1,opt,name=idm_api_url,json=idmApiUrl,proto3" json:"idm_api_url,omitempty"`
+	// User of the idm
+	IdmApiUser string `protobuf:"bytes,2,opt,name=idm_api_user,json=idmApiUser,proto3" json:"idm_api_user,omitempty"`
+	// Password for the idm
+	IdmApiPassword string `protobuf:"bytes,3,opt,name=idm_api_password,json=idmApiPassword,proto3" json:"idm_api_password,omitempty"`
+	// SystemId of the idm
+	IdmSystemId string `protobuf:"bytes,4,opt,name=idm_system_id,json=idmSystemId,proto3" json:"idm_system_id,omitempty"`
+	// AccessCode of the idm
+	IdmAccessCode string `protobuf:"bytes,5,opt,name=idm_access_code,json=idmAccessCode,proto3" json:"idm_access_code,omitempty"`
+	// CustomerId of the idm
+	IdmCustomerId string `protobuf:"bytes,6,opt,name=idm_customer_id,json=idmCustomerId,proto3" json:"idm_customer_id,omitempty"`
+	// GroupOU of the idm
+	IdmGroupOu string `protobuf:"bytes,7,opt,name=idm_group_ou,json=idmGroupOu,proto3" json:"idm_group_ou,omitempty"`
+	// DomainName of the idm
+	IdmDomainName string `protobuf:"bytes,8,opt,name=idm_domain_name,json=idmDomainName,proto3" json:"idm_domain_name,omitempty"`
+	// TenantPrefix of the idm
 	IdmTenantPrefix string `protobuf:"bytes,9,opt,name=idm_tenant_prefix,json=idmTenantPrefix,proto3" json:"idm_tenant_prefix,omitempty"`
-	IdmSubmitter    string `protobuf:"bytes,10,opt,name=idm_submitter,json=idmSubmitter,proto3" json:"idm_submitter,omitempty"`
-	IdmJobInfo      string `protobuf:"bytes,11,opt,name=idm_job_info,json=idmJobInfo,proto3" json:"idm_job_info,omitempty"`
-	IdmReqSystem    string `protobuf:"bytes,12,opt,name=idm_req_system,json=idmReqSystem,proto3" json:"idm_req_system,omitempty"`
-	IdmReqUser      string `protobuf:"bytes,13,opt,name=idm_req_user,json=idmReqUser,proto3" json:"idm_req_user,omitempty"`
-	IdmReqEmail     string `protobuf:"bytes,14,opt,name=idm_req_email,json=idmReqEmail,proto3" json:"idm_req_email,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	// Submitter
+	IdmSubmitter string `protobuf:"bytes,10,opt,name=idm_submitter,json=idmSubmitter,proto3" json:"idm_submitter,omitempty"`
+	// JobInfo
+	IdmJobInfo string `protobuf:"bytes,11,opt,name=idm_job_info,json=idmJobInfo,proto3" json:"idm_job_info,omitempty"`
+	// ReqSystem
+	IdmReqSystem string `protobuf:"bytes,12,opt,name=idm_req_system,json=idmReqSystem,proto3" json:"idm_req_system,omitempty"`
+	// ReqUser
+	IdmReqUser string `protobuf:"bytes,13,opt,name=idm_req_user,json=idmReqUser,proto3" json:"idm_req_user,omitempty"`
+	// ReqEmail
+	IdmReqEmail   string `protobuf:"bytes,14,opt,name=idm_req_email,json=idmReqEmail,proto3" json:"idm_req_email,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ConnectorConfig) Reset() {

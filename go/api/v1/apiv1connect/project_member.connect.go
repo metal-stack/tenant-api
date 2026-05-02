@@ -52,10 +52,15 @@ const (
 
 // ProjectMemberServiceClient is a client for the api.v1.ProjectMemberService service.
 type ProjectMemberServiceClient interface {
+	// Create a project member ship
 	Create(context.Context, *v1.ProjectMemberCreateRequest) (*v1.ProjectMemberResponse, error)
+	// Update a project member ship
 	Update(context.Context, *v1.ProjectMemberUpdateRequest) (*v1.ProjectMemberResponse, error)
+	// Delete a project member ship
 	Delete(context.Context, *v1.ProjectMemberDeleteRequest) (*v1.ProjectMemberResponse, error)
+	// Get a project member ship
 	Get(context.Context, *v1.ProjectMemberGetRequest) (*v1.ProjectMemberResponse, error)
+	// Find project member ships
 	Find(context.Context, *v1.ProjectMemberFindRequest) (*v1.ProjectMemberListResponse, error)
 }
 
@@ -159,10 +164,15 @@ func (c *projectMemberServiceClient) Find(ctx context.Context, req *v1.ProjectMe
 
 // ProjectMemberServiceHandler is an implementation of the api.v1.ProjectMemberService service.
 type ProjectMemberServiceHandler interface {
+	// Create a project member ship
 	Create(context.Context, *v1.ProjectMemberCreateRequest) (*v1.ProjectMemberResponse, error)
+	// Update a project member ship
 	Update(context.Context, *v1.ProjectMemberUpdateRequest) (*v1.ProjectMemberResponse, error)
+	// Delete a project member ship
 	Delete(context.Context, *v1.ProjectMemberDeleteRequest) (*v1.ProjectMemberResponse, error)
+	// Get a project member ship
 	Get(context.Context, *v1.ProjectMemberGetRequest) (*v1.ProjectMemberResponse, error)
+	// Find project member ships
 	Find(context.Context, *v1.ProjectMemberFindRequest) (*v1.ProjectMemberListResponse, error)
 }
 

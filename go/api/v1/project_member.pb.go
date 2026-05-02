@@ -23,10 +23,13 @@ const (
 
 // ProjectMember is the database model
 type ProjectMember struct {
-	state     protoimpl.MessageState `protogen:"open.v1"`
-	Meta      *Meta                  `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
-	ProjectId string                 `protobuf:"bytes,2,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	TenantId  string                 `protobuf:"bytes,3,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Meta for a project member
+	Meta *Meta `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
+	// ProjectId of this project member
+	ProjectId string `protobuf:"bytes,2,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	// TenantId of this project member
+	TenantId string `protobuf:"bytes,3,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	// Namespace introduces the possibility to associate memberships for different applications that use the masterdata-api as a backend.
 	Namespace     string `protobuf:"bytes,4,opt,name=namespace,proto3" json:"namespace,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -91,9 +94,11 @@ func (x *ProjectMember) GetNamespace() string {
 	return ""
 }
 
+// ProjectMemberCreateRequest is the request payload to create a new project member
 type ProjectMemberCreateRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProjectMember *ProjectMember         `protobuf:"bytes,1,opt,name=project_member,json=projectMember,proto3" json:"project_member,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ProjectMember to create
+	ProjectMember *ProjectMember `protobuf:"bytes,1,opt,name=project_member,json=projectMember,proto3" json:"project_member,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -135,9 +140,11 @@ func (x *ProjectMemberCreateRequest) GetProjectMember() *ProjectMember {
 	return nil
 }
 
+// ProjectMemberUpdateRequest is the request payload to Update a project member
 type ProjectMemberUpdateRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProjectMember *ProjectMember         `protobuf:"bytes,1,opt,name=project_member,json=projectMember,proto3" json:"project_member,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ProjectMember to update
+	ProjectMember *ProjectMember `protobuf:"bytes,1,opt,name=project_member,json=projectMember,proto3" json:"project_member,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -179,9 +186,11 @@ func (x *ProjectMemberUpdateRequest) GetProjectMember() *ProjectMember {
 	return nil
 }
 
+// ProjectMemberDeleteRequest is the request payload to delete a project member
 type ProjectMemberDeleteRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Id of the project member to delete
+	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -223,9 +232,11 @@ func (x *ProjectMemberDeleteRequest) GetId() string {
 	return ""
 }
 
+// ProjectMemberGetRequest is the request payload to get a project member
 type ProjectMemberGetRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Id of the project member to get
+	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -267,12 +278,17 @@ func (x *ProjectMemberGetRequest) GetId() string {
 	return ""
 }
 
+// ProjectMemberFindRequest is the request payload to find project members
 type ProjectMemberFindRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProjectId     *string                `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3,oneof" json:"project_id,omitempty"`
-	TenantId      *string                `protobuf:"bytes,2,opt,name=tenant_id,json=tenantId,proto3,oneof" json:"tenant_id,omitempty"`
-	Annotations   map[string]string      `protobuf:"bytes,3,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Namespace     string                 `protobuf:"bytes,4,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ProjectId of project members to find
+	ProjectId *string `protobuf:"bytes,1,opt,name=project_id,json=projectId,proto3,oneof" json:"project_id,omitempty"`
+	// TenantId of project members to find
+	TenantId *string `protobuf:"bytes,2,opt,name=tenant_id,json=tenantId,proto3,oneof" json:"tenant_id,omitempty"`
+	// Annotations of project members to find
+	Annotations map[string]string `protobuf:"bytes,3,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Namespace of project members to find
+	Namespace     string `protobuf:"bytes,4,opt,name=namespace,proto3" json:"namespace,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -335,9 +351,11 @@ func (x *ProjectMemberFindRequest) GetNamespace() string {
 	return ""
 }
 
+// ProjectMemberResponse contains the project member
 type ProjectMemberResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ProjectMember *ProjectMember         `protobuf:"bytes,1,opt,name=project_member,json=projectMember,proto3" json:"project_member,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ProjectMember is the response
+	ProjectMember *ProjectMember `protobuf:"bytes,1,opt,name=project_member,json=projectMember,proto3" json:"project_member,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -379,9 +397,11 @@ func (x *ProjectMemberResponse) GetProjectMember() *ProjectMember {
 	return nil
 }
 
+// ProjectMemberListResponse contains the project members
 type ProjectMemberListResponse struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	ProjectMembers []*ProjectMember       `protobuf:"bytes,1,rep,name=project_members,json=projectMembers,proto3" json:"project_members,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// ProjectMembers is the response
+	ProjectMembers []*ProjectMember `protobuf:"bytes,1,rep,name=project_members,json=projectMembers,proto3" json:"project_members,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }

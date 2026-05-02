@@ -6,60 +6,94 @@ import "api/v1/common.proto";
 import "api/v1/meta.proto";
 import "google/protobuf/timestamp.proto";
 
+// ProjectService provides service methods to work with projects
 service ProjectService {
+  // Create a project
   rpc Create(ProjectCreateRequest) returns (ProjectResponse);
+  // Update a project
   rpc Update(ProjectUpdateRequest) returns (ProjectResponse);
+  // Delete a project
   rpc Delete(ProjectDeleteRequest) returns (ProjectResponse);
+  // Get a project
   rpc Get(ProjectGetRequest) returns (ProjectResponse);
+  // GetHistory of a project
   rpc GetHistory(ProjectGetHistoryRequest) returns (ProjectResponse);
+  // Find projects
   rpc Find(ProjectFindRequest) returns (ProjectListResponse);
 }
 
 // Project is the database model
 message Project {
+  // Meta for a project
   Meta meta = 1;
+  // Name of the project
   string name = 2;
+  // Description of this project
   string description = 3;
+  // TenantId to which this project belongs to
   string tenant_id = 4;
 }
 
+// ProjectCreateRequest is the request payload to create a new project
 message ProjectCreateRequest {
+  // Project to create
   Project project = 1;
 }
 
+// ProjectUpdateRequest is the request payload to update a project
 message ProjectUpdateRequest {
+  // Project to update
   Project project = 1;
 }
 
+// ProjectDeleteRequest is the request payload to delete a project
 message ProjectDeleteRequest {
+  // Id of the project to delete
   string id = 1;
 }
 
+// ProjectGetRequest is the request payload to get a project
 message ProjectGetRequest {
+  // Id of the project to get
   string id = 1;
 }
 
+// ProjectGetHistoryRequest is the request payload to get the history of a project
 message ProjectGetHistoryRequest {
+  // Id of the project to get the history for
   string id = 1;
+  // At the timestamp at which the history should get returned
   google.protobuf.Timestamp at = 2;
 }
 
+// ProjectFindRequest is the request payload to find projects
 message ProjectFindRequest {
+  // Paging spec of this find request
   Paging paging = 1;
+  // Annotations of projects to find
   map<string, string> annotations = 2;
 
+  // Id of the project to find
   optional string id = 3;
+  // Name of the project to find
   optional string name = 4;
+  // Description of the project to find
   optional string description = 5;
+  // TenantId of the projects to find
   optional string tenant_id = 6;
+  // Labels of the projects to find
   repeated string labels = 7;
 }
 
+// ProjectResponse contains the project
 message ProjectResponse {
+  // Project is the response
   Project project = 1;
 }
 
+// ProjectListResponse contains the projects
 message ProjectListResponse {
+  // Projects is the response
   repeated Project projects = 1;
   // next_page_token is used for pagination, returns the next page to be fetched and must then be provided in the list request.
   optional uint64 next_page = 2;

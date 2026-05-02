@@ -24,7 +24,8 @@ const (
 // TenantMember is the database model
 type TenantMember struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	Meta  *Meta                  `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
+	// Meta of the tenant member
+	Meta *Meta `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
 	// TenantId is the id of the parent tenant
 	TenantId string `protobuf:"bytes,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	// MemberId is the id of the member tenant
@@ -93,9 +94,11 @@ func (x *TenantMember) GetNamespace() string {
 	return ""
 }
 
+// TenantMemberCreateRequest is the request payload to create a tenant member
 type TenantMemberCreateRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantMember  *TenantMember          `protobuf:"bytes,1,opt,name=tenant_member,json=tenantMember,proto3" json:"tenant_member,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// TenantMember to create
+	TenantMember  *TenantMember `protobuf:"bytes,1,opt,name=tenant_member,json=tenantMember,proto3" json:"tenant_member,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -137,9 +140,11 @@ func (x *TenantMemberCreateRequest) GetTenantMember() *TenantMember {
 	return nil
 }
 
+// TenantMemberUpdateRequest is the request payload to update a tenant member
 type TenantMemberUpdateRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantMember  *TenantMember          `protobuf:"bytes,1,opt,name=tenant_member,json=tenantMember,proto3" json:"tenant_member,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// TenantMember to update
+	TenantMember  *TenantMember `protobuf:"bytes,1,opt,name=tenant_member,json=tenantMember,proto3" json:"tenant_member,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -181,9 +186,11 @@ func (x *TenantMemberUpdateRequest) GetTenantMember() *TenantMember {
 	return nil
 }
 
+// TenantMemberDeleteRequest is the request payload to delete a tenant member
 type TenantMemberDeleteRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Id of the tenant member to delete
+	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -225,9 +232,11 @@ func (x *TenantMemberDeleteRequest) GetId() string {
 	return ""
 }
 
+// TenantMemberGetRequest is the request payload to get a tenant member
 type TenantMemberGetRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Id of the tenant member to get
+	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -269,12 +278,17 @@ func (x *TenantMemberGetRequest) GetId() string {
 	return ""
 }
 
+// TenantMemberFindRequest is the request payload to find tenant members
 type TenantMemberFindRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantId      *string                `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3,oneof" json:"tenant_id,omitempty"`
-	MemberId      *string                `protobuf:"bytes,2,opt,name=member_id,json=memberId,proto3,oneof" json:"member_id,omitempty"`
-	Annotations   map[string]string      `protobuf:"bytes,3,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Namespace     string                 `protobuf:"bytes,4,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// TenantId of tenant members to find
+	TenantId *string `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3,oneof" json:"tenant_id,omitempty"`
+	// MemberId of this tenant member to find
+	MemberId *string `protobuf:"bytes,2,opt,name=member_id,json=memberId,proto3,oneof" json:"member_id,omitempty"`
+	// Annotations of tenant members to find
+	Annotations map[string]string `protobuf:"bytes,3,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Namespace
+	Namespace     string `protobuf:"bytes,4,opt,name=namespace,proto3" json:"namespace,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -337,9 +351,11 @@ func (x *TenantMemberFindRequest) GetNamespace() string {
 	return ""
 }
 
+// TenantMemberResponse is the response payload of requests
 type TenantMemberResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantMember  *TenantMember          `protobuf:"bytes,1,opt,name=tenant_member,json=tenantMember,proto3" json:"tenant_member,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// TenantMember
+	TenantMember  *TenantMember `protobuf:"bytes,1,opt,name=tenant_member,json=tenantMember,proto3" json:"tenant_member,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -381,9 +397,11 @@ func (x *TenantMemberResponse) GetTenantMember() *TenantMember {
 	return nil
 }
 
+// TenantMemberListResponse is the response payload of find requests
 type TenantMemberListResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TenantMembers []*TenantMember        `protobuf:"bytes,1,rep,name=tenant_members,json=tenantMembers,proto3" json:"tenant_members,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// TenantMembers
+	TenantMembers []*TenantMember `protobuf:"bytes,1,rep,name=tenant_members,json=tenantMembers,proto3" json:"tenant_members,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

@@ -50,11 +50,17 @@ const (
 
 // ProjectServiceClient is a client for the api.v1.ProjectService service.
 type ProjectServiceClient interface {
+	// Create a project
 	Create(context.Context, *v1.ProjectCreateRequest) (*v1.ProjectResponse, error)
+	// Update a project
 	Update(context.Context, *v1.ProjectUpdateRequest) (*v1.ProjectResponse, error)
+	// Delete a project
 	Delete(context.Context, *v1.ProjectDeleteRequest) (*v1.ProjectResponse, error)
+	// Get a project
 	Get(context.Context, *v1.ProjectGetRequest) (*v1.ProjectResponse, error)
+	// GetHistory of a project
 	GetHistory(context.Context, *v1.ProjectGetHistoryRequest) (*v1.ProjectResponse, error)
+	// Find projects
 	Find(context.Context, *v1.ProjectFindRequest) (*v1.ProjectListResponse, error)
 }
 
@@ -174,11 +180,17 @@ func (c *projectServiceClient) Find(ctx context.Context, req *v1.ProjectFindRequ
 
 // ProjectServiceHandler is an implementation of the api.v1.ProjectService service.
 type ProjectServiceHandler interface {
+	// Create a project
 	Create(context.Context, *v1.ProjectCreateRequest) (*v1.ProjectResponse, error)
+	// Update a project
 	Update(context.Context, *v1.ProjectUpdateRequest) (*v1.ProjectResponse, error)
+	// Delete a project
 	Delete(context.Context, *v1.ProjectDeleteRequest) (*v1.ProjectResponse, error)
+	// Get a project
 	Get(context.Context, *v1.ProjectGetRequest) (*v1.ProjectResponse, error)
+	// GetHistory of a project
 	GetHistory(context.Context, *v1.ProjectGetHistoryRequest) (*v1.ProjectResponse, error)
+	// Find projects
 	Find(context.Context, *v1.ProjectFindRequest) (*v1.ProjectListResponse, error)
 }
 

@@ -59,14 +59,23 @@ const (
 
 // TenantServiceClient is a client for the api.v1.TenantService service.
 type TenantServiceClient interface {
+	// Create a tenant
 	Create(context.Context, *v1.TenantCreateRequest) (*v1.TenantResponse, error)
+	// Update a tenant
 	Update(context.Context, *v1.TenantUpdateRequest) (*v1.TenantResponse, error)
+	// Delete a tenant
 	Delete(context.Context, *v1.TenantDeleteRequest) (*v1.TenantResponse, error)
+	// Get a tenant
 	Get(context.Context, *v1.TenantGetRequest) (*v1.TenantResponse, error)
+	// GetHistory of a tenant
 	GetHistory(context.Context, *v1.TenantGetHistoryRequest) (*v1.TenantResponse, error)
+	// Find tenants
 	Find(context.Context, *v1.TenantFindRequest) (*v1.TenantListResponse, error)
+	// ListTenantMembers list all members of a tenant
 	ListTenantMembers(context.Context, *v1.ListTenantMembersRequest) (*v1.ListTenantMembersResponse, error)
+	// FindParticipatingProjects returns projects which are participating to the tenant
 	FindParticipatingProjects(context.Context, *v1.FindParticipatingProjectsRequest) (*v1.FindParticipatingProjectsResponse, error)
+	// FindParticipatingTenants returns tenants which are participating to the tenant
 	FindParticipatingTenants(context.Context, *v1.FindParticipatingTenantsRequest) (*v1.FindParticipatingTenantsResponse, error)
 }
 
@@ -234,14 +243,23 @@ func (c *tenantServiceClient) FindParticipatingTenants(ctx context.Context, req 
 
 // TenantServiceHandler is an implementation of the api.v1.TenantService service.
 type TenantServiceHandler interface {
+	// Create a tenant
 	Create(context.Context, *v1.TenantCreateRequest) (*v1.TenantResponse, error)
+	// Update a tenant
 	Update(context.Context, *v1.TenantUpdateRequest) (*v1.TenantResponse, error)
+	// Delete a tenant
 	Delete(context.Context, *v1.TenantDeleteRequest) (*v1.TenantResponse, error)
+	// Get a tenant
 	Get(context.Context, *v1.TenantGetRequest) (*v1.TenantResponse, error)
+	// GetHistory of a tenant
 	GetHistory(context.Context, *v1.TenantGetHistoryRequest) (*v1.TenantResponse, error)
+	// Find tenants
 	Find(context.Context, *v1.TenantFindRequest) (*v1.TenantListResponse, error)
+	// ListTenantMembers list all members of a tenant
 	ListTenantMembers(context.Context, *v1.ListTenantMembersRequest) (*v1.ListTenantMembersResponse, error)
+	// FindParticipatingProjects returns projects which are participating to the tenant
 	FindParticipatingProjects(context.Context, *v1.FindParticipatingProjectsRequest) (*v1.FindParticipatingProjectsResponse, error)
+	// FindParticipatingTenants returns tenants which are participating to the tenant
 	FindParticipatingTenants(context.Context, *v1.FindParticipatingTenantsRequest) (*v1.FindParticipatingTenantsResponse, error)
 }
 

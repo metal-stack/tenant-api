@@ -2,15 +2,23 @@ syntax = "proto3";
 
 package api.v1;
 
+// VersionService provides service methods to version information
 service VersionService {
+  // Get the version of this server
   rpc Get(GetVersionRequest) returns (GetVersionResponse);
 }
 
+// GetVersionRequest is the request payload to get the server version
 message GetVersionRequest {}
 
+// GetVersionResponse is the response payload with all version details
 message GetVersionResponse {
+  // Version
   string version = 1;
+  // Revision
   string revision = 2;
+  // GitSha1
   string git_sha1 = 3;
+  // BuildDate
   string build_date = 4;
 }

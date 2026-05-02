@@ -22,13 +22,17 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// FindParticipatingProjectsRequest is the request payload to find participating projects
 type FindParticipatingProjectsRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	TenantId         string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	IncludeInherited *bool                  `protobuf:"varint,2,opt,name=include_inherited,json=includeInherited,proto3,oneof" json:"include_inherited,omitempty"`
-	Namespace        string                 `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// TenantId
+	TenantId string `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	// IncludeInherited
+	IncludeInherited *bool `protobuf:"varint,2,opt,name=include_inherited,json=includeInherited,proto3,oneof" json:"include_inherited,omitempty"`
+	// Namespace
+	Namespace     string `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FindParticipatingProjectsRequest) Reset() {
@@ -82,13 +86,17 @@ func (x *FindParticipatingProjectsRequest) GetNamespace() string {
 	return ""
 }
 
+// FindParticipatingTenantsRequest is the request payload to find participating tenants
 type FindParticipatingTenantsRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	TenantId         string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	IncludeInherited *bool                  `protobuf:"varint,2,opt,name=include_inherited,json=includeInherited,proto3,oneof" json:"include_inherited,omitempty"`
-	Namespace        string                 `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// TenantId
+	TenantId string `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	// IncludeInherited
+	IncludeInherited *bool `protobuf:"varint,2,opt,name=include_inherited,json=includeInherited,proto3,oneof" json:"include_inherited,omitempty"`
+	// Namespace
+	Namespace     string `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FindParticipatingTenantsRequest) Reset() {
@@ -142,13 +150,17 @@ func (x *FindParticipatingTenantsRequest) GetNamespace() string {
 	return ""
 }
 
+// ListTenantMembersRequest is the request payload to get tenant members
 type ListTenantMembersRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	TenantId         string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	IncludeInherited *bool                  `protobuf:"varint,2,opt,name=include_inherited,json=includeInherited,proto3,oneof" json:"include_inherited,omitempty"`
-	Namespace        string                 `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// TenantId
+	TenantId string `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	// IncludeInherited
+	IncludeInherited *bool `protobuf:"varint,2,opt,name=include_inherited,json=includeInherited,proto3,oneof" json:"include_inherited,omitempty"`
+	// Namespace
+	Namespace     string `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListTenantMembersRequest) Reset() {
@@ -202,8 +214,10 @@ func (x *ListTenantMembersRequest) GetNamespace() string {
 	return ""
 }
 
+// ListTenantMembersResponse is the response payload to a list tenant member request
 type ListTenantMembersResponse struct {
-	state         protoimpl.MessageState             `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Tenants
 	Tenants       []*TenantWithMembershipAnnotations `protobuf:"bytes,1,rep,name=tenants,proto3" json:"tenants,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -246,8 +260,10 @@ func (x *ListTenantMembersResponse) GetTenants() []*TenantWithMembershipAnnotati
 	return nil
 }
 
+// FindParticipatingProjectsResponse is the response payload to a find participating project request
 type FindParticipatingProjectsResponse struct {
-	state         protoimpl.MessageState              `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Projects
 	Projects      []*ProjectWithMembershipAnnotations `protobuf:"bytes,1,rep,name=projects,proto3" json:"projects,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -290,8 +306,10 @@ func (x *FindParticipatingProjectsResponse) GetProjects() []*ProjectWithMembersh
 	return nil
 }
 
+// FindParticipatingTenantsResponse is the response payload to a find participating tenant request
 type FindParticipatingTenantsResponse struct {
-	state         protoimpl.MessageState             `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Tenants
 	Tenants       []*TenantWithMembershipAnnotations `protobuf:"bytes,1,rep,name=tenants,proto3" json:"tenants,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -334,13 +352,17 @@ func (x *FindParticipatingTenantsResponse) GetTenants() []*TenantWithMembershipA
 	return nil
 }
 
+// ProjectWithMembershipAnnotations
 type ProjectWithMembershipAnnotations struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Project            *Project               `protobuf:"bytes,1,opt,name=project,proto3" json:"project,omitempty"`
-	ProjectAnnotations map[string]string      `protobuf:"bytes,2,rep,name=project_annotations,json=projectAnnotations,proto3" json:"project_annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	TenantAnnotations  map[string]string      `protobuf:"bytes,3,rep,name=tenant_annotations,json=tenantAnnotations,proto3" json:"tenant_annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Project
+	Project *Project `protobuf:"bytes,1,opt,name=project,proto3" json:"project,omitempty"`
+	// ProjectAnnotations
+	ProjectAnnotations map[string]string `protobuf:"bytes,2,rep,name=project_annotations,json=projectAnnotations,proto3" json:"project_annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// TenantAnnotations
+	TenantAnnotations map[string]string `protobuf:"bytes,3,rep,name=tenant_annotations,json=tenantAnnotations,proto3" json:"tenant_annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ProjectWithMembershipAnnotations) Reset() {
@@ -394,11 +416,15 @@ func (x *ProjectWithMembershipAnnotations) GetTenantAnnotations() map[string]str
 	return nil
 }
 
+// TenantWithMembershipAnnotations
 type TenantWithMembershipAnnotations struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Tenant             *Tenant                `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
-	ProjectAnnotations map[string]string      `protobuf:"bytes,2,rep,name=project_annotations,json=projectAnnotations,proto3" json:"project_annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	TenantAnnotations  map[string]string      `protobuf:"bytes,3,rep,name=tenant_annotations,json=tenantAnnotations,proto3" json:"tenant_annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Tenant
+	Tenant *Tenant `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
+	// ProjectAnnotations
+	ProjectAnnotations map[string]string `protobuf:"bytes,2,rep,name=project_annotations,json=projectAnnotations,proto3" json:"project_annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// TenantAnnotations
+	TenantAnnotations map[string]string `protobuf:"bytes,3,rep,name=tenant_annotations,json=tenantAnnotations,proto3" json:"tenant_annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// ProjectIDs contains all project IDs of this tenant for which an explicit project membership exists
 	ProjectIds    []string `protobuf:"bytes,4,rep,name=project_ids,json=projectIds,proto3" json:"project_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -463,12 +489,17 @@ func (x *TenantWithMembershipAnnotations) GetProjectIds() []string {
 	return nil
 }
 
+// Tenant
 type Tenant struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Meta          *Meta                  `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	IamConfig     *IAMConfig             `protobuf:"bytes,4,opt,name=iam_config,json=iamConfig,proto3" json:"iam_config,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Meta for a tenant
+	Meta *Meta `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
+	// Name of the tenant
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of the tenant
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// IAMConfig for this tenant
+	IamConfig     *IAMConfig `protobuf:"bytes,4,opt,name=iam_config,json=iamConfig,proto3" json:"iam_config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -531,9 +562,11 @@ func (x *Tenant) GetIamConfig() *IAMConfig {
 	return nil
 }
 
+// TenantCreateRequest is the request payload to create a tenant
 type TenantCreateRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Tenant        *Tenant                `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Tenant
+	Tenant        *Tenant `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -575,9 +608,11 @@ func (x *TenantCreateRequest) GetTenant() *Tenant {
 	return nil
 }
 
+// TenantUpdateRequest is the request payload to update a tenant
 type TenantUpdateRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Tenant        *Tenant                `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Tenant
+	Tenant        *Tenant `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -619,9 +654,11 @@ func (x *TenantUpdateRequest) GetTenant() *Tenant {
 	return nil
 }
 
+// TenantDeleteRequest is the request payload to delete a tenant
 type TenantDeleteRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Id of the tenant to delete
+	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -663,9 +700,11 @@ func (x *TenantDeleteRequest) GetId() string {
 	return ""
 }
 
+// TenantGetRequest is the request payload to get a tenant
 type TenantGetRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Id of the tenant to get
+	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -707,9 +746,12 @@ func (x *TenantGetRequest) GetId() string {
 	return ""
 }
 
+// TenantGetHistoryRequest is the request payload to get the history of a tenant
 type TenantGetHistoryRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Id of the tenant
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// At timestamp at which the history of the tenant should be returned
 	At            *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=at,proto3" json:"at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -759,13 +801,19 @@ func (x *TenantGetHistoryRequest) GetAt() *timestamppb.Timestamp {
 	return nil
 }
 
+// TenantFindRequest is the request payload to find tenants
 type TenantFindRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Paging        *Paging                `protobuf:"bytes,1,opt,name=paging,proto3" json:"paging,omitempty"`
-	Annotations   map[string]string      `protobuf:"bytes,2,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Id            *string                `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	Name          *string                `protobuf:"bytes,4,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Labels        []string               `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Paging spec of this find request
+	Paging *Paging `protobuf:"bytes,1,opt,name=paging,proto3" json:"paging,omitempty"`
+	// Annotations of tenants to find
+	Annotations map[string]string `protobuf:"bytes,2,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Id of the tenant to find
+	Id *string `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	// Name of tenants to find
+	Name *string `protobuf:"bytes,4,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// Labels of tenants to find
+	Labels        []string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -835,9 +883,11 @@ func (x *TenantFindRequest) GetLabels() []string {
 	return nil
 }
 
+// TenantResponse is the response payload of requests
 type TenantResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Tenant        *Tenant                `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Tenant
+	Tenant        *Tenant `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -879,9 +929,11 @@ func (x *TenantResponse) GetTenant() *Tenant {
 	return nil
 }
 
+// TenantListResponse is the response payload of tenant find requests
 type TenantListResponse struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	Tenants []*Tenant              `protobuf:"bytes,1,rep,name=tenants,proto3" json:"tenants,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Tenants
+	Tenants []*Tenant `protobuf:"bytes,1,rep,name=tenants,proto3" json:"tenants,omitempty"`
 	// next_page is used for pagination, returns the next page to be fetched and must then be provided in the list request.
 	NextPage      *uint64 `protobuf:"varint,2,opt,name=next_page,json=nextPage,proto3,oneof" json:"next_page,omitempty"`
 	unknownFields protoimpl.UnknownFields

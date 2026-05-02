@@ -24,11 +24,15 @@ const (
 
 // Project is the database model
 type Project struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Meta          *Meta                  `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	TenantId      string                 `protobuf:"bytes,4,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Meta for a project
+	Meta *Meta `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
+	// Name of the project
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// Description of this project
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	// TenantId to which this project belongs to
+	TenantId      string `protobuf:"bytes,4,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -91,9 +95,11 @@ func (x *Project) GetTenantId() string {
 	return ""
 }
 
+// ProjectCreateRequest is the request payload to create a new project
 type ProjectCreateRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Project       *Project               `protobuf:"bytes,1,opt,name=project,proto3" json:"project,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Project to create
+	Project       *Project `protobuf:"bytes,1,opt,name=project,proto3" json:"project,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -135,9 +141,11 @@ func (x *ProjectCreateRequest) GetProject() *Project {
 	return nil
 }
 
+// ProjectUpdateRequest is the request payload to update a project
 type ProjectUpdateRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Project       *Project               `protobuf:"bytes,1,opt,name=project,proto3" json:"project,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Project to update
+	Project       *Project `protobuf:"bytes,1,opt,name=project,proto3" json:"project,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -179,9 +187,11 @@ func (x *ProjectUpdateRequest) GetProject() *Project {
 	return nil
 }
 
+// ProjectDeleteRequest is the request payload to delete a project
 type ProjectDeleteRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Id of the project to delete
+	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -223,9 +233,11 @@ func (x *ProjectDeleteRequest) GetId() string {
 	return ""
 }
 
+// ProjectGetRequest is the request payload to get a project
 type ProjectGetRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Id of the project to get
+	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -267,9 +279,12 @@ func (x *ProjectGetRequest) GetId() string {
 	return ""
 }
 
+// ProjectGetHistoryRequest is the request payload to get the history of a project
 type ProjectGetHistoryRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Id of the project to get the history for
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// At the timestamp at which the history should get returned
 	At            *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=at,proto3" json:"at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -319,15 +334,23 @@ func (x *ProjectGetHistoryRequest) GetAt() *timestamppb.Timestamp {
 	return nil
 }
 
+// ProjectFindRequest is the request payload to find projects
 type ProjectFindRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Paging        *Paging                `protobuf:"bytes,1,opt,name=paging,proto3" json:"paging,omitempty"`
-	Annotations   map[string]string      `protobuf:"bytes,2,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Id            *string                `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	Name          *string                `protobuf:"bytes,4,opt,name=name,proto3,oneof" json:"name,omitempty"`
-	Description   *string                `protobuf:"bytes,5,opt,name=description,proto3,oneof" json:"description,omitempty"`
-	TenantId      *string                `protobuf:"bytes,6,opt,name=tenant_id,json=tenantId,proto3,oneof" json:"tenant_id,omitempty"`
-	Labels        []string               `protobuf:"bytes,7,rep,name=labels,proto3" json:"labels,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Paging spec of this find request
+	Paging *Paging `protobuf:"bytes,1,opt,name=paging,proto3" json:"paging,omitempty"`
+	// Annotations of projects to find
+	Annotations map[string]string `protobuf:"bytes,2,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	// Id of the project to find
+	Id *string `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	// Name of the project to find
+	Name *string `protobuf:"bytes,4,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// Description of the project to find
+	Description *string `protobuf:"bytes,5,opt,name=description,proto3,oneof" json:"description,omitempty"`
+	// TenantId of the projects to find
+	TenantId *string `protobuf:"bytes,6,opt,name=tenant_id,json=tenantId,proto3,oneof" json:"tenant_id,omitempty"`
+	// Labels of the projects to find
+	Labels        []string `protobuf:"bytes,7,rep,name=labels,proto3" json:"labels,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -411,9 +434,11 @@ func (x *ProjectFindRequest) GetLabels() []string {
 	return nil
 }
 
+// ProjectResponse contains the project
 type ProjectResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Project       *Project               `protobuf:"bytes,1,opt,name=project,proto3" json:"project,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Project is the response
+	Project       *Project `protobuf:"bytes,1,opt,name=project,proto3" json:"project,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -455,9 +480,11 @@ func (x *ProjectResponse) GetProject() *Project {
 	return nil
 }
 
+// ProjectListResponse contains the projects
 type ProjectListResponse struct {
-	state    protoimpl.MessageState `protogen:"open.v1"`
-	Projects []*Project             `protobuf:"bytes,1,rep,name=projects,proto3" json:"projects,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Projects is the response
+	Projects []*Project `protobuf:"bytes,1,rep,name=projects,proto3" json:"projects,omitempty"`
 	// next_page_token is used for pagination, returns the next page to be fetched and must then be provided in the list request.
 	NextPage      *uint64 `protobuf:"varint,2,opt,name=next_page,json=nextPage,proto3,oneof" json:"next_page,omitempty"`
 	unknownFields protoimpl.UnknownFields

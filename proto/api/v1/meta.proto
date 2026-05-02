@@ -4,13 +4,22 @@ package api.v1;
 
 import "google/protobuf/timestamp.proto";
 
+// Meta contains properties common to every message
 message Meta {
+  // Id if this message
   string id = 1;
+  // Kind of this message
   string kind = 2;
+  // Apiversion of this message
   string apiversion = 3;
+  // Version of this message, e.g. how often this message was modified
   int64 version = 4;
+  // CreatedTime when this message was created
   google.protobuf.Timestamp created_time = 5;
+  // UpdatedTime when this message was updated
   google.protobuf.Timestamp updated_time = 6;
+  // Annotations to this message
   map<string, string> annotations = 7;
+  // Labels to this message
   repeated string labels = 8;
 }

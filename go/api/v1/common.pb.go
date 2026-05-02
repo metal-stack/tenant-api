@@ -21,6 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Paging contains properties to define how paging in list requests should work.
 type Paging struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// page is used for pagination, if unset only the first page is returned,

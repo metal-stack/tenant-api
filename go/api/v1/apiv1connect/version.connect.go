@@ -39,6 +39,7 @@ const (
 
 // VersionServiceClient is a client for the api.v1.VersionService service.
 type VersionServiceClient interface {
+	// Get the version of this server
 	Get(context.Context, *v1.GetVersionRequest) (*v1.GetVersionResponse, error)
 }
 
@@ -78,6 +79,7 @@ func (c *versionServiceClient) Get(ctx context.Context, req *v1.GetVersionReques
 
 // VersionServiceHandler is an implementation of the api.v1.VersionService service.
 type VersionServiceHandler interface {
+	// Get the version of this server
 	Get(context.Context, *v1.GetVersionRequest) (*v1.GetVersionResponse, error)
 }
 
