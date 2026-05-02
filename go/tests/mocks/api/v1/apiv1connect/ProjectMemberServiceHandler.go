@@ -39,8 +39,8 @@ func (_m *ProjectMemberServiceHandler) EXPECT() *ProjectMemberServiceHandler_Exp
 }
 
 // Create provides a mock function for the type ProjectMemberServiceHandler
-func (_mock *ProjectMemberServiceHandler) Create(context1 context.Context, projectMemberCreateRequest *apiv1.ProjectMemberCreateRequest) (*apiv1.ProjectMemberResponse, error) {
-	ret := _mock.Called(context1, projectMemberCreateRequest)
+func (_mock *ProjectMemberServiceHandler) Create(context1 context.Context, projectMemberServiceCreateRequest *apiv1.ProjectMemberServiceCreateRequest) (*apiv1.ProjectMemberResponse, error) {
+	ret := _mock.Called(context1, projectMemberServiceCreateRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Create")
@@ -48,18 +48,18 @@ func (_mock *ProjectMemberServiceHandler) Create(context1 context.Context, proje
 
 	var r0 *apiv1.ProjectMemberResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberCreateRequest) (*apiv1.ProjectMemberResponse, error)); ok {
-		return returnFunc(context1, projectMemberCreateRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberServiceCreateRequest) (*apiv1.ProjectMemberResponse, error)); ok {
+		return returnFunc(context1, projectMemberServiceCreateRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberCreateRequest) *apiv1.ProjectMemberResponse); ok {
-		r0 = returnFunc(context1, projectMemberCreateRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberServiceCreateRequest) *apiv1.ProjectMemberResponse); ok {
+		r0 = returnFunc(context1, projectMemberServiceCreateRequest)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*apiv1.ProjectMemberResponse)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectMemberCreateRequest) error); ok {
-		r1 = returnFunc(context1, projectMemberCreateRequest)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectMemberServiceCreateRequest) error); ok {
+		r1 = returnFunc(context1, projectMemberServiceCreateRequest)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -73,20 +73,20 @@ type ProjectMemberServiceHandler_Create_Call struct {
 
 // Create is a helper method to define mock.On call
 //   - context1 context.Context
-//   - projectMemberCreateRequest *apiv1.ProjectMemberCreateRequest
-func (_e *ProjectMemberServiceHandler_Expecter) Create(context1 interface{}, projectMemberCreateRequest interface{}) *ProjectMemberServiceHandler_Create_Call {
-	return &ProjectMemberServiceHandler_Create_Call{Call: _e.mock.On("Create", context1, projectMemberCreateRequest)}
+//   - projectMemberServiceCreateRequest *apiv1.ProjectMemberServiceCreateRequest
+func (_e *ProjectMemberServiceHandler_Expecter) Create(context1 interface{}, projectMemberServiceCreateRequest interface{}) *ProjectMemberServiceHandler_Create_Call {
+	return &ProjectMemberServiceHandler_Create_Call{Call: _e.mock.On("Create", context1, projectMemberServiceCreateRequest)}
 }
 
-func (_c *ProjectMemberServiceHandler_Create_Call) Run(run func(context1 context.Context, projectMemberCreateRequest *apiv1.ProjectMemberCreateRequest)) *ProjectMemberServiceHandler_Create_Call {
+func (_c *ProjectMemberServiceHandler_Create_Call) Run(run func(context1 context.Context, projectMemberServiceCreateRequest *apiv1.ProjectMemberServiceCreateRequest)) *ProjectMemberServiceHandler_Create_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 *apiv1.ProjectMemberCreateRequest
+		var arg1 *apiv1.ProjectMemberServiceCreateRequest
 		if args[1] != nil {
-			arg1 = args[1].(*apiv1.ProjectMemberCreateRequest)
+			arg1 = args[1].(*apiv1.ProjectMemberServiceCreateRequest)
 		}
 		run(
 			arg0,
@@ -101,14 +101,14 @@ func (_c *ProjectMemberServiceHandler_Create_Call) Return(projectMemberResponse 
 	return _c
 }
 
-func (_c *ProjectMemberServiceHandler_Create_Call) RunAndReturn(run func(context1 context.Context, projectMemberCreateRequest *apiv1.ProjectMemberCreateRequest) (*apiv1.ProjectMemberResponse, error)) *ProjectMemberServiceHandler_Create_Call {
+func (_c *ProjectMemberServiceHandler_Create_Call) RunAndReturn(run func(context1 context.Context, projectMemberServiceCreateRequest *apiv1.ProjectMemberServiceCreateRequest) (*apiv1.ProjectMemberResponse, error)) *ProjectMemberServiceHandler_Create_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // Delete provides a mock function for the type ProjectMemberServiceHandler
-func (_mock *ProjectMemberServiceHandler) Delete(context1 context.Context, projectMemberDeleteRequest *apiv1.ProjectMemberDeleteRequest) (*apiv1.ProjectMemberResponse, error) {
-	ret := _mock.Called(context1, projectMemberDeleteRequest)
+func (_mock *ProjectMemberServiceHandler) Delete(context1 context.Context, projectMemberServiceDeleteRequest *apiv1.ProjectMemberServiceDeleteRequest) (*apiv1.ProjectMemberResponse, error) {
+	ret := _mock.Called(context1, projectMemberServiceDeleteRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Delete")
@@ -116,18 +116,18 @@ func (_mock *ProjectMemberServiceHandler) Delete(context1 context.Context, proje
 
 	var r0 *apiv1.ProjectMemberResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberDeleteRequest) (*apiv1.ProjectMemberResponse, error)); ok {
-		return returnFunc(context1, projectMemberDeleteRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberServiceDeleteRequest) (*apiv1.ProjectMemberResponse, error)); ok {
+		return returnFunc(context1, projectMemberServiceDeleteRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberDeleteRequest) *apiv1.ProjectMemberResponse); ok {
-		r0 = returnFunc(context1, projectMemberDeleteRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberServiceDeleteRequest) *apiv1.ProjectMemberResponse); ok {
+		r0 = returnFunc(context1, projectMemberServiceDeleteRequest)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*apiv1.ProjectMemberResponse)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectMemberDeleteRequest) error); ok {
-		r1 = returnFunc(context1, projectMemberDeleteRequest)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectMemberServiceDeleteRequest) error); ok {
+		r1 = returnFunc(context1, projectMemberServiceDeleteRequest)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -141,20 +141,20 @@ type ProjectMemberServiceHandler_Delete_Call struct {
 
 // Delete is a helper method to define mock.On call
 //   - context1 context.Context
-//   - projectMemberDeleteRequest *apiv1.ProjectMemberDeleteRequest
-func (_e *ProjectMemberServiceHandler_Expecter) Delete(context1 interface{}, projectMemberDeleteRequest interface{}) *ProjectMemberServiceHandler_Delete_Call {
-	return &ProjectMemberServiceHandler_Delete_Call{Call: _e.mock.On("Delete", context1, projectMemberDeleteRequest)}
+//   - projectMemberServiceDeleteRequest *apiv1.ProjectMemberServiceDeleteRequest
+func (_e *ProjectMemberServiceHandler_Expecter) Delete(context1 interface{}, projectMemberServiceDeleteRequest interface{}) *ProjectMemberServiceHandler_Delete_Call {
+	return &ProjectMemberServiceHandler_Delete_Call{Call: _e.mock.On("Delete", context1, projectMemberServiceDeleteRequest)}
 }
 
-func (_c *ProjectMemberServiceHandler_Delete_Call) Run(run func(context1 context.Context, projectMemberDeleteRequest *apiv1.ProjectMemberDeleteRequest)) *ProjectMemberServiceHandler_Delete_Call {
+func (_c *ProjectMemberServiceHandler_Delete_Call) Run(run func(context1 context.Context, projectMemberServiceDeleteRequest *apiv1.ProjectMemberServiceDeleteRequest)) *ProjectMemberServiceHandler_Delete_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 *apiv1.ProjectMemberDeleteRequest
+		var arg1 *apiv1.ProjectMemberServiceDeleteRequest
 		if args[1] != nil {
-			arg1 = args[1].(*apiv1.ProjectMemberDeleteRequest)
+			arg1 = args[1].(*apiv1.ProjectMemberServiceDeleteRequest)
 		}
 		run(
 			arg0,
@@ -169,14 +169,14 @@ func (_c *ProjectMemberServiceHandler_Delete_Call) Return(projectMemberResponse 
 	return _c
 }
 
-func (_c *ProjectMemberServiceHandler_Delete_Call) RunAndReturn(run func(context1 context.Context, projectMemberDeleteRequest *apiv1.ProjectMemberDeleteRequest) (*apiv1.ProjectMemberResponse, error)) *ProjectMemberServiceHandler_Delete_Call {
+func (_c *ProjectMemberServiceHandler_Delete_Call) RunAndReturn(run func(context1 context.Context, projectMemberServiceDeleteRequest *apiv1.ProjectMemberServiceDeleteRequest) (*apiv1.ProjectMemberResponse, error)) *ProjectMemberServiceHandler_Delete_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // Find provides a mock function for the type ProjectMemberServiceHandler
-func (_mock *ProjectMemberServiceHandler) Find(context1 context.Context, projectMemberFindRequest *apiv1.ProjectMemberFindRequest) (*apiv1.ProjectMemberListResponse, error) {
-	ret := _mock.Called(context1, projectMemberFindRequest)
+func (_mock *ProjectMemberServiceHandler) Find(context1 context.Context, projectMemberServiceFindRequest *apiv1.ProjectMemberServiceFindRequest) (*apiv1.ProjectMemberListResponse, error) {
+	ret := _mock.Called(context1, projectMemberServiceFindRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Find")
@@ -184,18 +184,18 @@ func (_mock *ProjectMemberServiceHandler) Find(context1 context.Context, project
 
 	var r0 *apiv1.ProjectMemberListResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberFindRequest) (*apiv1.ProjectMemberListResponse, error)); ok {
-		return returnFunc(context1, projectMemberFindRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberServiceFindRequest) (*apiv1.ProjectMemberListResponse, error)); ok {
+		return returnFunc(context1, projectMemberServiceFindRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberFindRequest) *apiv1.ProjectMemberListResponse); ok {
-		r0 = returnFunc(context1, projectMemberFindRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberServiceFindRequest) *apiv1.ProjectMemberListResponse); ok {
+		r0 = returnFunc(context1, projectMemberServiceFindRequest)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*apiv1.ProjectMemberListResponse)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectMemberFindRequest) error); ok {
-		r1 = returnFunc(context1, projectMemberFindRequest)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectMemberServiceFindRequest) error); ok {
+		r1 = returnFunc(context1, projectMemberServiceFindRequest)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -209,20 +209,20 @@ type ProjectMemberServiceHandler_Find_Call struct {
 
 // Find is a helper method to define mock.On call
 //   - context1 context.Context
-//   - projectMemberFindRequest *apiv1.ProjectMemberFindRequest
-func (_e *ProjectMemberServiceHandler_Expecter) Find(context1 interface{}, projectMemberFindRequest interface{}) *ProjectMemberServiceHandler_Find_Call {
-	return &ProjectMemberServiceHandler_Find_Call{Call: _e.mock.On("Find", context1, projectMemberFindRequest)}
+//   - projectMemberServiceFindRequest *apiv1.ProjectMemberServiceFindRequest
+func (_e *ProjectMemberServiceHandler_Expecter) Find(context1 interface{}, projectMemberServiceFindRequest interface{}) *ProjectMemberServiceHandler_Find_Call {
+	return &ProjectMemberServiceHandler_Find_Call{Call: _e.mock.On("Find", context1, projectMemberServiceFindRequest)}
 }
 
-func (_c *ProjectMemberServiceHandler_Find_Call) Run(run func(context1 context.Context, projectMemberFindRequest *apiv1.ProjectMemberFindRequest)) *ProjectMemberServiceHandler_Find_Call {
+func (_c *ProjectMemberServiceHandler_Find_Call) Run(run func(context1 context.Context, projectMemberServiceFindRequest *apiv1.ProjectMemberServiceFindRequest)) *ProjectMemberServiceHandler_Find_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 *apiv1.ProjectMemberFindRequest
+		var arg1 *apiv1.ProjectMemberServiceFindRequest
 		if args[1] != nil {
-			arg1 = args[1].(*apiv1.ProjectMemberFindRequest)
+			arg1 = args[1].(*apiv1.ProjectMemberServiceFindRequest)
 		}
 		run(
 			arg0,
@@ -237,14 +237,14 @@ func (_c *ProjectMemberServiceHandler_Find_Call) Return(projectMemberListRespons
 	return _c
 }
 
-func (_c *ProjectMemberServiceHandler_Find_Call) RunAndReturn(run func(context1 context.Context, projectMemberFindRequest *apiv1.ProjectMemberFindRequest) (*apiv1.ProjectMemberListResponse, error)) *ProjectMemberServiceHandler_Find_Call {
+func (_c *ProjectMemberServiceHandler_Find_Call) RunAndReturn(run func(context1 context.Context, projectMemberServiceFindRequest *apiv1.ProjectMemberServiceFindRequest) (*apiv1.ProjectMemberListResponse, error)) *ProjectMemberServiceHandler_Find_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // Get provides a mock function for the type ProjectMemberServiceHandler
-func (_mock *ProjectMemberServiceHandler) Get(context1 context.Context, projectMemberGetRequest *apiv1.ProjectMemberGetRequest) (*apiv1.ProjectMemberResponse, error) {
-	ret := _mock.Called(context1, projectMemberGetRequest)
+func (_mock *ProjectMemberServiceHandler) Get(context1 context.Context, projectMemberServiceGetRequest *apiv1.ProjectMemberServiceGetRequest) (*apiv1.ProjectMemberResponse, error) {
+	ret := _mock.Called(context1, projectMemberServiceGetRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Get")
@@ -252,18 +252,18 @@ func (_mock *ProjectMemberServiceHandler) Get(context1 context.Context, projectM
 
 	var r0 *apiv1.ProjectMemberResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberGetRequest) (*apiv1.ProjectMemberResponse, error)); ok {
-		return returnFunc(context1, projectMemberGetRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberServiceGetRequest) (*apiv1.ProjectMemberResponse, error)); ok {
+		return returnFunc(context1, projectMemberServiceGetRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberGetRequest) *apiv1.ProjectMemberResponse); ok {
-		r0 = returnFunc(context1, projectMemberGetRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberServiceGetRequest) *apiv1.ProjectMemberResponse); ok {
+		r0 = returnFunc(context1, projectMemberServiceGetRequest)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*apiv1.ProjectMemberResponse)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectMemberGetRequest) error); ok {
-		r1 = returnFunc(context1, projectMemberGetRequest)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectMemberServiceGetRequest) error); ok {
+		r1 = returnFunc(context1, projectMemberServiceGetRequest)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -277,20 +277,20 @@ type ProjectMemberServiceHandler_Get_Call struct {
 
 // Get is a helper method to define mock.On call
 //   - context1 context.Context
-//   - projectMemberGetRequest *apiv1.ProjectMemberGetRequest
-func (_e *ProjectMemberServiceHandler_Expecter) Get(context1 interface{}, projectMemberGetRequest interface{}) *ProjectMemberServiceHandler_Get_Call {
-	return &ProjectMemberServiceHandler_Get_Call{Call: _e.mock.On("Get", context1, projectMemberGetRequest)}
+//   - projectMemberServiceGetRequest *apiv1.ProjectMemberServiceGetRequest
+func (_e *ProjectMemberServiceHandler_Expecter) Get(context1 interface{}, projectMemberServiceGetRequest interface{}) *ProjectMemberServiceHandler_Get_Call {
+	return &ProjectMemberServiceHandler_Get_Call{Call: _e.mock.On("Get", context1, projectMemberServiceGetRequest)}
 }
 
-func (_c *ProjectMemberServiceHandler_Get_Call) Run(run func(context1 context.Context, projectMemberGetRequest *apiv1.ProjectMemberGetRequest)) *ProjectMemberServiceHandler_Get_Call {
+func (_c *ProjectMemberServiceHandler_Get_Call) Run(run func(context1 context.Context, projectMemberServiceGetRequest *apiv1.ProjectMemberServiceGetRequest)) *ProjectMemberServiceHandler_Get_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 *apiv1.ProjectMemberGetRequest
+		var arg1 *apiv1.ProjectMemberServiceGetRequest
 		if args[1] != nil {
-			arg1 = args[1].(*apiv1.ProjectMemberGetRequest)
+			arg1 = args[1].(*apiv1.ProjectMemberServiceGetRequest)
 		}
 		run(
 			arg0,
@@ -305,14 +305,14 @@ func (_c *ProjectMemberServiceHandler_Get_Call) Return(projectMemberResponse *ap
 	return _c
 }
 
-func (_c *ProjectMemberServiceHandler_Get_Call) RunAndReturn(run func(context1 context.Context, projectMemberGetRequest *apiv1.ProjectMemberGetRequest) (*apiv1.ProjectMemberResponse, error)) *ProjectMemberServiceHandler_Get_Call {
+func (_c *ProjectMemberServiceHandler_Get_Call) RunAndReturn(run func(context1 context.Context, projectMemberServiceGetRequest *apiv1.ProjectMemberServiceGetRequest) (*apiv1.ProjectMemberResponse, error)) *ProjectMemberServiceHandler_Get_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // Update provides a mock function for the type ProjectMemberServiceHandler
-func (_mock *ProjectMemberServiceHandler) Update(context1 context.Context, projectMemberUpdateRequest *apiv1.ProjectMemberUpdateRequest) (*apiv1.ProjectMemberResponse, error) {
-	ret := _mock.Called(context1, projectMemberUpdateRequest)
+func (_mock *ProjectMemberServiceHandler) Update(context1 context.Context, projectMemberServiceUpdateRequest *apiv1.ProjectMemberServiceUpdateRequest) (*apiv1.ProjectMemberResponse, error) {
+	ret := _mock.Called(context1, projectMemberServiceUpdateRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Update")
@@ -320,18 +320,18 @@ func (_mock *ProjectMemberServiceHandler) Update(context1 context.Context, proje
 
 	var r0 *apiv1.ProjectMemberResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberUpdateRequest) (*apiv1.ProjectMemberResponse, error)); ok {
-		return returnFunc(context1, projectMemberUpdateRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberServiceUpdateRequest) (*apiv1.ProjectMemberResponse, error)); ok {
+		return returnFunc(context1, projectMemberServiceUpdateRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberUpdateRequest) *apiv1.ProjectMemberResponse); ok {
-		r0 = returnFunc(context1, projectMemberUpdateRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectMemberServiceUpdateRequest) *apiv1.ProjectMemberResponse); ok {
+		r0 = returnFunc(context1, projectMemberServiceUpdateRequest)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*apiv1.ProjectMemberResponse)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectMemberUpdateRequest) error); ok {
-		r1 = returnFunc(context1, projectMemberUpdateRequest)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectMemberServiceUpdateRequest) error); ok {
+		r1 = returnFunc(context1, projectMemberServiceUpdateRequest)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -345,20 +345,20 @@ type ProjectMemberServiceHandler_Update_Call struct {
 
 // Update is a helper method to define mock.On call
 //   - context1 context.Context
-//   - projectMemberUpdateRequest *apiv1.ProjectMemberUpdateRequest
-func (_e *ProjectMemberServiceHandler_Expecter) Update(context1 interface{}, projectMemberUpdateRequest interface{}) *ProjectMemberServiceHandler_Update_Call {
-	return &ProjectMemberServiceHandler_Update_Call{Call: _e.mock.On("Update", context1, projectMemberUpdateRequest)}
+//   - projectMemberServiceUpdateRequest *apiv1.ProjectMemberServiceUpdateRequest
+func (_e *ProjectMemberServiceHandler_Expecter) Update(context1 interface{}, projectMemberServiceUpdateRequest interface{}) *ProjectMemberServiceHandler_Update_Call {
+	return &ProjectMemberServiceHandler_Update_Call{Call: _e.mock.On("Update", context1, projectMemberServiceUpdateRequest)}
 }
 
-func (_c *ProjectMemberServiceHandler_Update_Call) Run(run func(context1 context.Context, projectMemberUpdateRequest *apiv1.ProjectMemberUpdateRequest)) *ProjectMemberServiceHandler_Update_Call {
+func (_c *ProjectMemberServiceHandler_Update_Call) Run(run func(context1 context.Context, projectMemberServiceUpdateRequest *apiv1.ProjectMemberServiceUpdateRequest)) *ProjectMemberServiceHandler_Update_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 *apiv1.ProjectMemberUpdateRequest
+		var arg1 *apiv1.ProjectMemberServiceUpdateRequest
 		if args[1] != nil {
-			arg1 = args[1].(*apiv1.ProjectMemberUpdateRequest)
+			arg1 = args[1].(*apiv1.ProjectMemberServiceUpdateRequest)
 		}
 		run(
 			arg0,
@@ -373,7 +373,7 @@ func (_c *ProjectMemberServiceHandler_Update_Call) Return(projectMemberResponse 
 	return _c
 }
 
-func (_c *ProjectMemberServiceHandler_Update_Call) RunAndReturn(run func(context1 context.Context, projectMemberUpdateRequest *apiv1.ProjectMemberUpdateRequest) (*apiv1.ProjectMemberResponse, error)) *ProjectMemberServiceHandler_Update_Call {
+func (_c *ProjectMemberServiceHandler_Update_Call) RunAndReturn(run func(context1 context.Context, projectMemberServiceUpdateRequest *apiv1.ProjectMemberServiceUpdateRequest) (*apiv1.ProjectMemberResponse, error)) *ProjectMemberServiceHandler_Update_Call {
 	_c.Call.Return(run)
 	return _c
 }

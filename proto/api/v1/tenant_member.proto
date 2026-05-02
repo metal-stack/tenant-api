@@ -7,15 +7,15 @@ import "api/v1/meta.proto";
 // TenantMemberService provides service methods to work with tenant members
 service TenantMemberService {
   // Create a tenant member
-  rpc Create(TenantMemberCreateRequest) returns (TenantMemberResponse);
+  rpc Create(TenantMemberServiceCreateRequest) returns (TenantMemberResponse);
   // Update a tenant member
-  rpc Update(TenantMemberUpdateRequest) returns (TenantMemberResponse);
+  rpc Update(TenantMemberServiceUpdateRequest) returns (TenantMemberResponse);
   // Delete a tenant member
-  rpc Delete(TenantMemberDeleteRequest) returns (TenantMemberResponse);
+  rpc Delete(TenantMemberServiceDeleteRequest) returns (TenantMemberResponse);
   // Get a tenant member
-  rpc Get(TenantMemberGetRequest) returns (TenantMemberResponse);
+  rpc Get(TenantMemberServiceGetRequest) returns (TenantMemberResponse);
   // Find tenant members
-  rpc Find(TenantMemberFindRequest) returns (TenantMemberListResponse);
+  rpc Find(TenantMemberServiceFindRequest) returns (TenantMemberListResponse);
 }
 
 // TenantMember is the database model
@@ -30,32 +30,32 @@ message TenantMember {
   string namespace = 4;
 }
 
-// TenantMemberCreateRequest is the request payload to create a tenant member
-message TenantMemberCreateRequest {
+// TenantMemberServiceCreateRequest is the request payload to create a tenant member
+message TenantMemberServiceCreateRequest {
   // TenantMember to create
   TenantMember tenant_member = 1;
 }
 
-// TenantMemberUpdateRequest is the request payload to update a tenant member
-message TenantMemberUpdateRequest {
+// TenantMemberServiceUpdateRequest is the request payload to update a tenant member
+message TenantMemberServiceUpdateRequest {
   // TenantMember to update
   TenantMember tenant_member = 1;
 }
 
-// TenantMemberDeleteRequest is the request payload to delete a tenant member
-message TenantMemberDeleteRequest {
+// TenantMemberServiceDeleteRequest is the request payload to delete a tenant member
+message TenantMemberServiceDeleteRequest {
   // Id of the tenant member to delete
   string id = 1;
 }
 
-// TenantMemberGetRequest is the request payload to get a tenant member
-message TenantMemberGetRequest {
+// TenantMemberServiceGetRequest is the request payload to get a tenant member
+message TenantMemberServiceGetRequest {
   // Id of the tenant member to get
   string id = 1;
 }
 
-// TenantMemberFindRequest is the request payload to find tenant members
-message TenantMemberFindRequest {
+// TenantMemberServiceFindRequest is the request payload to find tenant members
+message TenantMemberServiceFindRequest {
   // TenantId of tenant members to find
   optional string tenant_id = 1;
   // MemberId of this tenant member to find

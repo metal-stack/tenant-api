@@ -11,27 +11,27 @@ import "google/protobuf/timestamp.proto";
 // TenantService provides service methods to work with tenants
 service TenantService {
   // Create a tenant
-  rpc Create(TenantCreateRequest) returns (TenantResponse);
+  rpc Create(TenantServiceCreateRequest) returns (TenantResponse);
   // Update a tenant
-  rpc Update(TenantUpdateRequest) returns (TenantResponse);
+  rpc Update(TenantServiceUpdateRequest) returns (TenantResponse);
   // Delete a tenant
-  rpc Delete(TenantDeleteRequest) returns (TenantResponse);
+  rpc Delete(TenantServiceDeleteRequest) returns (TenantResponse);
   // Get a tenant
-  rpc Get(TenantGetRequest) returns (TenantResponse);
+  rpc Get(TenantServiceGetRequest) returns (TenantResponse);
   // GetHistory of a tenant
-  rpc GetHistory(TenantGetHistoryRequest) returns (TenantResponse);
+  rpc GetHistory(TenantServiceGetHistoryRequest) returns (TenantResponse);
   // Find tenants
-  rpc Find(TenantFindRequest) returns (TenantListResponse);
+  rpc Find(TenantServiceFindRequest) returns (TenantListResponse);
   // ListTenantMembers list all members of a tenant
-  rpc ListTenantMembers(ListTenantMembersRequest) returns (ListTenantMembersResponse);
+  rpc ListTenantMembers(TenantServiceListTenantMembersRequest) returns (ListTenantMembersResponse);
   // FindParticipatingProjects returns projects which are participating to the tenant
-  rpc FindParticipatingProjects(FindParticipatingProjectsRequest) returns (FindParticipatingProjectsResponse);
+  rpc FindParticipatingProjects(TenantServiceFindParticipatingProjectsRequest) returns (FindParticipatingProjectsResponse);
   // FindParticipatingTenants returns tenants which are participating to the tenant
-  rpc FindParticipatingTenants(FindParticipatingTenantsRequest) returns (FindParticipatingTenantsResponse);
+  rpc FindParticipatingTenants(TenantServiceFindParticipatingTenantsRequest) returns (FindParticipatingTenantsResponse);
 }
 
-// FindParticipatingProjectsRequest is the request payload to find participating projects
-message FindParticipatingProjectsRequest {
+// TenantServiceFindParticipatingProjectsRequest is the request payload to find participating projects
+message TenantServiceFindParticipatingProjectsRequest {
   // TenantId
   string tenant_id = 1;
   // IncludeInherited
@@ -40,8 +40,8 @@ message FindParticipatingProjectsRequest {
   string namespace = 3;
 }
 
-// FindParticipatingTenantsRequest is the request payload to find participating tenants
-message FindParticipatingTenantsRequest {
+// TenantServiceFindParticipatingTenantsRequest is the request payload to find participating tenants
+message TenantServiceFindParticipatingTenantsRequest {
   // TenantId
   string tenant_id = 1;
   // IncludeInherited
@@ -50,8 +50,8 @@ message FindParticipatingTenantsRequest {
   string namespace = 3;
 }
 
-// ListTenantMembersRequest is the request payload to get tenant members
-message ListTenantMembersRequest {
+// TenantServiceListTenantMembersRequest is the request payload to get tenant members
+message TenantServiceListTenantMembersRequest {
   // TenantId
   string tenant_id = 1;
   // IncludeInherited
@@ -112,40 +112,40 @@ message Tenant {
   IAMConfig iam_config = 4;
 }
 
-// TenantCreateRequest is the request payload to create a tenant
-message TenantCreateRequest {
+// TenantServiceCreateRequest is the request payload to create a tenant
+message TenantServiceCreateRequest {
   // Tenant
   Tenant tenant = 1;
 }
 
-// TenantUpdateRequest is the request payload to update a tenant
-message TenantUpdateRequest {
+// TenantServiceUpdateRequest is the request payload to update a tenant
+message TenantServiceUpdateRequest {
   // Tenant
   Tenant tenant = 1;
 }
 
-// TenantDeleteRequest is the request payload to delete a tenant
-message TenantDeleteRequest {
+// TenantServiceDeleteRequest is the request payload to delete a tenant
+message TenantServiceDeleteRequest {
   // Id of the tenant to delete
   string id = 1;
 }
 
-// TenantGetRequest is the request payload to get a tenant
-message TenantGetRequest {
+// TenantServiceGetRequest is the request payload to get a tenant
+message TenantServiceGetRequest {
   // Id of the tenant to get
   string id = 1;
 }
 
-// TenantGetHistoryRequest is the request payload to get the history of a tenant
-message TenantGetHistoryRequest {
+// TenantServiceGetHistoryRequest is the request payload to get the history of a tenant
+message TenantServiceGetHistoryRequest {
   // Id of the tenant
   string id = 1;
   // At timestamp at which the history of the tenant should be returned
   google.protobuf.Timestamp at = 2;
 }
 
-// TenantFindRequest is the request payload to find tenants
-message TenantFindRequest {
+// TenantServiceFindRequest is the request payload to find tenants
+message TenantServiceFindRequest {
   // Paging spec of this find request
   Paging paging = 1;
   // Annotations of tenants to find

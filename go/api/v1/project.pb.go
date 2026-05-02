@@ -95,8 +95,8 @@ func (x *Project) GetTenantId() string {
 	return ""
 }
 
-// ProjectCreateRequest is the request payload to create a new project
-type ProjectCreateRequest struct {
+// ProjectServiceCreateRequest is the request payload to create a new project
+type ProjectServiceCreateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Project to create
 	Project       *Project `protobuf:"bytes,1,opt,name=project,proto3" json:"project,omitempty"`
@@ -104,20 +104,20 @@ type ProjectCreateRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ProjectCreateRequest) Reset() {
-	*x = ProjectCreateRequest{}
+func (x *ProjectServiceCreateRequest) Reset() {
+	*x = ProjectServiceCreateRequest{}
 	mi := &file_api_v1_project_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ProjectCreateRequest) String() string {
+func (x *ProjectServiceCreateRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ProjectCreateRequest) ProtoMessage() {}
+func (*ProjectServiceCreateRequest) ProtoMessage() {}
 
-func (x *ProjectCreateRequest) ProtoReflect() protoreflect.Message {
+func (x *ProjectServiceCreateRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_api_v1_project_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -129,20 +129,20 @@ func (x *ProjectCreateRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ProjectCreateRequest.ProtoReflect.Descriptor instead.
-func (*ProjectCreateRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ProjectServiceCreateRequest.ProtoReflect.Descriptor instead.
+func (*ProjectServiceCreateRequest) Descriptor() ([]byte, []int) {
 	return file_api_v1_project_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *ProjectCreateRequest) GetProject() *Project {
+func (x *ProjectServiceCreateRequest) GetProject() *Project {
 	if x != nil {
 		return x.Project
 	}
 	return nil
 }
 
-// ProjectUpdateRequest is the request payload to update a project
-type ProjectUpdateRequest struct {
+// ProjectServiceUpdateRequest is the request payload to update a project
+type ProjectServiceUpdateRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Project to update
 	Project       *Project `protobuf:"bytes,1,opt,name=project,proto3" json:"project,omitempty"`
@@ -150,20 +150,20 @@ type ProjectUpdateRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ProjectUpdateRequest) Reset() {
-	*x = ProjectUpdateRequest{}
+func (x *ProjectServiceUpdateRequest) Reset() {
+	*x = ProjectServiceUpdateRequest{}
 	mi := &file_api_v1_project_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ProjectUpdateRequest) String() string {
+func (x *ProjectServiceUpdateRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ProjectUpdateRequest) ProtoMessage() {}
+func (*ProjectServiceUpdateRequest) ProtoMessage() {}
 
-func (x *ProjectUpdateRequest) ProtoReflect() protoreflect.Message {
+func (x *ProjectServiceUpdateRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_api_v1_project_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -175,20 +175,20 @@ func (x *ProjectUpdateRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ProjectUpdateRequest.ProtoReflect.Descriptor instead.
-func (*ProjectUpdateRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ProjectServiceUpdateRequest.ProtoReflect.Descriptor instead.
+func (*ProjectServiceUpdateRequest) Descriptor() ([]byte, []int) {
 	return file_api_v1_project_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ProjectUpdateRequest) GetProject() *Project {
+func (x *ProjectServiceUpdateRequest) GetProject() *Project {
 	if x != nil {
 		return x.Project
 	}
 	return nil
 }
 
-// ProjectDeleteRequest is the request payload to delete a project
-type ProjectDeleteRequest struct {
+// ProjectServiceDeleteRequest is the request payload to delete a project
+type ProjectServiceDeleteRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Id of the project to delete
 	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -196,20 +196,20 @@ type ProjectDeleteRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ProjectDeleteRequest) Reset() {
-	*x = ProjectDeleteRequest{}
+func (x *ProjectServiceDeleteRequest) Reset() {
+	*x = ProjectServiceDeleteRequest{}
 	mi := &file_api_v1_project_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ProjectDeleteRequest) String() string {
+func (x *ProjectServiceDeleteRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ProjectDeleteRequest) ProtoMessage() {}
+func (*ProjectServiceDeleteRequest) ProtoMessage() {}
 
-func (x *ProjectDeleteRequest) ProtoReflect() protoreflect.Message {
+func (x *ProjectServiceDeleteRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_api_v1_project_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -221,20 +221,20 @@ func (x *ProjectDeleteRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ProjectDeleteRequest.ProtoReflect.Descriptor instead.
-func (*ProjectDeleteRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ProjectServiceDeleteRequest.ProtoReflect.Descriptor instead.
+func (*ProjectServiceDeleteRequest) Descriptor() ([]byte, []int) {
 	return file_api_v1_project_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *ProjectDeleteRequest) GetId() string {
+func (x *ProjectServiceDeleteRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-// ProjectGetRequest is the request payload to get a project
-type ProjectGetRequest struct {
+// ProjectServiceGetRequest is the request payload to get a project
+type ProjectServiceGetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Id of the project to get
 	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -242,20 +242,20 @@ type ProjectGetRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ProjectGetRequest) Reset() {
-	*x = ProjectGetRequest{}
+func (x *ProjectServiceGetRequest) Reset() {
+	*x = ProjectServiceGetRequest{}
 	mi := &file_api_v1_project_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ProjectGetRequest) String() string {
+func (x *ProjectServiceGetRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ProjectGetRequest) ProtoMessage() {}
+func (*ProjectServiceGetRequest) ProtoMessage() {}
 
-func (x *ProjectGetRequest) ProtoReflect() protoreflect.Message {
+func (x *ProjectServiceGetRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_api_v1_project_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -267,20 +267,20 @@ func (x *ProjectGetRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ProjectGetRequest.ProtoReflect.Descriptor instead.
-func (*ProjectGetRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ProjectServiceGetRequest.ProtoReflect.Descriptor instead.
+func (*ProjectServiceGetRequest) Descriptor() ([]byte, []int) {
 	return file_api_v1_project_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *ProjectGetRequest) GetId() string {
+func (x *ProjectServiceGetRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-// ProjectGetHistoryRequest is the request payload to get the history of a project
-type ProjectGetHistoryRequest struct {
+// ProjectServiceGetHistoryRequest is the request payload to get the history of a project
+type ProjectServiceGetHistoryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Id of the project to get the history for
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -290,20 +290,20 @@ type ProjectGetHistoryRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ProjectGetHistoryRequest) Reset() {
-	*x = ProjectGetHistoryRequest{}
+func (x *ProjectServiceGetHistoryRequest) Reset() {
+	*x = ProjectServiceGetHistoryRequest{}
 	mi := &file_api_v1_project_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ProjectGetHistoryRequest) String() string {
+func (x *ProjectServiceGetHistoryRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ProjectGetHistoryRequest) ProtoMessage() {}
+func (*ProjectServiceGetHistoryRequest) ProtoMessage() {}
 
-func (x *ProjectGetHistoryRequest) ProtoReflect() protoreflect.Message {
+func (x *ProjectServiceGetHistoryRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_api_v1_project_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -315,27 +315,27 @@ func (x *ProjectGetHistoryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ProjectGetHistoryRequest.ProtoReflect.Descriptor instead.
-func (*ProjectGetHistoryRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ProjectServiceGetHistoryRequest.ProtoReflect.Descriptor instead.
+func (*ProjectServiceGetHistoryRequest) Descriptor() ([]byte, []int) {
 	return file_api_v1_project_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *ProjectGetHistoryRequest) GetId() string {
+func (x *ProjectServiceGetHistoryRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *ProjectGetHistoryRequest) GetAt() *timestamppb.Timestamp {
+func (x *ProjectServiceGetHistoryRequest) GetAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.At
 	}
 	return nil
 }
 
-// ProjectFindRequest is the request payload to find projects
-type ProjectFindRequest struct {
+// ProjectServiceFindRequest is the request payload to find projects
+type ProjectServiceFindRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Paging spec of this find request
 	Paging *Paging `protobuf:"bytes,1,opt,name=paging,proto3" json:"paging,omitempty"`
@@ -355,20 +355,20 @@ type ProjectFindRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ProjectFindRequest) Reset() {
-	*x = ProjectFindRequest{}
+func (x *ProjectServiceFindRequest) Reset() {
+	*x = ProjectServiceFindRequest{}
 	mi := &file_api_v1_project_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ProjectFindRequest) String() string {
+func (x *ProjectServiceFindRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ProjectFindRequest) ProtoMessage() {}
+func (*ProjectServiceFindRequest) ProtoMessage() {}
 
-func (x *ProjectFindRequest) ProtoReflect() protoreflect.Message {
+func (x *ProjectServiceFindRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_api_v1_project_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -380,54 +380,54 @@ func (x *ProjectFindRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ProjectFindRequest.ProtoReflect.Descriptor instead.
-func (*ProjectFindRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use ProjectServiceFindRequest.ProtoReflect.Descriptor instead.
+func (*ProjectServiceFindRequest) Descriptor() ([]byte, []int) {
 	return file_api_v1_project_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *ProjectFindRequest) GetPaging() *Paging {
+func (x *ProjectServiceFindRequest) GetPaging() *Paging {
 	if x != nil {
 		return x.Paging
 	}
 	return nil
 }
 
-func (x *ProjectFindRequest) GetAnnotations() map[string]string {
+func (x *ProjectServiceFindRequest) GetAnnotations() map[string]string {
 	if x != nil {
 		return x.Annotations
 	}
 	return nil
 }
 
-func (x *ProjectFindRequest) GetId() string {
+func (x *ProjectServiceFindRequest) GetId() string {
 	if x != nil && x.Id != nil {
 		return *x.Id
 	}
 	return ""
 }
 
-func (x *ProjectFindRequest) GetName() string {
+func (x *ProjectServiceFindRequest) GetName() string {
 	if x != nil && x.Name != nil {
 		return *x.Name
 	}
 	return ""
 }
 
-func (x *ProjectFindRequest) GetDescription() string {
+func (x *ProjectServiceFindRequest) GetDescription() string {
 	if x != nil && x.Description != nil {
 		return *x.Description
 	}
 	return ""
 }
 
-func (x *ProjectFindRequest) GetTenantId() string {
+func (x *ProjectServiceFindRequest) GetTenantId() string {
 	if x != nil && x.TenantId != nil {
 		return *x.TenantId
 	}
 	return ""
 }
 
-func (x *ProjectFindRequest) GetLabels() []string {
+func (x *ProjectServiceFindRequest) GetLabels() []string {
 	if x != nil {
 		return x.Labels
 	}
@@ -544,21 +544,21 @@ const file_api_v1_project_proto_rawDesc = "" +
 	"\x04meta\x18\x01 \x01(\v2\f.api.v1.MetaR\x04meta\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1b\n" +
-	"\ttenant_id\x18\x04 \x01(\tR\btenantId\"A\n" +
-	"\x14ProjectCreateRequest\x12)\n" +
-	"\aproject\x18\x01 \x01(\v2\x0f.api.v1.ProjectR\aproject\"A\n" +
-	"\x14ProjectUpdateRequest\x12)\n" +
-	"\aproject\x18\x01 \x01(\v2\x0f.api.v1.ProjectR\aproject\"&\n" +
-	"\x14ProjectDeleteRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"#\n" +
-	"\x11ProjectGetRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"V\n" +
-	"\x18ProjectGetHistoryRequest\x12\x0e\n" +
+	"\ttenant_id\x18\x04 \x01(\tR\btenantId\"H\n" +
+	"\x1bProjectServiceCreateRequest\x12)\n" +
+	"\aproject\x18\x01 \x01(\v2\x0f.api.v1.ProjectR\aproject\"H\n" +
+	"\x1bProjectServiceUpdateRequest\x12)\n" +
+	"\aproject\x18\x01 \x01(\v2\x0f.api.v1.ProjectR\aproject\"-\n" +
+	"\x1bProjectServiceDeleteRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"*\n" +
+	"\x18ProjectServiceGetRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"]\n" +
+	"\x1fProjectServiceGetHistoryRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12*\n" +
-	"\x02at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x02at\"\x88\x03\n" +
-	"\x12ProjectFindRequest\x12&\n" +
-	"\x06paging\x18\x01 \x01(\v2\x0e.api.v1.PagingR\x06paging\x12M\n" +
-	"\vannotations\x18\x02 \x03(\v2+.api.v1.ProjectFindRequest.AnnotationsEntryR\vannotations\x12\x13\n" +
+	"\x02at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x02at\"\x96\x03\n" +
+	"\x19ProjectServiceFindRequest\x12&\n" +
+	"\x06paging\x18\x01 \x01(\v2\x0e.api.v1.PagingR\x06paging\x12T\n" +
+	"\vannotations\x18\x02 \x03(\v22.api.v1.ProjectServiceFindRequest.AnnotationsEntryR\vannotations\x12\x13\n" +
 	"\x02id\x18\x03 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
 	"\x04name\x18\x04 \x01(\tH\x01R\x04name\x88\x01\x01\x12%\n" +
 	"\vdescription\x18\x05 \x01(\tH\x02R\vdescription\x88\x01\x01\x12 \n" +
@@ -578,15 +578,15 @@ const file_api_v1_project_proto_rawDesc = "" +
 	"\bprojects\x18\x01 \x03(\v2\x0f.api.v1.ProjectR\bprojects\x12 \n" +
 	"\tnext_page\x18\x02 \x01(\x04H\x00R\bnextPage\x88\x01\x01B\f\n" +
 	"\n" +
-	"_next_page2\x98\x03\n" +
-	"\x0eProjectService\x12?\n" +
-	"\x06Create\x12\x1c.api.v1.ProjectCreateRequest\x1a\x17.api.v1.ProjectResponse\x12?\n" +
-	"\x06Update\x12\x1c.api.v1.ProjectUpdateRequest\x1a\x17.api.v1.ProjectResponse\x12?\n" +
-	"\x06Delete\x12\x1c.api.v1.ProjectDeleteRequest\x1a\x17.api.v1.ProjectResponse\x129\n" +
-	"\x03Get\x12\x19.api.v1.ProjectGetRequest\x1a\x17.api.v1.ProjectResponse\x12G\n" +
+	"_next_page2\xc2\x03\n" +
+	"\x0eProjectService\x12F\n" +
+	"\x06Create\x12#.api.v1.ProjectServiceCreateRequest\x1a\x17.api.v1.ProjectResponse\x12F\n" +
+	"\x06Update\x12#.api.v1.ProjectServiceUpdateRequest\x1a\x17.api.v1.ProjectResponse\x12F\n" +
+	"\x06Delete\x12#.api.v1.ProjectServiceDeleteRequest\x1a\x17.api.v1.ProjectResponse\x12@\n" +
+	"\x03Get\x12 .api.v1.ProjectServiceGetRequest\x1a\x17.api.v1.ProjectResponse\x12N\n" +
 	"\n" +
-	"GetHistory\x12 .api.v1.ProjectGetHistoryRequest\x1a\x17.api.v1.ProjectResponse\x12?\n" +
-	"\x04Find\x12\x1a.api.v1.ProjectFindRequest\x1a\x1b.api.v1.ProjectListResponseB\x86\x01\n" +
+	"GetHistory\x12'.api.v1.ProjectServiceGetHistoryRequest\x1a\x17.api.v1.ProjectResponse\x12F\n" +
+	"\x04Find\x12!.api.v1.ProjectServiceFindRequest\x1a\x1b.api.v1.ProjectListResponseB\x86\x01\n" +
 	"\n" +
 	"com.api.v1B\fProjectProtoP\x01Z1github.com/metal-stack/tenant-api/go/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
 
@@ -604,35 +604,35 @@ func file_api_v1_project_proto_rawDescGZIP() []byte {
 
 var file_api_v1_project_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_api_v1_project_proto_goTypes = []any{
-	(*Project)(nil),                  // 0: api.v1.Project
-	(*ProjectCreateRequest)(nil),     // 1: api.v1.ProjectCreateRequest
-	(*ProjectUpdateRequest)(nil),     // 2: api.v1.ProjectUpdateRequest
-	(*ProjectDeleteRequest)(nil),     // 3: api.v1.ProjectDeleteRequest
-	(*ProjectGetRequest)(nil),        // 4: api.v1.ProjectGetRequest
-	(*ProjectGetHistoryRequest)(nil), // 5: api.v1.ProjectGetHistoryRequest
-	(*ProjectFindRequest)(nil),       // 6: api.v1.ProjectFindRequest
-	(*ProjectResponse)(nil),          // 7: api.v1.ProjectResponse
-	(*ProjectListResponse)(nil),      // 8: api.v1.ProjectListResponse
-	nil,                              // 9: api.v1.ProjectFindRequest.AnnotationsEntry
-	(*Meta)(nil),                     // 10: api.v1.Meta
-	(*timestamppb.Timestamp)(nil),    // 11: google.protobuf.Timestamp
-	(*Paging)(nil),                   // 12: api.v1.Paging
+	(*Project)(nil),                         // 0: api.v1.Project
+	(*ProjectServiceCreateRequest)(nil),     // 1: api.v1.ProjectServiceCreateRequest
+	(*ProjectServiceUpdateRequest)(nil),     // 2: api.v1.ProjectServiceUpdateRequest
+	(*ProjectServiceDeleteRequest)(nil),     // 3: api.v1.ProjectServiceDeleteRequest
+	(*ProjectServiceGetRequest)(nil),        // 4: api.v1.ProjectServiceGetRequest
+	(*ProjectServiceGetHistoryRequest)(nil), // 5: api.v1.ProjectServiceGetHistoryRequest
+	(*ProjectServiceFindRequest)(nil),       // 6: api.v1.ProjectServiceFindRequest
+	(*ProjectResponse)(nil),                 // 7: api.v1.ProjectResponse
+	(*ProjectListResponse)(nil),             // 8: api.v1.ProjectListResponse
+	nil,                                     // 9: api.v1.ProjectServiceFindRequest.AnnotationsEntry
+	(*Meta)(nil),                            // 10: api.v1.Meta
+	(*timestamppb.Timestamp)(nil),           // 11: google.protobuf.Timestamp
+	(*Paging)(nil),                          // 12: api.v1.Paging
 }
 var file_api_v1_project_proto_depIdxs = []int32{
 	10, // 0: api.v1.Project.meta:type_name -> api.v1.Meta
-	0,  // 1: api.v1.ProjectCreateRequest.project:type_name -> api.v1.Project
-	0,  // 2: api.v1.ProjectUpdateRequest.project:type_name -> api.v1.Project
-	11, // 3: api.v1.ProjectGetHistoryRequest.at:type_name -> google.protobuf.Timestamp
-	12, // 4: api.v1.ProjectFindRequest.paging:type_name -> api.v1.Paging
-	9,  // 5: api.v1.ProjectFindRequest.annotations:type_name -> api.v1.ProjectFindRequest.AnnotationsEntry
+	0,  // 1: api.v1.ProjectServiceCreateRequest.project:type_name -> api.v1.Project
+	0,  // 2: api.v1.ProjectServiceUpdateRequest.project:type_name -> api.v1.Project
+	11, // 3: api.v1.ProjectServiceGetHistoryRequest.at:type_name -> google.protobuf.Timestamp
+	12, // 4: api.v1.ProjectServiceFindRequest.paging:type_name -> api.v1.Paging
+	9,  // 5: api.v1.ProjectServiceFindRequest.annotations:type_name -> api.v1.ProjectServiceFindRequest.AnnotationsEntry
 	0,  // 6: api.v1.ProjectResponse.project:type_name -> api.v1.Project
 	0,  // 7: api.v1.ProjectListResponse.projects:type_name -> api.v1.Project
-	1,  // 8: api.v1.ProjectService.Create:input_type -> api.v1.ProjectCreateRequest
-	2,  // 9: api.v1.ProjectService.Update:input_type -> api.v1.ProjectUpdateRequest
-	3,  // 10: api.v1.ProjectService.Delete:input_type -> api.v1.ProjectDeleteRequest
-	4,  // 11: api.v1.ProjectService.Get:input_type -> api.v1.ProjectGetRequest
-	5,  // 12: api.v1.ProjectService.GetHistory:input_type -> api.v1.ProjectGetHistoryRequest
-	6,  // 13: api.v1.ProjectService.Find:input_type -> api.v1.ProjectFindRequest
+	1,  // 8: api.v1.ProjectService.Create:input_type -> api.v1.ProjectServiceCreateRequest
+	2,  // 9: api.v1.ProjectService.Update:input_type -> api.v1.ProjectServiceUpdateRequest
+	3,  // 10: api.v1.ProjectService.Delete:input_type -> api.v1.ProjectServiceDeleteRequest
+	4,  // 11: api.v1.ProjectService.Get:input_type -> api.v1.ProjectServiceGetRequest
+	5,  // 12: api.v1.ProjectService.GetHistory:input_type -> api.v1.ProjectServiceGetHistoryRequest
+	6,  // 13: api.v1.ProjectService.Find:input_type -> api.v1.ProjectServiceFindRequest
 	7,  // 14: api.v1.ProjectService.Create:output_type -> api.v1.ProjectResponse
 	7,  // 15: api.v1.ProjectService.Update:output_type -> api.v1.ProjectResponse
 	7,  // 16: api.v1.ProjectService.Delete:output_type -> api.v1.ProjectResponse

@@ -4,8 +4,9 @@ lint:
     - COMMENTS
     - STANDARD
   except:
+    # FIXME make these linters happy as well
     - RPC_REQUEST_RESPONSE_UNIQUE
-    - RPC_REQUEST_STANDARD_NAME
+    # - RPC_REQUEST_STANDARD_NAME
     - RPC_RESPONSE_STANDARD_NAME
   disallow_comment_ignores: true
 breaking:

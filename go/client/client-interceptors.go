@@ -71,31 +71,31 @@ func NamespaceInterceptor(namespace string) connect.UnaryInterceptorFunc {
 	return func(uf connect.UnaryFunc) connect.UnaryFunc {
 		return func(ctx context.Context, ar connect.AnyRequest) (connect.AnyResponse, error) {
 			switch r := ar.Any().(type) {
-			case *v1.TenantMemberCreateRequest:
+			case *v1.TenantMemberServiceCreateRequest:
 				if r.TenantMember.Namespace == "" {
 					r.TenantMember.Namespace = namespace
 				}
-			case *v1.ProjectMemberCreateRequest:
+			case *v1.ProjectMemberServiceCreateRequest:
 				if r.ProjectMember.Namespace == "" {
 					r.ProjectMember.Namespace = namespace
 				}
-			case *v1.TenantMemberFindRequest:
+			case *v1.TenantMemberServiceFindRequest:
 				if r.Namespace == "" {
 					r.Namespace = namespace
 				}
-			case *v1.ProjectMemberFindRequest:
+			case *v1.ProjectMemberServiceFindRequest:
 				if r.Namespace == "" {
 					r.Namespace = namespace
 				}
-			case *v1.FindParticipatingProjectsRequest:
+			case *v1.TenantServiceFindParticipatingProjectsRequest:
 				if r.Namespace == "" {
 					r.Namespace = namespace
 				}
-			case *v1.FindParticipatingTenantsRequest:
+			case *v1.TenantServiceFindParticipatingTenantsRequest:
 				if r.Namespace == "" {
 					r.Namespace = namespace
 				}
-			case *v1.ListTenantMembersRequest:
+			case *v1.TenantServiceListTenantMembersRequest:
 				if r.Namespace == "" {
 					r.Namespace = namespace
 				}

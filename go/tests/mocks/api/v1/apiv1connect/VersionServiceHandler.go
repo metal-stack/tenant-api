@@ -39,27 +39,27 @@ func (_m *VersionServiceHandler) EXPECT() *VersionServiceHandler_Expecter {
 }
 
 // Get provides a mock function for the type VersionServiceHandler
-func (_mock *VersionServiceHandler) Get(context1 context.Context, getVersionRequest *apiv1.GetVersionRequest) (*apiv1.GetVersionResponse, error) {
-	ret := _mock.Called(context1, getVersionRequest)
+func (_mock *VersionServiceHandler) Get(context1 context.Context, versionServiceGetRequest *apiv1.VersionServiceGetRequest) (*apiv1.VersionServiceGetResponse, error) {
+	ret := _mock.Called(context1, versionServiceGetRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Get")
 	}
 
-	var r0 *apiv1.GetVersionResponse
+	var r0 *apiv1.VersionServiceGetResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.GetVersionRequest) (*apiv1.GetVersionResponse, error)); ok {
-		return returnFunc(context1, getVersionRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.VersionServiceGetRequest) (*apiv1.VersionServiceGetResponse, error)); ok {
+		return returnFunc(context1, versionServiceGetRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.GetVersionRequest) *apiv1.GetVersionResponse); ok {
-		r0 = returnFunc(context1, getVersionRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.VersionServiceGetRequest) *apiv1.VersionServiceGetResponse); ok {
+		r0 = returnFunc(context1, versionServiceGetRequest)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*apiv1.GetVersionResponse)
+			r0 = ret.Get(0).(*apiv1.VersionServiceGetResponse)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.GetVersionRequest) error); ok {
-		r1 = returnFunc(context1, getVersionRequest)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.VersionServiceGetRequest) error); ok {
+		r1 = returnFunc(context1, versionServiceGetRequest)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -73,20 +73,20 @@ type VersionServiceHandler_Get_Call struct {
 
 // Get is a helper method to define mock.On call
 //   - context1 context.Context
-//   - getVersionRequest *apiv1.GetVersionRequest
-func (_e *VersionServiceHandler_Expecter) Get(context1 interface{}, getVersionRequest interface{}) *VersionServiceHandler_Get_Call {
-	return &VersionServiceHandler_Get_Call{Call: _e.mock.On("Get", context1, getVersionRequest)}
+//   - versionServiceGetRequest *apiv1.VersionServiceGetRequest
+func (_e *VersionServiceHandler_Expecter) Get(context1 interface{}, versionServiceGetRequest interface{}) *VersionServiceHandler_Get_Call {
+	return &VersionServiceHandler_Get_Call{Call: _e.mock.On("Get", context1, versionServiceGetRequest)}
 }
 
-func (_c *VersionServiceHandler_Get_Call) Run(run func(context1 context.Context, getVersionRequest *apiv1.GetVersionRequest)) *VersionServiceHandler_Get_Call {
+func (_c *VersionServiceHandler_Get_Call) Run(run func(context1 context.Context, versionServiceGetRequest *apiv1.VersionServiceGetRequest)) *VersionServiceHandler_Get_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 *apiv1.GetVersionRequest
+		var arg1 *apiv1.VersionServiceGetRequest
 		if args[1] != nil {
-			arg1 = args[1].(*apiv1.GetVersionRequest)
+			arg1 = args[1].(*apiv1.VersionServiceGetRequest)
 		}
 		run(
 			arg0,
@@ -96,12 +96,12 @@ func (_c *VersionServiceHandler_Get_Call) Run(run func(context1 context.Context,
 	return _c
 }
 
-func (_c *VersionServiceHandler_Get_Call) Return(getVersionResponse *apiv1.GetVersionResponse, err error) *VersionServiceHandler_Get_Call {
-	_c.Call.Return(getVersionResponse, err)
+func (_c *VersionServiceHandler_Get_Call) Return(versionServiceGetResponse *apiv1.VersionServiceGetResponse, err error) *VersionServiceHandler_Get_Call {
+	_c.Call.Return(versionServiceGetResponse, err)
 	return _c
 }
 
-func (_c *VersionServiceHandler_Get_Call) RunAndReturn(run func(context1 context.Context, getVersionRequest *apiv1.GetVersionRequest) (*apiv1.GetVersionResponse, error)) *VersionServiceHandler_Get_Call {
+func (_c *VersionServiceHandler_Get_Call) RunAndReturn(run func(context1 context.Context, versionServiceGetRequest *apiv1.VersionServiceGetRequest) (*apiv1.VersionServiceGetResponse, error)) *VersionServiceHandler_Get_Call {
 	_c.Call.Return(run)
 	return _c
 }

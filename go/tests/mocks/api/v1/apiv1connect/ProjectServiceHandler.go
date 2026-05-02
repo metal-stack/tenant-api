@@ -39,8 +39,8 @@ func (_m *ProjectServiceHandler) EXPECT() *ProjectServiceHandler_Expecter {
 }
 
 // Create provides a mock function for the type ProjectServiceHandler
-func (_mock *ProjectServiceHandler) Create(context1 context.Context, projectCreateRequest *apiv1.ProjectCreateRequest) (*apiv1.ProjectResponse, error) {
-	ret := _mock.Called(context1, projectCreateRequest)
+func (_mock *ProjectServiceHandler) Create(context1 context.Context, projectServiceCreateRequest *apiv1.ProjectServiceCreateRequest) (*apiv1.ProjectResponse, error) {
+	ret := _mock.Called(context1, projectServiceCreateRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Create")
@@ -48,18 +48,18 @@ func (_mock *ProjectServiceHandler) Create(context1 context.Context, projectCrea
 
 	var r0 *apiv1.ProjectResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectCreateRequest) (*apiv1.ProjectResponse, error)); ok {
-		return returnFunc(context1, projectCreateRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectServiceCreateRequest) (*apiv1.ProjectResponse, error)); ok {
+		return returnFunc(context1, projectServiceCreateRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectCreateRequest) *apiv1.ProjectResponse); ok {
-		r0 = returnFunc(context1, projectCreateRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectServiceCreateRequest) *apiv1.ProjectResponse); ok {
+		r0 = returnFunc(context1, projectServiceCreateRequest)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*apiv1.ProjectResponse)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectCreateRequest) error); ok {
-		r1 = returnFunc(context1, projectCreateRequest)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectServiceCreateRequest) error); ok {
+		r1 = returnFunc(context1, projectServiceCreateRequest)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -73,20 +73,20 @@ type ProjectServiceHandler_Create_Call struct {
 
 // Create is a helper method to define mock.On call
 //   - context1 context.Context
-//   - projectCreateRequest *apiv1.ProjectCreateRequest
-func (_e *ProjectServiceHandler_Expecter) Create(context1 interface{}, projectCreateRequest interface{}) *ProjectServiceHandler_Create_Call {
-	return &ProjectServiceHandler_Create_Call{Call: _e.mock.On("Create", context1, projectCreateRequest)}
+//   - projectServiceCreateRequest *apiv1.ProjectServiceCreateRequest
+func (_e *ProjectServiceHandler_Expecter) Create(context1 interface{}, projectServiceCreateRequest interface{}) *ProjectServiceHandler_Create_Call {
+	return &ProjectServiceHandler_Create_Call{Call: _e.mock.On("Create", context1, projectServiceCreateRequest)}
 }
 
-func (_c *ProjectServiceHandler_Create_Call) Run(run func(context1 context.Context, projectCreateRequest *apiv1.ProjectCreateRequest)) *ProjectServiceHandler_Create_Call {
+func (_c *ProjectServiceHandler_Create_Call) Run(run func(context1 context.Context, projectServiceCreateRequest *apiv1.ProjectServiceCreateRequest)) *ProjectServiceHandler_Create_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 *apiv1.ProjectCreateRequest
+		var arg1 *apiv1.ProjectServiceCreateRequest
 		if args[1] != nil {
-			arg1 = args[1].(*apiv1.ProjectCreateRequest)
+			arg1 = args[1].(*apiv1.ProjectServiceCreateRequest)
 		}
 		run(
 			arg0,
@@ -101,14 +101,14 @@ func (_c *ProjectServiceHandler_Create_Call) Return(projectResponse *apiv1.Proje
 	return _c
 }
 
-func (_c *ProjectServiceHandler_Create_Call) RunAndReturn(run func(context1 context.Context, projectCreateRequest *apiv1.ProjectCreateRequest) (*apiv1.ProjectResponse, error)) *ProjectServiceHandler_Create_Call {
+func (_c *ProjectServiceHandler_Create_Call) RunAndReturn(run func(context1 context.Context, projectServiceCreateRequest *apiv1.ProjectServiceCreateRequest) (*apiv1.ProjectResponse, error)) *ProjectServiceHandler_Create_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // Delete provides a mock function for the type ProjectServiceHandler
-func (_mock *ProjectServiceHandler) Delete(context1 context.Context, projectDeleteRequest *apiv1.ProjectDeleteRequest) (*apiv1.ProjectResponse, error) {
-	ret := _mock.Called(context1, projectDeleteRequest)
+func (_mock *ProjectServiceHandler) Delete(context1 context.Context, projectServiceDeleteRequest *apiv1.ProjectServiceDeleteRequest) (*apiv1.ProjectResponse, error) {
+	ret := _mock.Called(context1, projectServiceDeleteRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Delete")
@@ -116,18 +116,18 @@ func (_mock *ProjectServiceHandler) Delete(context1 context.Context, projectDele
 
 	var r0 *apiv1.ProjectResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectDeleteRequest) (*apiv1.ProjectResponse, error)); ok {
-		return returnFunc(context1, projectDeleteRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectServiceDeleteRequest) (*apiv1.ProjectResponse, error)); ok {
+		return returnFunc(context1, projectServiceDeleteRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectDeleteRequest) *apiv1.ProjectResponse); ok {
-		r0 = returnFunc(context1, projectDeleteRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectServiceDeleteRequest) *apiv1.ProjectResponse); ok {
+		r0 = returnFunc(context1, projectServiceDeleteRequest)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*apiv1.ProjectResponse)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectDeleteRequest) error); ok {
-		r1 = returnFunc(context1, projectDeleteRequest)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectServiceDeleteRequest) error); ok {
+		r1 = returnFunc(context1, projectServiceDeleteRequest)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -141,20 +141,20 @@ type ProjectServiceHandler_Delete_Call struct {
 
 // Delete is a helper method to define mock.On call
 //   - context1 context.Context
-//   - projectDeleteRequest *apiv1.ProjectDeleteRequest
-func (_e *ProjectServiceHandler_Expecter) Delete(context1 interface{}, projectDeleteRequest interface{}) *ProjectServiceHandler_Delete_Call {
-	return &ProjectServiceHandler_Delete_Call{Call: _e.mock.On("Delete", context1, projectDeleteRequest)}
+//   - projectServiceDeleteRequest *apiv1.ProjectServiceDeleteRequest
+func (_e *ProjectServiceHandler_Expecter) Delete(context1 interface{}, projectServiceDeleteRequest interface{}) *ProjectServiceHandler_Delete_Call {
+	return &ProjectServiceHandler_Delete_Call{Call: _e.mock.On("Delete", context1, projectServiceDeleteRequest)}
 }
 
-func (_c *ProjectServiceHandler_Delete_Call) Run(run func(context1 context.Context, projectDeleteRequest *apiv1.ProjectDeleteRequest)) *ProjectServiceHandler_Delete_Call {
+func (_c *ProjectServiceHandler_Delete_Call) Run(run func(context1 context.Context, projectServiceDeleteRequest *apiv1.ProjectServiceDeleteRequest)) *ProjectServiceHandler_Delete_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 *apiv1.ProjectDeleteRequest
+		var arg1 *apiv1.ProjectServiceDeleteRequest
 		if args[1] != nil {
-			arg1 = args[1].(*apiv1.ProjectDeleteRequest)
+			arg1 = args[1].(*apiv1.ProjectServiceDeleteRequest)
 		}
 		run(
 			arg0,
@@ -169,14 +169,14 @@ func (_c *ProjectServiceHandler_Delete_Call) Return(projectResponse *apiv1.Proje
 	return _c
 }
 
-func (_c *ProjectServiceHandler_Delete_Call) RunAndReturn(run func(context1 context.Context, projectDeleteRequest *apiv1.ProjectDeleteRequest) (*apiv1.ProjectResponse, error)) *ProjectServiceHandler_Delete_Call {
+func (_c *ProjectServiceHandler_Delete_Call) RunAndReturn(run func(context1 context.Context, projectServiceDeleteRequest *apiv1.ProjectServiceDeleteRequest) (*apiv1.ProjectResponse, error)) *ProjectServiceHandler_Delete_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // Find provides a mock function for the type ProjectServiceHandler
-func (_mock *ProjectServiceHandler) Find(context1 context.Context, projectFindRequest *apiv1.ProjectFindRequest) (*apiv1.ProjectListResponse, error) {
-	ret := _mock.Called(context1, projectFindRequest)
+func (_mock *ProjectServiceHandler) Find(context1 context.Context, projectServiceFindRequest *apiv1.ProjectServiceFindRequest) (*apiv1.ProjectListResponse, error) {
+	ret := _mock.Called(context1, projectServiceFindRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Find")
@@ -184,18 +184,18 @@ func (_mock *ProjectServiceHandler) Find(context1 context.Context, projectFindRe
 
 	var r0 *apiv1.ProjectListResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectFindRequest) (*apiv1.ProjectListResponse, error)); ok {
-		return returnFunc(context1, projectFindRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectServiceFindRequest) (*apiv1.ProjectListResponse, error)); ok {
+		return returnFunc(context1, projectServiceFindRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectFindRequest) *apiv1.ProjectListResponse); ok {
-		r0 = returnFunc(context1, projectFindRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectServiceFindRequest) *apiv1.ProjectListResponse); ok {
+		r0 = returnFunc(context1, projectServiceFindRequest)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*apiv1.ProjectListResponse)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectFindRequest) error); ok {
-		r1 = returnFunc(context1, projectFindRequest)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectServiceFindRequest) error); ok {
+		r1 = returnFunc(context1, projectServiceFindRequest)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -209,20 +209,20 @@ type ProjectServiceHandler_Find_Call struct {
 
 // Find is a helper method to define mock.On call
 //   - context1 context.Context
-//   - projectFindRequest *apiv1.ProjectFindRequest
-func (_e *ProjectServiceHandler_Expecter) Find(context1 interface{}, projectFindRequest interface{}) *ProjectServiceHandler_Find_Call {
-	return &ProjectServiceHandler_Find_Call{Call: _e.mock.On("Find", context1, projectFindRequest)}
+//   - projectServiceFindRequest *apiv1.ProjectServiceFindRequest
+func (_e *ProjectServiceHandler_Expecter) Find(context1 interface{}, projectServiceFindRequest interface{}) *ProjectServiceHandler_Find_Call {
+	return &ProjectServiceHandler_Find_Call{Call: _e.mock.On("Find", context1, projectServiceFindRequest)}
 }
 
-func (_c *ProjectServiceHandler_Find_Call) Run(run func(context1 context.Context, projectFindRequest *apiv1.ProjectFindRequest)) *ProjectServiceHandler_Find_Call {
+func (_c *ProjectServiceHandler_Find_Call) Run(run func(context1 context.Context, projectServiceFindRequest *apiv1.ProjectServiceFindRequest)) *ProjectServiceHandler_Find_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 *apiv1.ProjectFindRequest
+		var arg1 *apiv1.ProjectServiceFindRequest
 		if args[1] != nil {
-			arg1 = args[1].(*apiv1.ProjectFindRequest)
+			arg1 = args[1].(*apiv1.ProjectServiceFindRequest)
 		}
 		run(
 			arg0,
@@ -237,14 +237,14 @@ func (_c *ProjectServiceHandler_Find_Call) Return(projectListResponse *apiv1.Pro
 	return _c
 }
 
-func (_c *ProjectServiceHandler_Find_Call) RunAndReturn(run func(context1 context.Context, projectFindRequest *apiv1.ProjectFindRequest) (*apiv1.ProjectListResponse, error)) *ProjectServiceHandler_Find_Call {
+func (_c *ProjectServiceHandler_Find_Call) RunAndReturn(run func(context1 context.Context, projectServiceFindRequest *apiv1.ProjectServiceFindRequest) (*apiv1.ProjectListResponse, error)) *ProjectServiceHandler_Find_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // Get provides a mock function for the type ProjectServiceHandler
-func (_mock *ProjectServiceHandler) Get(context1 context.Context, projectGetRequest *apiv1.ProjectGetRequest) (*apiv1.ProjectResponse, error) {
-	ret := _mock.Called(context1, projectGetRequest)
+func (_mock *ProjectServiceHandler) Get(context1 context.Context, projectServiceGetRequest *apiv1.ProjectServiceGetRequest) (*apiv1.ProjectResponse, error) {
+	ret := _mock.Called(context1, projectServiceGetRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Get")
@@ -252,18 +252,18 @@ func (_mock *ProjectServiceHandler) Get(context1 context.Context, projectGetRequ
 
 	var r0 *apiv1.ProjectResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectGetRequest) (*apiv1.ProjectResponse, error)); ok {
-		return returnFunc(context1, projectGetRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectServiceGetRequest) (*apiv1.ProjectResponse, error)); ok {
+		return returnFunc(context1, projectServiceGetRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectGetRequest) *apiv1.ProjectResponse); ok {
-		r0 = returnFunc(context1, projectGetRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectServiceGetRequest) *apiv1.ProjectResponse); ok {
+		r0 = returnFunc(context1, projectServiceGetRequest)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*apiv1.ProjectResponse)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectGetRequest) error); ok {
-		r1 = returnFunc(context1, projectGetRequest)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectServiceGetRequest) error); ok {
+		r1 = returnFunc(context1, projectServiceGetRequest)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -277,20 +277,20 @@ type ProjectServiceHandler_Get_Call struct {
 
 // Get is a helper method to define mock.On call
 //   - context1 context.Context
-//   - projectGetRequest *apiv1.ProjectGetRequest
-func (_e *ProjectServiceHandler_Expecter) Get(context1 interface{}, projectGetRequest interface{}) *ProjectServiceHandler_Get_Call {
-	return &ProjectServiceHandler_Get_Call{Call: _e.mock.On("Get", context1, projectGetRequest)}
+//   - projectServiceGetRequest *apiv1.ProjectServiceGetRequest
+func (_e *ProjectServiceHandler_Expecter) Get(context1 interface{}, projectServiceGetRequest interface{}) *ProjectServiceHandler_Get_Call {
+	return &ProjectServiceHandler_Get_Call{Call: _e.mock.On("Get", context1, projectServiceGetRequest)}
 }
 
-func (_c *ProjectServiceHandler_Get_Call) Run(run func(context1 context.Context, projectGetRequest *apiv1.ProjectGetRequest)) *ProjectServiceHandler_Get_Call {
+func (_c *ProjectServiceHandler_Get_Call) Run(run func(context1 context.Context, projectServiceGetRequest *apiv1.ProjectServiceGetRequest)) *ProjectServiceHandler_Get_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 *apiv1.ProjectGetRequest
+		var arg1 *apiv1.ProjectServiceGetRequest
 		if args[1] != nil {
-			arg1 = args[1].(*apiv1.ProjectGetRequest)
+			arg1 = args[1].(*apiv1.ProjectServiceGetRequest)
 		}
 		run(
 			arg0,
@@ -305,14 +305,14 @@ func (_c *ProjectServiceHandler_Get_Call) Return(projectResponse *apiv1.ProjectR
 	return _c
 }
 
-func (_c *ProjectServiceHandler_Get_Call) RunAndReturn(run func(context1 context.Context, projectGetRequest *apiv1.ProjectGetRequest) (*apiv1.ProjectResponse, error)) *ProjectServiceHandler_Get_Call {
+func (_c *ProjectServiceHandler_Get_Call) RunAndReturn(run func(context1 context.Context, projectServiceGetRequest *apiv1.ProjectServiceGetRequest) (*apiv1.ProjectResponse, error)) *ProjectServiceHandler_Get_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // GetHistory provides a mock function for the type ProjectServiceHandler
-func (_mock *ProjectServiceHandler) GetHistory(context1 context.Context, projectGetHistoryRequest *apiv1.ProjectGetHistoryRequest) (*apiv1.ProjectResponse, error) {
-	ret := _mock.Called(context1, projectGetHistoryRequest)
+func (_mock *ProjectServiceHandler) GetHistory(context1 context.Context, projectServiceGetHistoryRequest *apiv1.ProjectServiceGetHistoryRequest) (*apiv1.ProjectResponse, error) {
+	ret := _mock.Called(context1, projectServiceGetHistoryRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for GetHistory")
@@ -320,18 +320,18 @@ func (_mock *ProjectServiceHandler) GetHistory(context1 context.Context, project
 
 	var r0 *apiv1.ProjectResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectGetHistoryRequest) (*apiv1.ProjectResponse, error)); ok {
-		return returnFunc(context1, projectGetHistoryRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectServiceGetHistoryRequest) (*apiv1.ProjectResponse, error)); ok {
+		return returnFunc(context1, projectServiceGetHistoryRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectGetHistoryRequest) *apiv1.ProjectResponse); ok {
-		r0 = returnFunc(context1, projectGetHistoryRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectServiceGetHistoryRequest) *apiv1.ProjectResponse); ok {
+		r0 = returnFunc(context1, projectServiceGetHistoryRequest)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*apiv1.ProjectResponse)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectGetHistoryRequest) error); ok {
-		r1 = returnFunc(context1, projectGetHistoryRequest)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectServiceGetHistoryRequest) error); ok {
+		r1 = returnFunc(context1, projectServiceGetHistoryRequest)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -345,20 +345,20 @@ type ProjectServiceHandler_GetHistory_Call struct {
 
 // GetHistory is a helper method to define mock.On call
 //   - context1 context.Context
-//   - projectGetHistoryRequest *apiv1.ProjectGetHistoryRequest
-func (_e *ProjectServiceHandler_Expecter) GetHistory(context1 interface{}, projectGetHistoryRequest interface{}) *ProjectServiceHandler_GetHistory_Call {
-	return &ProjectServiceHandler_GetHistory_Call{Call: _e.mock.On("GetHistory", context1, projectGetHistoryRequest)}
+//   - projectServiceGetHistoryRequest *apiv1.ProjectServiceGetHistoryRequest
+func (_e *ProjectServiceHandler_Expecter) GetHistory(context1 interface{}, projectServiceGetHistoryRequest interface{}) *ProjectServiceHandler_GetHistory_Call {
+	return &ProjectServiceHandler_GetHistory_Call{Call: _e.mock.On("GetHistory", context1, projectServiceGetHistoryRequest)}
 }
 
-func (_c *ProjectServiceHandler_GetHistory_Call) Run(run func(context1 context.Context, projectGetHistoryRequest *apiv1.ProjectGetHistoryRequest)) *ProjectServiceHandler_GetHistory_Call {
+func (_c *ProjectServiceHandler_GetHistory_Call) Run(run func(context1 context.Context, projectServiceGetHistoryRequest *apiv1.ProjectServiceGetHistoryRequest)) *ProjectServiceHandler_GetHistory_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 *apiv1.ProjectGetHistoryRequest
+		var arg1 *apiv1.ProjectServiceGetHistoryRequest
 		if args[1] != nil {
-			arg1 = args[1].(*apiv1.ProjectGetHistoryRequest)
+			arg1 = args[1].(*apiv1.ProjectServiceGetHistoryRequest)
 		}
 		run(
 			arg0,
@@ -373,14 +373,14 @@ func (_c *ProjectServiceHandler_GetHistory_Call) Return(projectResponse *apiv1.P
 	return _c
 }
 
-func (_c *ProjectServiceHandler_GetHistory_Call) RunAndReturn(run func(context1 context.Context, projectGetHistoryRequest *apiv1.ProjectGetHistoryRequest) (*apiv1.ProjectResponse, error)) *ProjectServiceHandler_GetHistory_Call {
+func (_c *ProjectServiceHandler_GetHistory_Call) RunAndReturn(run func(context1 context.Context, projectServiceGetHistoryRequest *apiv1.ProjectServiceGetHistoryRequest) (*apiv1.ProjectResponse, error)) *ProjectServiceHandler_GetHistory_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // Update provides a mock function for the type ProjectServiceHandler
-func (_mock *ProjectServiceHandler) Update(context1 context.Context, projectUpdateRequest *apiv1.ProjectUpdateRequest) (*apiv1.ProjectResponse, error) {
-	ret := _mock.Called(context1, projectUpdateRequest)
+func (_mock *ProjectServiceHandler) Update(context1 context.Context, projectServiceUpdateRequest *apiv1.ProjectServiceUpdateRequest) (*apiv1.ProjectResponse, error) {
+	ret := _mock.Called(context1, projectServiceUpdateRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Update")
@@ -388,18 +388,18 @@ func (_mock *ProjectServiceHandler) Update(context1 context.Context, projectUpda
 
 	var r0 *apiv1.ProjectResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectUpdateRequest) (*apiv1.ProjectResponse, error)); ok {
-		return returnFunc(context1, projectUpdateRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectServiceUpdateRequest) (*apiv1.ProjectResponse, error)); ok {
+		return returnFunc(context1, projectServiceUpdateRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectUpdateRequest) *apiv1.ProjectResponse); ok {
-		r0 = returnFunc(context1, projectUpdateRequest)
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.ProjectServiceUpdateRequest) *apiv1.ProjectResponse); ok {
+		r0 = returnFunc(context1, projectServiceUpdateRequest)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*apiv1.ProjectResponse)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectUpdateRequest) error); ok {
-		r1 = returnFunc(context1, projectUpdateRequest)
+	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.ProjectServiceUpdateRequest) error); ok {
+		r1 = returnFunc(context1, projectServiceUpdateRequest)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -413,20 +413,20 @@ type ProjectServiceHandler_Update_Call struct {
 
 // Update is a helper method to define mock.On call
 //   - context1 context.Context
-//   - projectUpdateRequest *apiv1.ProjectUpdateRequest
-func (_e *ProjectServiceHandler_Expecter) Update(context1 interface{}, projectUpdateRequest interface{}) *ProjectServiceHandler_Update_Call {
-	return &ProjectServiceHandler_Update_Call{Call: _e.mock.On("Update", context1, projectUpdateRequest)}
+//   - projectServiceUpdateRequest *apiv1.ProjectServiceUpdateRequest
+func (_e *ProjectServiceHandler_Expecter) Update(context1 interface{}, projectServiceUpdateRequest interface{}) *ProjectServiceHandler_Update_Call {
+	return &ProjectServiceHandler_Update_Call{Call: _e.mock.On("Update", context1, projectServiceUpdateRequest)}
 }
 
-func (_c *ProjectServiceHandler_Update_Call) Run(run func(context1 context.Context, projectUpdateRequest *apiv1.ProjectUpdateRequest)) *ProjectServiceHandler_Update_Call {
+func (_c *ProjectServiceHandler_Update_Call) Run(run func(context1 context.Context, projectServiceUpdateRequest *apiv1.ProjectServiceUpdateRequest)) *ProjectServiceHandler_Update_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
 			arg0 = args[0].(context.Context)
 		}
-		var arg1 *apiv1.ProjectUpdateRequest
+		var arg1 *apiv1.ProjectServiceUpdateRequest
 		if args[1] != nil {
-			arg1 = args[1].(*apiv1.ProjectUpdateRequest)
+			arg1 = args[1].(*apiv1.ProjectServiceUpdateRequest)
 		}
 		run(
 			arg0,
@@ -441,7 +441,7 @@ func (_c *ProjectServiceHandler_Update_Call) Return(projectResponse *apiv1.Proje
 	return _c
 }
 
-func (_c *ProjectServiceHandler_Update_Call) RunAndReturn(run func(context1 context.Context, projectUpdateRequest *apiv1.ProjectUpdateRequest) (*apiv1.ProjectResponse, error)) *ProjectServiceHandler_Update_Call {
+func (_c *ProjectServiceHandler_Update_Call) RunAndReturn(run func(context1 context.Context, projectServiceUpdateRequest *apiv1.ProjectServiceUpdateRequest) (*apiv1.ProjectResponse, error)) *ProjectServiceHandler_Update_Call {
 	_c.Call.Return(run)
 	return _c
 }

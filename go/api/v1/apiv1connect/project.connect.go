@@ -51,17 +51,17 @@ const (
 // ProjectServiceClient is a client for the api.v1.ProjectService service.
 type ProjectServiceClient interface {
 	// Create a project
-	Create(context.Context, *v1.ProjectCreateRequest) (*v1.ProjectResponse, error)
+	Create(context.Context, *v1.ProjectServiceCreateRequest) (*v1.ProjectResponse, error)
 	// Update a project
-	Update(context.Context, *v1.ProjectUpdateRequest) (*v1.ProjectResponse, error)
+	Update(context.Context, *v1.ProjectServiceUpdateRequest) (*v1.ProjectResponse, error)
 	// Delete a project
-	Delete(context.Context, *v1.ProjectDeleteRequest) (*v1.ProjectResponse, error)
+	Delete(context.Context, *v1.ProjectServiceDeleteRequest) (*v1.ProjectResponse, error)
 	// Get a project
-	Get(context.Context, *v1.ProjectGetRequest) (*v1.ProjectResponse, error)
+	Get(context.Context, *v1.ProjectServiceGetRequest) (*v1.ProjectResponse, error)
 	// GetHistory of a project
-	GetHistory(context.Context, *v1.ProjectGetHistoryRequest) (*v1.ProjectResponse, error)
+	GetHistory(context.Context, *v1.ProjectServiceGetHistoryRequest) (*v1.ProjectResponse, error)
 	// Find projects
-	Find(context.Context, *v1.ProjectFindRequest) (*v1.ProjectListResponse, error)
+	Find(context.Context, *v1.ProjectServiceFindRequest) (*v1.ProjectListResponse, error)
 }
 
 // NewProjectServiceClient constructs a client for the api.v1.ProjectService service. By default, it
@@ -75,37 +75,37 @@ func NewProjectServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 	baseURL = strings.TrimRight(baseURL, "/")
 	projectServiceMethods := v1.File_api_v1_project_proto.Services().ByName("ProjectService").Methods()
 	return &projectServiceClient{
-		create: connect.NewClient[v1.ProjectCreateRequest, v1.ProjectResponse](
+		create: connect.NewClient[v1.ProjectServiceCreateRequest, v1.ProjectResponse](
 			httpClient,
 			baseURL+ProjectServiceCreateProcedure,
 			connect.WithSchema(projectServiceMethods.ByName("Create")),
 			connect.WithClientOptions(opts...),
 		),
-		update: connect.NewClient[v1.ProjectUpdateRequest, v1.ProjectResponse](
+		update: connect.NewClient[v1.ProjectServiceUpdateRequest, v1.ProjectResponse](
 			httpClient,
 			baseURL+ProjectServiceUpdateProcedure,
 			connect.WithSchema(projectServiceMethods.ByName("Update")),
 			connect.WithClientOptions(opts...),
 		),
-		delete: connect.NewClient[v1.ProjectDeleteRequest, v1.ProjectResponse](
+		delete: connect.NewClient[v1.ProjectServiceDeleteRequest, v1.ProjectResponse](
 			httpClient,
 			baseURL+ProjectServiceDeleteProcedure,
 			connect.WithSchema(projectServiceMethods.ByName("Delete")),
 			connect.WithClientOptions(opts...),
 		),
-		get: connect.NewClient[v1.ProjectGetRequest, v1.ProjectResponse](
+		get: connect.NewClient[v1.ProjectServiceGetRequest, v1.ProjectResponse](
 			httpClient,
 			baseURL+ProjectServiceGetProcedure,
 			connect.WithSchema(projectServiceMethods.ByName("Get")),
 			connect.WithClientOptions(opts...),
 		),
-		getHistory: connect.NewClient[v1.ProjectGetHistoryRequest, v1.ProjectResponse](
+		getHistory: connect.NewClient[v1.ProjectServiceGetHistoryRequest, v1.ProjectResponse](
 			httpClient,
 			baseURL+ProjectServiceGetHistoryProcedure,
 			connect.WithSchema(projectServiceMethods.ByName("GetHistory")),
 			connect.WithClientOptions(opts...),
 		),
-		find: connect.NewClient[v1.ProjectFindRequest, v1.ProjectListResponse](
+		find: connect.NewClient[v1.ProjectServiceFindRequest, v1.ProjectListResponse](
 			httpClient,
 			baseURL+ProjectServiceFindProcedure,
 			connect.WithSchema(projectServiceMethods.ByName("Find")),
@@ -116,16 +116,16 @@ func NewProjectServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 
 // projectServiceClient implements ProjectServiceClient.
 type projectServiceClient struct {
-	create     *connect.Client[v1.ProjectCreateRequest, v1.ProjectResponse]
-	update     *connect.Client[v1.ProjectUpdateRequest, v1.ProjectResponse]
-	delete     *connect.Client[v1.ProjectDeleteRequest, v1.ProjectResponse]
-	get        *connect.Client[v1.ProjectGetRequest, v1.ProjectResponse]
-	getHistory *connect.Client[v1.ProjectGetHistoryRequest, v1.ProjectResponse]
-	find       *connect.Client[v1.ProjectFindRequest, v1.ProjectListResponse]
+	create     *connect.Client[v1.ProjectServiceCreateRequest, v1.ProjectResponse]
+	update     *connect.Client[v1.ProjectServiceUpdateRequest, v1.ProjectResponse]
+	delete     *connect.Client[v1.ProjectServiceDeleteRequest, v1.ProjectResponse]
+	get        *connect.Client[v1.ProjectServiceGetRequest, v1.ProjectResponse]
+	getHistory *connect.Client[v1.ProjectServiceGetHistoryRequest, v1.ProjectResponse]
+	find       *connect.Client[v1.ProjectServiceFindRequest, v1.ProjectListResponse]
 }
 
 // Create calls api.v1.ProjectService.Create.
-func (c *projectServiceClient) Create(ctx context.Context, req *v1.ProjectCreateRequest) (*v1.ProjectResponse, error) {
+func (c *projectServiceClient) Create(ctx context.Context, req *v1.ProjectServiceCreateRequest) (*v1.ProjectResponse, error) {
 	response, err := c.create.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -134,7 +134,7 @@ func (c *projectServiceClient) Create(ctx context.Context, req *v1.ProjectCreate
 }
 
 // Update calls api.v1.ProjectService.Update.
-func (c *projectServiceClient) Update(ctx context.Context, req *v1.ProjectUpdateRequest) (*v1.ProjectResponse, error) {
+func (c *projectServiceClient) Update(ctx context.Context, req *v1.ProjectServiceUpdateRequest) (*v1.ProjectResponse, error) {
 	response, err := c.update.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -143,7 +143,7 @@ func (c *projectServiceClient) Update(ctx context.Context, req *v1.ProjectUpdate
 }
 
 // Delete calls api.v1.ProjectService.Delete.
-func (c *projectServiceClient) Delete(ctx context.Context, req *v1.ProjectDeleteRequest) (*v1.ProjectResponse, error) {
+func (c *projectServiceClient) Delete(ctx context.Context, req *v1.ProjectServiceDeleteRequest) (*v1.ProjectResponse, error) {
 	response, err := c.delete.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -152,7 +152,7 @@ func (c *projectServiceClient) Delete(ctx context.Context, req *v1.ProjectDelete
 }
 
 // Get calls api.v1.ProjectService.Get.
-func (c *projectServiceClient) Get(ctx context.Context, req *v1.ProjectGetRequest) (*v1.ProjectResponse, error) {
+func (c *projectServiceClient) Get(ctx context.Context, req *v1.ProjectServiceGetRequest) (*v1.ProjectResponse, error) {
 	response, err := c.get.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -161,7 +161,7 @@ func (c *projectServiceClient) Get(ctx context.Context, req *v1.ProjectGetReques
 }
 
 // GetHistory calls api.v1.ProjectService.GetHistory.
-func (c *projectServiceClient) GetHistory(ctx context.Context, req *v1.ProjectGetHistoryRequest) (*v1.ProjectResponse, error) {
+func (c *projectServiceClient) GetHistory(ctx context.Context, req *v1.ProjectServiceGetHistoryRequest) (*v1.ProjectResponse, error) {
 	response, err := c.getHistory.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -170,7 +170,7 @@ func (c *projectServiceClient) GetHistory(ctx context.Context, req *v1.ProjectGe
 }
 
 // Find calls api.v1.ProjectService.Find.
-func (c *projectServiceClient) Find(ctx context.Context, req *v1.ProjectFindRequest) (*v1.ProjectListResponse, error) {
+func (c *projectServiceClient) Find(ctx context.Context, req *v1.ProjectServiceFindRequest) (*v1.ProjectListResponse, error) {
 	response, err := c.find.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -181,17 +181,17 @@ func (c *projectServiceClient) Find(ctx context.Context, req *v1.ProjectFindRequ
 // ProjectServiceHandler is an implementation of the api.v1.ProjectService service.
 type ProjectServiceHandler interface {
 	// Create a project
-	Create(context.Context, *v1.ProjectCreateRequest) (*v1.ProjectResponse, error)
+	Create(context.Context, *v1.ProjectServiceCreateRequest) (*v1.ProjectResponse, error)
 	// Update a project
-	Update(context.Context, *v1.ProjectUpdateRequest) (*v1.ProjectResponse, error)
+	Update(context.Context, *v1.ProjectServiceUpdateRequest) (*v1.ProjectResponse, error)
 	// Delete a project
-	Delete(context.Context, *v1.ProjectDeleteRequest) (*v1.ProjectResponse, error)
+	Delete(context.Context, *v1.ProjectServiceDeleteRequest) (*v1.ProjectResponse, error)
 	// Get a project
-	Get(context.Context, *v1.ProjectGetRequest) (*v1.ProjectResponse, error)
+	Get(context.Context, *v1.ProjectServiceGetRequest) (*v1.ProjectResponse, error)
 	// GetHistory of a project
-	GetHistory(context.Context, *v1.ProjectGetHistoryRequest) (*v1.ProjectResponse, error)
+	GetHistory(context.Context, *v1.ProjectServiceGetHistoryRequest) (*v1.ProjectResponse, error)
 	// Find projects
-	Find(context.Context, *v1.ProjectFindRequest) (*v1.ProjectListResponse, error)
+	Find(context.Context, *v1.ProjectServiceFindRequest) (*v1.ProjectListResponse, error)
 }
 
 // NewProjectServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -260,26 +260,26 @@ func NewProjectServiceHandler(svc ProjectServiceHandler, opts ...connect.Handler
 // UnimplementedProjectServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedProjectServiceHandler struct{}
 
-func (UnimplementedProjectServiceHandler) Create(context.Context, *v1.ProjectCreateRequest) (*v1.ProjectResponse, error) {
+func (UnimplementedProjectServiceHandler) Create(context.Context, *v1.ProjectServiceCreateRequest) (*v1.ProjectResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ProjectService.Create is not implemented"))
 }
 
-func (UnimplementedProjectServiceHandler) Update(context.Context, *v1.ProjectUpdateRequest) (*v1.ProjectResponse, error) {
+func (UnimplementedProjectServiceHandler) Update(context.Context, *v1.ProjectServiceUpdateRequest) (*v1.ProjectResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ProjectService.Update is not implemented"))
 }
 
-func (UnimplementedProjectServiceHandler) Delete(context.Context, *v1.ProjectDeleteRequest) (*v1.ProjectResponse, error) {
+func (UnimplementedProjectServiceHandler) Delete(context.Context, *v1.ProjectServiceDeleteRequest) (*v1.ProjectResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ProjectService.Delete is not implemented"))
 }
 
-func (UnimplementedProjectServiceHandler) Get(context.Context, *v1.ProjectGetRequest) (*v1.ProjectResponse, error) {
+func (UnimplementedProjectServiceHandler) Get(context.Context, *v1.ProjectServiceGetRequest) (*v1.ProjectResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ProjectService.Get is not implemented"))
 }
 
-func (UnimplementedProjectServiceHandler) GetHistory(context.Context, *v1.ProjectGetHistoryRequest) (*v1.ProjectResponse, error) {
+func (UnimplementedProjectServiceHandler) GetHistory(context.Context, *v1.ProjectServiceGetHistoryRequest) (*v1.ProjectResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ProjectService.GetHistory is not implemented"))
 }
 
-func (UnimplementedProjectServiceHandler) Find(context.Context, *v1.ProjectFindRequest) (*v1.ProjectListResponse, error) {
+func (UnimplementedProjectServiceHandler) Find(context.Context, *v1.ProjectServiceFindRequest) (*v1.ProjectListResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ProjectService.Find is not implemented"))
 }

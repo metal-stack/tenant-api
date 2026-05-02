@@ -5,14 +5,14 @@ package api.v1;
 // VersionService provides service methods to version information
 service VersionService {
   // Get the version of this server
-  rpc Get(GetVersionRequest) returns (GetVersionResponse);
+  rpc Get(VersionServiceGetRequest) returns (VersionServiceGetResponse);
 }
 
-// GetVersionRequest is the request payload to get the server version
-message GetVersionRequest {}
+// VersionServiceGetRequest is the request payload to get the server version
+message VersionServiceGetRequest {}
 
-// GetVersionResponse is the response payload with all version details
-message GetVersionResponse {
+// VersionServiceGetResponse is the response payload with all version details
+message VersionServiceGetResponse {
   // Version
   string version = 1;
   // Revision

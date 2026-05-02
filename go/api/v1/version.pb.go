@@ -21,27 +21,27 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// GetVersionRequest is the request payload to get the server version
-type GetVersionRequest struct {
+// VersionServiceGetRequest is the request payload to get the server version
+type VersionServiceGetRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetVersionRequest) Reset() {
-	*x = GetVersionRequest{}
+func (x *VersionServiceGetRequest) Reset() {
+	*x = VersionServiceGetRequest{}
 	mi := &file_api_v1_version_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetVersionRequest) String() string {
+func (x *VersionServiceGetRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetVersionRequest) ProtoMessage() {}
+func (*VersionServiceGetRequest) ProtoMessage() {}
 
-func (x *GetVersionRequest) ProtoReflect() protoreflect.Message {
+func (x *VersionServiceGetRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_api_v1_version_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -53,13 +53,13 @@ func (x *GetVersionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetVersionRequest.ProtoReflect.Descriptor instead.
-func (*GetVersionRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use VersionServiceGetRequest.ProtoReflect.Descriptor instead.
+func (*VersionServiceGetRequest) Descriptor() ([]byte, []int) {
 	return file_api_v1_version_proto_rawDescGZIP(), []int{0}
 }
 
-// GetVersionResponse is the response payload with all version details
-type GetVersionResponse struct {
+// VersionServiceGetResponse is the response payload with all version details
+type VersionServiceGetResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Version
 	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
@@ -73,20 +73,20 @@ type GetVersionResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetVersionResponse) Reset() {
-	*x = GetVersionResponse{}
+func (x *VersionServiceGetResponse) Reset() {
+	*x = VersionServiceGetResponse{}
 	mi := &file_api_v1_version_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetVersionResponse) String() string {
+func (x *VersionServiceGetResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetVersionResponse) ProtoMessage() {}
+func (*VersionServiceGetResponse) ProtoMessage() {}
 
-func (x *GetVersionResponse) ProtoReflect() protoreflect.Message {
+func (x *VersionServiceGetResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_api_v1_version_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -98,33 +98,33 @@ func (x *GetVersionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetVersionResponse.ProtoReflect.Descriptor instead.
-func (*GetVersionResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use VersionServiceGetResponse.ProtoReflect.Descriptor instead.
+func (*VersionServiceGetResponse) Descriptor() ([]byte, []int) {
 	return file_api_v1_version_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GetVersionResponse) GetVersion() string {
+func (x *VersionServiceGetResponse) GetVersion() string {
 	if x != nil {
 		return x.Version
 	}
 	return ""
 }
 
-func (x *GetVersionResponse) GetRevision() string {
+func (x *VersionServiceGetResponse) GetRevision() string {
 	if x != nil {
 		return x.Revision
 	}
 	return ""
 }
 
-func (x *GetVersionResponse) GetGitSha1() string {
+func (x *VersionServiceGetResponse) GetGitSha1() string {
 	if x != nil {
 		return x.GitSha1
 	}
 	return ""
 }
 
-func (x *GetVersionResponse) GetBuildDate() string {
+func (x *VersionServiceGetResponse) GetBuildDate() string {
 	if x != nil {
 		return x.BuildDate
 	}
@@ -135,16 +135,16 @@ var File_api_v1_version_proto protoreflect.FileDescriptor
 
 const file_api_v1_version_proto_rawDesc = "" +
 	"\n" +
-	"\x14api/v1/version.proto\x12\x06api.v1\"\x13\n" +
-	"\x11GetVersionRequest\"\x84\x01\n" +
-	"\x12GetVersionResponse\x12\x18\n" +
+	"\x14api/v1/version.proto\x12\x06api.v1\"\x1a\n" +
+	"\x18VersionServiceGetRequest\"\x8b\x01\n" +
+	"\x19VersionServiceGetResponse\x12\x18\n" +
 	"\aversion\x18\x01 \x01(\tR\aversion\x12\x1a\n" +
 	"\brevision\x18\x02 \x01(\tR\brevision\x12\x19\n" +
 	"\bgit_sha1\x18\x03 \x01(\tR\agitSha1\x12\x1d\n" +
 	"\n" +
-	"build_date\x18\x04 \x01(\tR\tbuildDate2N\n" +
-	"\x0eVersionService\x12<\n" +
-	"\x03Get\x12\x19.api.v1.GetVersionRequest\x1a\x1a.api.v1.GetVersionResponseB\x86\x01\n" +
+	"build_date\x18\x04 \x01(\tR\tbuildDate2\\\n" +
+	"\x0eVersionService\x12J\n" +
+	"\x03Get\x12 .api.v1.VersionServiceGetRequest\x1a!.api.v1.VersionServiceGetResponseB\x86\x01\n" +
 	"\n" +
 	"com.api.v1B\fVersionProtoP\x01Z1github.com/metal-stack/tenant-api/go/api/v1;apiv1\xa2\x02\x03AXX\xaa\x02\x06Api.V1\xca\x02\x06Api\\V1\xe2\x02\x12Api\\V1\\GPBMetadata\xea\x02\aApi::V1b\x06proto3"
 
@@ -162,12 +162,12 @@ func file_api_v1_version_proto_rawDescGZIP() []byte {
 
 var file_api_v1_version_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_api_v1_version_proto_goTypes = []any{
-	(*GetVersionRequest)(nil),  // 0: api.v1.GetVersionRequest
-	(*GetVersionResponse)(nil), // 1: api.v1.GetVersionResponse
+	(*VersionServiceGetRequest)(nil),  // 0: api.v1.VersionServiceGetRequest
+	(*VersionServiceGetResponse)(nil), // 1: api.v1.VersionServiceGetResponse
 }
 var file_api_v1_version_proto_depIdxs = []int32{
-	0, // 0: api.v1.VersionService.Get:input_type -> api.v1.GetVersionRequest
-	1, // 1: api.v1.VersionService.Get:output_type -> api.v1.GetVersionResponse
+	0, // 0: api.v1.VersionService.Get:input_type -> api.v1.VersionServiceGetRequest
+	1, // 1: api.v1.VersionService.Get:output_type -> api.v1.VersionServiceGetResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

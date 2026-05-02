@@ -7,15 +7,15 @@ import "api/v1/meta.proto";
 // ProjectMemberService provides service methods to work with project members
 service ProjectMemberService {
   // Create a project member ship
-  rpc Create(ProjectMemberCreateRequest) returns (ProjectMemberResponse);
+  rpc Create(ProjectMemberServiceCreateRequest) returns (ProjectMemberResponse);
   // Update a project member ship
-  rpc Update(ProjectMemberUpdateRequest) returns (ProjectMemberResponse);
+  rpc Update(ProjectMemberServiceUpdateRequest) returns (ProjectMemberResponse);
   // Delete a project member ship
-  rpc Delete(ProjectMemberDeleteRequest) returns (ProjectMemberResponse);
+  rpc Delete(ProjectMemberServiceDeleteRequest) returns (ProjectMemberResponse);
   // Get a project member ship
-  rpc Get(ProjectMemberGetRequest) returns (ProjectMemberResponse);
+  rpc Get(ProjectMemberServiceGetRequest) returns (ProjectMemberResponse);
   // Find project member ships
-  rpc Find(ProjectMemberFindRequest) returns (ProjectMemberListResponse);
+  rpc Find(ProjectMemberServiceFindRequest) returns (ProjectMemberListResponse);
 }
 
 // ProjectMember is the database model
@@ -30,32 +30,32 @@ message ProjectMember {
   string namespace = 4;
 }
 
-// ProjectMemberCreateRequest is the request payload to create a new project member
-message ProjectMemberCreateRequest {
+// ProjectMemberServiceCreateRequest is the request payload to create a new project member
+message ProjectMemberServiceCreateRequest {
   // ProjectMember to create
   ProjectMember project_member = 1;
 }
 
-// ProjectMemberUpdateRequest is the request payload to Update a project member
-message ProjectMemberUpdateRequest {
+// ProjectMemberServiceUpdateRequest is the request payload to Update a project member
+message ProjectMemberServiceUpdateRequest {
   // ProjectMember to update
   ProjectMember project_member = 1;
 }
 
-// ProjectMemberDeleteRequest is the request payload to delete a project member
-message ProjectMemberDeleteRequest {
+// ProjectMemberServiceDeleteRequest is the request payload to delete a project member
+message ProjectMemberServiceDeleteRequest {
   // Id of the project member to delete
   string id = 1;
 }
 
-// ProjectMemberGetRequest is the request payload to get a project member
-message ProjectMemberGetRequest {
+// ProjectMemberServiceGetRequest is the request payload to get a project member
+message ProjectMemberServiceGetRequest {
   // Id of the project member to get
   string id = 1;
 }
 
-// ProjectMemberFindRequest is the request payload to find project members
-message ProjectMemberFindRequest {
+// ProjectMemberServiceFindRequest is the request payload to find project members
+message ProjectMemberServiceFindRequest {
   // ProjectId of project members to find
   optional string project_id = 1;
   // TenantId of project members to find

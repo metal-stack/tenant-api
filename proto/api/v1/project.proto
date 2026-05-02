@@ -9,17 +9,17 @@ import "google/protobuf/timestamp.proto";
 // ProjectService provides service methods to work with projects
 service ProjectService {
   // Create a project
-  rpc Create(ProjectCreateRequest) returns (ProjectResponse);
+  rpc Create(ProjectServiceCreateRequest) returns (ProjectResponse);
   // Update a project
-  rpc Update(ProjectUpdateRequest) returns (ProjectResponse);
+  rpc Update(ProjectServiceUpdateRequest) returns (ProjectResponse);
   // Delete a project
-  rpc Delete(ProjectDeleteRequest) returns (ProjectResponse);
+  rpc Delete(ProjectServiceDeleteRequest) returns (ProjectResponse);
   // Get a project
-  rpc Get(ProjectGetRequest) returns (ProjectResponse);
+  rpc Get(ProjectServiceGetRequest) returns (ProjectResponse);
   // GetHistory of a project
-  rpc GetHistory(ProjectGetHistoryRequest) returns (ProjectResponse);
+  rpc GetHistory(ProjectServiceGetHistoryRequest) returns (ProjectResponse);
   // Find projects
-  rpc Find(ProjectFindRequest) returns (ProjectListResponse);
+  rpc Find(ProjectServiceFindRequest) returns (ProjectListResponse);
 }
 
 // Project is the database model
@@ -34,40 +34,40 @@ message Project {
   string tenant_id = 4;
 }
 
-// ProjectCreateRequest is the request payload to create a new project
-message ProjectCreateRequest {
+// ProjectServiceCreateRequest is the request payload to create a new project
+message ProjectServiceCreateRequest {
   // Project to create
   Project project = 1;
 }
 
-// ProjectUpdateRequest is the request payload to update a project
-message ProjectUpdateRequest {
+// ProjectServiceUpdateRequest is the request payload to update a project
+message ProjectServiceUpdateRequest {
   // Project to update
   Project project = 1;
 }
 
-// ProjectDeleteRequest is the request payload to delete a project
-message ProjectDeleteRequest {
+// ProjectServiceDeleteRequest is the request payload to delete a project
+message ProjectServiceDeleteRequest {
   // Id of the project to delete
   string id = 1;
 }
 
-// ProjectGetRequest is the request payload to get a project
-message ProjectGetRequest {
+// ProjectServiceGetRequest is the request payload to get a project
+message ProjectServiceGetRequest {
   // Id of the project to get
   string id = 1;
 }
 
-// ProjectGetHistoryRequest is the request payload to get the history of a project
-message ProjectGetHistoryRequest {
+// ProjectServiceGetHistoryRequest is the request payload to get the history of a project
+message ProjectServiceGetHistoryRequest {
   // Id of the project to get the history for
   string id = 1;
   // At the timestamp at which the history should get returned
   google.protobuf.Timestamp at = 2;
 }
 
-// ProjectFindRequest is the request payload to find projects
-message ProjectFindRequest {
+// ProjectServiceFindRequest is the request payload to find projects
+message ProjectServiceFindRequest {
   // Paging spec of this find request
   Paging paging = 1;
   // Annotations of projects to find

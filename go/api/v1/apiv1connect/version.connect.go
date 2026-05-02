@@ -40,7 +40,7 @@ const (
 // VersionServiceClient is a client for the api.v1.VersionService service.
 type VersionServiceClient interface {
 	// Get the version of this server
-	Get(context.Context, *v1.GetVersionRequest) (*v1.GetVersionResponse, error)
+	Get(context.Context, *v1.VersionServiceGetRequest) (*v1.VersionServiceGetResponse, error)
 }
 
 // NewVersionServiceClient constructs a client for the api.v1.VersionService service. By default, it
@@ -54,7 +54,7 @@ func NewVersionServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 	baseURL = strings.TrimRight(baseURL, "/")
 	versionServiceMethods := v1.File_api_v1_version_proto.Services().ByName("VersionService").Methods()
 	return &versionServiceClient{
-		get: connect.NewClient[v1.GetVersionRequest, v1.GetVersionResponse](
+		get: connect.NewClient[v1.VersionServiceGetRequest, v1.VersionServiceGetResponse](
 			httpClient,
 			baseURL+VersionServiceGetProcedure,
 			connect.WithSchema(versionServiceMethods.ByName("Get")),
@@ -65,11 +65,11 @@ func NewVersionServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 
 // versionServiceClient implements VersionServiceClient.
 type versionServiceClient struct {
-	get *connect.Client[v1.GetVersionRequest, v1.GetVersionResponse]
+	get *connect.Client[v1.VersionServiceGetRequest, v1.VersionServiceGetResponse]
 }
 
 // Get calls api.v1.VersionService.Get.
-func (c *versionServiceClient) Get(ctx context.Context, req *v1.GetVersionRequest) (*v1.GetVersionResponse, error) {
+func (c *versionServiceClient) Get(ctx context.Context, req *v1.VersionServiceGetRequest) (*v1.VersionServiceGetResponse, error) {
 	response, err := c.get.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -80,7 +80,7 @@ func (c *versionServiceClient) Get(ctx context.Context, req *v1.GetVersionReques
 // VersionServiceHandler is an implementation of the api.v1.VersionService service.
 type VersionServiceHandler interface {
 	// Get the version of this server
-	Get(context.Context, *v1.GetVersionRequest) (*v1.GetVersionResponse, error)
+	Get(context.Context, *v1.VersionServiceGetRequest) (*v1.VersionServiceGetResponse, error)
 }
 
 // NewVersionServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -109,6 +109,6 @@ func NewVersionServiceHandler(svc VersionServiceHandler, opts ...connect.Handler
 // UnimplementedVersionServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedVersionServiceHandler struct{}
 
-func (UnimplementedVersionServiceHandler) Get(context.Context, *v1.GetVersionRequest) (*v1.GetVersionResponse, error) {
+func (UnimplementedVersionServiceHandler) Get(context.Context, *v1.VersionServiceGetRequest) (*v1.VersionServiceGetResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.VersionService.Get is not implemented"))
 }

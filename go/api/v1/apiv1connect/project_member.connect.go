@@ -53,15 +53,15 @@ const (
 // ProjectMemberServiceClient is a client for the api.v1.ProjectMemberService service.
 type ProjectMemberServiceClient interface {
 	// Create a project member ship
-	Create(context.Context, *v1.ProjectMemberCreateRequest) (*v1.ProjectMemberResponse, error)
+	Create(context.Context, *v1.ProjectMemberServiceCreateRequest) (*v1.ProjectMemberResponse, error)
 	// Update a project member ship
-	Update(context.Context, *v1.ProjectMemberUpdateRequest) (*v1.ProjectMemberResponse, error)
+	Update(context.Context, *v1.ProjectMemberServiceUpdateRequest) (*v1.ProjectMemberResponse, error)
 	// Delete a project member ship
-	Delete(context.Context, *v1.ProjectMemberDeleteRequest) (*v1.ProjectMemberResponse, error)
+	Delete(context.Context, *v1.ProjectMemberServiceDeleteRequest) (*v1.ProjectMemberResponse, error)
 	// Get a project member ship
-	Get(context.Context, *v1.ProjectMemberGetRequest) (*v1.ProjectMemberResponse, error)
+	Get(context.Context, *v1.ProjectMemberServiceGetRequest) (*v1.ProjectMemberResponse, error)
 	// Find project member ships
-	Find(context.Context, *v1.ProjectMemberFindRequest) (*v1.ProjectMemberListResponse, error)
+	Find(context.Context, *v1.ProjectMemberServiceFindRequest) (*v1.ProjectMemberListResponse, error)
 }
 
 // NewProjectMemberServiceClient constructs a client for the api.v1.ProjectMemberService service. By
@@ -75,31 +75,31 @@ func NewProjectMemberServiceClient(httpClient connect.HTTPClient, baseURL string
 	baseURL = strings.TrimRight(baseURL, "/")
 	projectMemberServiceMethods := v1.File_api_v1_project_member_proto.Services().ByName("ProjectMemberService").Methods()
 	return &projectMemberServiceClient{
-		create: connect.NewClient[v1.ProjectMemberCreateRequest, v1.ProjectMemberResponse](
+		create: connect.NewClient[v1.ProjectMemberServiceCreateRequest, v1.ProjectMemberResponse](
 			httpClient,
 			baseURL+ProjectMemberServiceCreateProcedure,
 			connect.WithSchema(projectMemberServiceMethods.ByName("Create")),
 			connect.WithClientOptions(opts...),
 		),
-		update: connect.NewClient[v1.ProjectMemberUpdateRequest, v1.ProjectMemberResponse](
+		update: connect.NewClient[v1.ProjectMemberServiceUpdateRequest, v1.ProjectMemberResponse](
 			httpClient,
 			baseURL+ProjectMemberServiceUpdateProcedure,
 			connect.WithSchema(projectMemberServiceMethods.ByName("Update")),
 			connect.WithClientOptions(opts...),
 		),
-		delete: connect.NewClient[v1.ProjectMemberDeleteRequest, v1.ProjectMemberResponse](
+		delete: connect.NewClient[v1.ProjectMemberServiceDeleteRequest, v1.ProjectMemberResponse](
 			httpClient,
 			baseURL+ProjectMemberServiceDeleteProcedure,
 			connect.WithSchema(projectMemberServiceMethods.ByName("Delete")),
 			connect.WithClientOptions(opts...),
 		),
-		get: connect.NewClient[v1.ProjectMemberGetRequest, v1.ProjectMemberResponse](
+		get: connect.NewClient[v1.ProjectMemberServiceGetRequest, v1.ProjectMemberResponse](
 			httpClient,
 			baseURL+ProjectMemberServiceGetProcedure,
 			connect.WithSchema(projectMemberServiceMethods.ByName("Get")),
 			connect.WithClientOptions(opts...),
 		),
-		find: connect.NewClient[v1.ProjectMemberFindRequest, v1.ProjectMemberListResponse](
+		find: connect.NewClient[v1.ProjectMemberServiceFindRequest, v1.ProjectMemberListResponse](
 			httpClient,
 			baseURL+ProjectMemberServiceFindProcedure,
 			connect.WithSchema(projectMemberServiceMethods.ByName("Find")),
@@ -110,15 +110,15 @@ func NewProjectMemberServiceClient(httpClient connect.HTTPClient, baseURL string
 
 // projectMemberServiceClient implements ProjectMemberServiceClient.
 type projectMemberServiceClient struct {
-	create *connect.Client[v1.ProjectMemberCreateRequest, v1.ProjectMemberResponse]
-	update *connect.Client[v1.ProjectMemberUpdateRequest, v1.ProjectMemberResponse]
-	delete *connect.Client[v1.ProjectMemberDeleteRequest, v1.ProjectMemberResponse]
-	get    *connect.Client[v1.ProjectMemberGetRequest, v1.ProjectMemberResponse]
-	find   *connect.Client[v1.ProjectMemberFindRequest, v1.ProjectMemberListResponse]
+	create *connect.Client[v1.ProjectMemberServiceCreateRequest, v1.ProjectMemberResponse]
+	update *connect.Client[v1.ProjectMemberServiceUpdateRequest, v1.ProjectMemberResponse]
+	delete *connect.Client[v1.ProjectMemberServiceDeleteRequest, v1.ProjectMemberResponse]
+	get    *connect.Client[v1.ProjectMemberServiceGetRequest, v1.ProjectMemberResponse]
+	find   *connect.Client[v1.ProjectMemberServiceFindRequest, v1.ProjectMemberListResponse]
 }
 
 // Create calls api.v1.ProjectMemberService.Create.
-func (c *projectMemberServiceClient) Create(ctx context.Context, req *v1.ProjectMemberCreateRequest) (*v1.ProjectMemberResponse, error) {
+func (c *projectMemberServiceClient) Create(ctx context.Context, req *v1.ProjectMemberServiceCreateRequest) (*v1.ProjectMemberResponse, error) {
 	response, err := c.create.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -127,7 +127,7 @@ func (c *projectMemberServiceClient) Create(ctx context.Context, req *v1.Project
 }
 
 // Update calls api.v1.ProjectMemberService.Update.
-func (c *projectMemberServiceClient) Update(ctx context.Context, req *v1.ProjectMemberUpdateRequest) (*v1.ProjectMemberResponse, error) {
+func (c *projectMemberServiceClient) Update(ctx context.Context, req *v1.ProjectMemberServiceUpdateRequest) (*v1.ProjectMemberResponse, error) {
 	response, err := c.update.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -136,7 +136,7 @@ func (c *projectMemberServiceClient) Update(ctx context.Context, req *v1.Project
 }
 
 // Delete calls api.v1.ProjectMemberService.Delete.
-func (c *projectMemberServiceClient) Delete(ctx context.Context, req *v1.ProjectMemberDeleteRequest) (*v1.ProjectMemberResponse, error) {
+func (c *projectMemberServiceClient) Delete(ctx context.Context, req *v1.ProjectMemberServiceDeleteRequest) (*v1.ProjectMemberResponse, error) {
 	response, err := c.delete.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -145,7 +145,7 @@ func (c *projectMemberServiceClient) Delete(ctx context.Context, req *v1.Project
 }
 
 // Get calls api.v1.ProjectMemberService.Get.
-func (c *projectMemberServiceClient) Get(ctx context.Context, req *v1.ProjectMemberGetRequest) (*v1.ProjectMemberResponse, error) {
+func (c *projectMemberServiceClient) Get(ctx context.Context, req *v1.ProjectMemberServiceGetRequest) (*v1.ProjectMemberResponse, error) {
 	response, err := c.get.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -154,7 +154,7 @@ func (c *projectMemberServiceClient) Get(ctx context.Context, req *v1.ProjectMem
 }
 
 // Find calls api.v1.ProjectMemberService.Find.
-func (c *projectMemberServiceClient) Find(ctx context.Context, req *v1.ProjectMemberFindRequest) (*v1.ProjectMemberListResponse, error) {
+func (c *projectMemberServiceClient) Find(ctx context.Context, req *v1.ProjectMemberServiceFindRequest) (*v1.ProjectMemberListResponse, error) {
 	response, err := c.find.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -165,15 +165,15 @@ func (c *projectMemberServiceClient) Find(ctx context.Context, req *v1.ProjectMe
 // ProjectMemberServiceHandler is an implementation of the api.v1.ProjectMemberService service.
 type ProjectMemberServiceHandler interface {
 	// Create a project member ship
-	Create(context.Context, *v1.ProjectMemberCreateRequest) (*v1.ProjectMemberResponse, error)
+	Create(context.Context, *v1.ProjectMemberServiceCreateRequest) (*v1.ProjectMemberResponse, error)
 	// Update a project member ship
-	Update(context.Context, *v1.ProjectMemberUpdateRequest) (*v1.ProjectMemberResponse, error)
+	Update(context.Context, *v1.ProjectMemberServiceUpdateRequest) (*v1.ProjectMemberResponse, error)
 	// Delete a project member ship
-	Delete(context.Context, *v1.ProjectMemberDeleteRequest) (*v1.ProjectMemberResponse, error)
+	Delete(context.Context, *v1.ProjectMemberServiceDeleteRequest) (*v1.ProjectMemberResponse, error)
 	// Get a project member ship
-	Get(context.Context, *v1.ProjectMemberGetRequest) (*v1.ProjectMemberResponse, error)
+	Get(context.Context, *v1.ProjectMemberServiceGetRequest) (*v1.ProjectMemberResponse, error)
 	// Find project member ships
-	Find(context.Context, *v1.ProjectMemberFindRequest) (*v1.ProjectMemberListResponse, error)
+	Find(context.Context, *v1.ProjectMemberServiceFindRequest) (*v1.ProjectMemberListResponse, error)
 }
 
 // NewProjectMemberServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -234,22 +234,22 @@ func NewProjectMemberServiceHandler(svc ProjectMemberServiceHandler, opts ...con
 // UnimplementedProjectMemberServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedProjectMemberServiceHandler struct{}
 
-func (UnimplementedProjectMemberServiceHandler) Create(context.Context, *v1.ProjectMemberCreateRequest) (*v1.ProjectMemberResponse, error) {
+func (UnimplementedProjectMemberServiceHandler) Create(context.Context, *v1.ProjectMemberServiceCreateRequest) (*v1.ProjectMemberResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ProjectMemberService.Create is not implemented"))
 }
 
-func (UnimplementedProjectMemberServiceHandler) Update(context.Context, *v1.ProjectMemberUpdateRequest) (*v1.ProjectMemberResponse, error) {
+func (UnimplementedProjectMemberServiceHandler) Update(context.Context, *v1.ProjectMemberServiceUpdateRequest) (*v1.ProjectMemberResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ProjectMemberService.Update is not implemented"))
 }
 
-func (UnimplementedProjectMemberServiceHandler) Delete(context.Context, *v1.ProjectMemberDeleteRequest) (*v1.ProjectMemberResponse, error) {
+func (UnimplementedProjectMemberServiceHandler) Delete(context.Context, *v1.ProjectMemberServiceDeleteRequest) (*v1.ProjectMemberResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ProjectMemberService.Delete is not implemented"))
 }
 
-func (UnimplementedProjectMemberServiceHandler) Get(context.Context, *v1.ProjectMemberGetRequest) (*v1.ProjectMemberResponse, error) {
+func (UnimplementedProjectMemberServiceHandler) Get(context.Context, *v1.ProjectMemberServiceGetRequest) (*v1.ProjectMemberResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ProjectMemberService.Get is not implemented"))
 }
 
-func (UnimplementedProjectMemberServiceHandler) Find(context.Context, *v1.ProjectMemberFindRequest) (*v1.ProjectMemberListResponse, error) {
+func (UnimplementedProjectMemberServiceHandler) Find(context.Context, *v1.ProjectMemberServiceFindRequest) (*v1.ProjectMemberListResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.ProjectMemberService.Find is not implemented"))
 }
