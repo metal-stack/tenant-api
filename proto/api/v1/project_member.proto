@@ -7,15 +7,15 @@ import "api/v1/meta.proto";
 // ProjectMemberService provides service methods to work with project members
 service ProjectMemberService {
   // Create a project member ship
-  rpc Create(ProjectMemberServiceCreateRequest) returns (ProjectMemberResponse);
+  rpc Create(ProjectMemberServiceCreateRequest) returns (ProjectMemberServiceCreateResponse);
   // Update a project member ship
-  rpc Update(ProjectMemberServiceUpdateRequest) returns (ProjectMemberResponse);
+  rpc Update(ProjectMemberServiceUpdateRequest) returns (ProjectMemberServiceUpdateResponse);
   // Delete a project member ship
-  rpc Delete(ProjectMemberServiceDeleteRequest) returns (ProjectMemberResponse);
+  rpc Delete(ProjectMemberServiceDeleteRequest) returns (ProjectMemberServiceDeleteResponse);
   // Get a project member ship
-  rpc Get(ProjectMemberServiceGetRequest) returns (ProjectMemberResponse);
-  // Find project member ships
-  rpc Find(ProjectMemberServiceFindRequest) returns (ProjectMemberListResponse);
+  rpc Get(ProjectMemberServiceGetRequest) returns (ProjectMemberServiceGetResponse);
+  // List project member ships
+  rpc List(ProjectMemberServiceListRequest) returns (ProjectMemberServiceListResponse);
 }
 
 // ProjectMember is the database model
@@ -36,9 +36,21 @@ message ProjectMemberServiceCreateRequest {
   ProjectMember project_member = 1;
 }
 
+// ProjectMemberServiceCreateResponse contains the project member
+message ProjectMemberServiceCreateResponse {
+  // ProjectMember is the response
+  ProjectMember project_member = 1;
+}
+
 // ProjectMemberServiceUpdateRequest is the request payload to Update a project member
 message ProjectMemberServiceUpdateRequest {
   // ProjectMember to update
+  ProjectMember project_member = 1;
+}
+
+// ProjectMemberServiceUpdateResponse contains the project member
+message ProjectMemberServiceUpdateResponse {
+  // ProjectMember is the response
   ProjectMember project_member = 1;
 }
 
@@ -48,32 +60,38 @@ message ProjectMemberServiceDeleteRequest {
   string id = 1;
 }
 
+// ProjectMemberServiceDeleteResponse contains the project member
+message ProjectMemberServiceDeleteResponse {
+  // ProjectMember is the response
+  ProjectMember project_member = 1;
+}
+
 // ProjectMemberServiceGetRequest is the request payload to get a project member
 message ProjectMemberServiceGetRequest {
   // Id of the project member to get
   string id = 1;
 }
 
-// ProjectMemberServiceFindRequest is the request payload to find project members
-message ProjectMemberServiceFindRequest {
-  // ProjectId of project members to find
-  optional string project_id = 1;
-  // TenantId of project members to find
-  optional string tenant_id = 2;
-  // Annotations of project members to find
-  map<string, string> annotations = 3;
-  // Namespace of project members to find
-  string namespace = 4;
-}
-
-// ProjectMemberResponse contains the project member
-message ProjectMemberResponse {
+// ProjectMemberServiceGetResponse contains the project member
+message ProjectMemberServiceGetResponse {
   // ProjectMember is the response
   ProjectMember project_member = 1;
 }
 
-// ProjectMemberListResponse contains the project members
-message ProjectMemberListResponse {
+// ProjectMemberServiceListRequest is the request payload to list project members
+message ProjectMemberServiceListRequest {
+  // ProjectId of project members to list
+  optional string project_id = 1;
+  // TenantId of project members to list
+  optional string tenant_id = 2;
+  // Annotations of project members to list
+  map<string, string> annotations = 3;
+  // Namespace of project members to list
+  string namespace = 4;
+}
+
+// ProjectMemberServiceListResponse contains the project members
+message ProjectMemberServiceListResponse {
   // ProjectMembers is the response
   repeated ProjectMember project_members = 1;
 }

@@ -44,23 +44,23 @@ const (
 	TenantMemberServiceDeleteProcedure = "/api.v1.TenantMemberService/Delete"
 	// TenantMemberServiceGetProcedure is the fully-qualified name of the TenantMemberService's Get RPC.
 	TenantMemberServiceGetProcedure = "/api.v1.TenantMemberService/Get"
-	// TenantMemberServiceFindProcedure is the fully-qualified name of the TenantMemberService's Find
+	// TenantMemberServiceListProcedure is the fully-qualified name of the TenantMemberService's List
 	// RPC.
-	TenantMemberServiceFindProcedure = "/api.v1.TenantMemberService/Find"
+	TenantMemberServiceListProcedure = "/api.v1.TenantMemberService/List"
 )
 
 // TenantMemberServiceClient is a client for the api.v1.TenantMemberService service.
 type TenantMemberServiceClient interface {
 	// Create a tenant member
-	Create(context.Context, *v1.TenantMemberServiceCreateRequest) (*v1.TenantMemberResponse, error)
+	Create(context.Context, *v1.TenantMemberServiceCreateRequest) (*v1.TenantMemberServiceCreateResponse, error)
 	// Update a tenant member
-	Update(context.Context, *v1.TenantMemberServiceUpdateRequest) (*v1.TenantMemberResponse, error)
+	Update(context.Context, *v1.TenantMemberServiceUpdateRequest) (*v1.TenantMemberServiceUpdateResponse, error)
 	// Delete a tenant member
-	Delete(context.Context, *v1.TenantMemberServiceDeleteRequest) (*v1.TenantMemberResponse, error)
+	Delete(context.Context, *v1.TenantMemberServiceDeleteRequest) (*v1.TenantMemberServiceDeleteResponse, error)
 	// Get a tenant member
-	Get(context.Context, *v1.TenantMemberServiceGetRequest) (*v1.TenantMemberResponse, error)
-	// Find tenant members
-	Find(context.Context, *v1.TenantMemberServiceFindRequest) (*v1.TenantMemberListResponse, error)
+	Get(context.Context, *v1.TenantMemberServiceGetRequest) (*v1.TenantMemberServiceGetResponse, error)
+	// List tenant members
+	List(context.Context, *v1.TenantMemberServiceListRequest) (*v1.TenantMemberServiceListResponse, error)
 }
 
 // NewTenantMemberServiceClient constructs a client for the api.v1.TenantMemberService service. By
@@ -74,34 +74,34 @@ func NewTenantMemberServiceClient(httpClient connect.HTTPClient, baseURL string,
 	baseURL = strings.TrimRight(baseURL, "/")
 	tenantMemberServiceMethods := v1.File_api_v1_tenant_member_proto.Services().ByName("TenantMemberService").Methods()
 	return &tenantMemberServiceClient{
-		create: connect.NewClient[v1.TenantMemberServiceCreateRequest, v1.TenantMemberResponse](
+		create: connect.NewClient[v1.TenantMemberServiceCreateRequest, v1.TenantMemberServiceCreateResponse](
 			httpClient,
 			baseURL+TenantMemberServiceCreateProcedure,
 			connect.WithSchema(tenantMemberServiceMethods.ByName("Create")),
 			connect.WithClientOptions(opts...),
 		),
-		update: connect.NewClient[v1.TenantMemberServiceUpdateRequest, v1.TenantMemberResponse](
+		update: connect.NewClient[v1.TenantMemberServiceUpdateRequest, v1.TenantMemberServiceUpdateResponse](
 			httpClient,
 			baseURL+TenantMemberServiceUpdateProcedure,
 			connect.WithSchema(tenantMemberServiceMethods.ByName("Update")),
 			connect.WithClientOptions(opts...),
 		),
-		delete: connect.NewClient[v1.TenantMemberServiceDeleteRequest, v1.TenantMemberResponse](
+		delete: connect.NewClient[v1.TenantMemberServiceDeleteRequest, v1.TenantMemberServiceDeleteResponse](
 			httpClient,
 			baseURL+TenantMemberServiceDeleteProcedure,
 			connect.WithSchema(tenantMemberServiceMethods.ByName("Delete")),
 			connect.WithClientOptions(opts...),
 		),
-		get: connect.NewClient[v1.TenantMemberServiceGetRequest, v1.TenantMemberResponse](
+		get: connect.NewClient[v1.TenantMemberServiceGetRequest, v1.TenantMemberServiceGetResponse](
 			httpClient,
 			baseURL+TenantMemberServiceGetProcedure,
 			connect.WithSchema(tenantMemberServiceMethods.ByName("Get")),
 			connect.WithClientOptions(opts...),
 		),
-		find: connect.NewClient[v1.TenantMemberServiceFindRequest, v1.TenantMemberListResponse](
+		list: connect.NewClient[v1.TenantMemberServiceListRequest, v1.TenantMemberServiceListResponse](
 			httpClient,
-			baseURL+TenantMemberServiceFindProcedure,
-			connect.WithSchema(tenantMemberServiceMethods.ByName("Find")),
+			baseURL+TenantMemberServiceListProcedure,
+			connect.WithSchema(tenantMemberServiceMethods.ByName("List")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -109,15 +109,15 @@ func NewTenantMemberServiceClient(httpClient connect.HTTPClient, baseURL string,
 
 // tenantMemberServiceClient implements TenantMemberServiceClient.
 type tenantMemberServiceClient struct {
-	create *connect.Client[v1.TenantMemberServiceCreateRequest, v1.TenantMemberResponse]
-	update *connect.Client[v1.TenantMemberServiceUpdateRequest, v1.TenantMemberResponse]
-	delete *connect.Client[v1.TenantMemberServiceDeleteRequest, v1.TenantMemberResponse]
-	get    *connect.Client[v1.TenantMemberServiceGetRequest, v1.TenantMemberResponse]
-	find   *connect.Client[v1.TenantMemberServiceFindRequest, v1.TenantMemberListResponse]
+	create *connect.Client[v1.TenantMemberServiceCreateRequest, v1.TenantMemberServiceCreateResponse]
+	update *connect.Client[v1.TenantMemberServiceUpdateRequest, v1.TenantMemberServiceUpdateResponse]
+	delete *connect.Client[v1.TenantMemberServiceDeleteRequest, v1.TenantMemberServiceDeleteResponse]
+	get    *connect.Client[v1.TenantMemberServiceGetRequest, v1.TenantMemberServiceGetResponse]
+	list   *connect.Client[v1.TenantMemberServiceListRequest, v1.TenantMemberServiceListResponse]
 }
 
 // Create calls api.v1.TenantMemberService.Create.
-func (c *tenantMemberServiceClient) Create(ctx context.Context, req *v1.TenantMemberServiceCreateRequest) (*v1.TenantMemberResponse, error) {
+func (c *tenantMemberServiceClient) Create(ctx context.Context, req *v1.TenantMemberServiceCreateRequest) (*v1.TenantMemberServiceCreateResponse, error) {
 	response, err := c.create.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -126,7 +126,7 @@ func (c *tenantMemberServiceClient) Create(ctx context.Context, req *v1.TenantMe
 }
 
 // Update calls api.v1.TenantMemberService.Update.
-func (c *tenantMemberServiceClient) Update(ctx context.Context, req *v1.TenantMemberServiceUpdateRequest) (*v1.TenantMemberResponse, error) {
+func (c *tenantMemberServiceClient) Update(ctx context.Context, req *v1.TenantMemberServiceUpdateRequest) (*v1.TenantMemberServiceUpdateResponse, error) {
 	response, err := c.update.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -135,7 +135,7 @@ func (c *tenantMemberServiceClient) Update(ctx context.Context, req *v1.TenantMe
 }
 
 // Delete calls api.v1.TenantMemberService.Delete.
-func (c *tenantMemberServiceClient) Delete(ctx context.Context, req *v1.TenantMemberServiceDeleteRequest) (*v1.TenantMemberResponse, error) {
+func (c *tenantMemberServiceClient) Delete(ctx context.Context, req *v1.TenantMemberServiceDeleteRequest) (*v1.TenantMemberServiceDeleteResponse, error) {
 	response, err := c.delete.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -144,7 +144,7 @@ func (c *tenantMemberServiceClient) Delete(ctx context.Context, req *v1.TenantMe
 }
 
 // Get calls api.v1.TenantMemberService.Get.
-func (c *tenantMemberServiceClient) Get(ctx context.Context, req *v1.TenantMemberServiceGetRequest) (*v1.TenantMemberResponse, error) {
+func (c *tenantMemberServiceClient) Get(ctx context.Context, req *v1.TenantMemberServiceGetRequest) (*v1.TenantMemberServiceGetResponse, error) {
 	response, err := c.get.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
@@ -152,9 +152,9 @@ func (c *tenantMemberServiceClient) Get(ctx context.Context, req *v1.TenantMembe
 	return nil, err
 }
 
-// Find calls api.v1.TenantMemberService.Find.
-func (c *tenantMemberServiceClient) Find(ctx context.Context, req *v1.TenantMemberServiceFindRequest) (*v1.TenantMemberListResponse, error) {
-	response, err := c.find.CallUnary(ctx, connect.NewRequest(req))
+// List calls api.v1.TenantMemberService.List.
+func (c *tenantMemberServiceClient) List(ctx context.Context, req *v1.TenantMemberServiceListRequest) (*v1.TenantMemberServiceListResponse, error) {
+	response, err := c.list.CallUnary(ctx, connect.NewRequest(req))
 	if response != nil {
 		return response.Msg, err
 	}
@@ -164,15 +164,15 @@ func (c *tenantMemberServiceClient) Find(ctx context.Context, req *v1.TenantMemb
 // TenantMemberServiceHandler is an implementation of the api.v1.TenantMemberService service.
 type TenantMemberServiceHandler interface {
 	// Create a tenant member
-	Create(context.Context, *v1.TenantMemberServiceCreateRequest) (*v1.TenantMemberResponse, error)
+	Create(context.Context, *v1.TenantMemberServiceCreateRequest) (*v1.TenantMemberServiceCreateResponse, error)
 	// Update a tenant member
-	Update(context.Context, *v1.TenantMemberServiceUpdateRequest) (*v1.TenantMemberResponse, error)
+	Update(context.Context, *v1.TenantMemberServiceUpdateRequest) (*v1.TenantMemberServiceUpdateResponse, error)
 	// Delete a tenant member
-	Delete(context.Context, *v1.TenantMemberServiceDeleteRequest) (*v1.TenantMemberResponse, error)
+	Delete(context.Context, *v1.TenantMemberServiceDeleteRequest) (*v1.TenantMemberServiceDeleteResponse, error)
 	// Get a tenant member
-	Get(context.Context, *v1.TenantMemberServiceGetRequest) (*v1.TenantMemberResponse, error)
-	// Find tenant members
-	Find(context.Context, *v1.TenantMemberServiceFindRequest) (*v1.TenantMemberListResponse, error)
+	Get(context.Context, *v1.TenantMemberServiceGetRequest) (*v1.TenantMemberServiceGetResponse, error)
+	// List tenant members
+	List(context.Context, *v1.TenantMemberServiceListRequest) (*v1.TenantMemberServiceListResponse, error)
 }
 
 // NewTenantMemberServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -206,10 +206,10 @@ func NewTenantMemberServiceHandler(svc TenantMemberServiceHandler, opts ...conne
 		connect.WithSchema(tenantMemberServiceMethods.ByName("Get")),
 		connect.WithHandlerOptions(opts...),
 	)
-	tenantMemberServiceFindHandler := connect.NewUnaryHandlerSimple(
-		TenantMemberServiceFindProcedure,
-		svc.Find,
-		connect.WithSchema(tenantMemberServiceMethods.ByName("Find")),
+	tenantMemberServiceListHandler := connect.NewUnaryHandlerSimple(
+		TenantMemberServiceListProcedure,
+		svc.List,
+		connect.WithSchema(tenantMemberServiceMethods.ByName("List")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/api.v1.TenantMemberService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -222,8 +222,8 @@ func NewTenantMemberServiceHandler(svc TenantMemberServiceHandler, opts ...conne
 			tenantMemberServiceDeleteHandler.ServeHTTP(w, r)
 		case TenantMemberServiceGetProcedure:
 			tenantMemberServiceGetHandler.ServeHTTP(w, r)
-		case TenantMemberServiceFindProcedure:
-			tenantMemberServiceFindHandler.ServeHTTP(w, r)
+		case TenantMemberServiceListProcedure:
+			tenantMemberServiceListHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -233,22 +233,22 @@ func NewTenantMemberServiceHandler(svc TenantMemberServiceHandler, opts ...conne
 // UnimplementedTenantMemberServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedTenantMemberServiceHandler struct{}
 
-func (UnimplementedTenantMemberServiceHandler) Create(context.Context, *v1.TenantMemberServiceCreateRequest) (*v1.TenantMemberResponse, error) {
+func (UnimplementedTenantMemberServiceHandler) Create(context.Context, *v1.TenantMemberServiceCreateRequest) (*v1.TenantMemberServiceCreateResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.TenantMemberService.Create is not implemented"))
 }
 
-func (UnimplementedTenantMemberServiceHandler) Update(context.Context, *v1.TenantMemberServiceUpdateRequest) (*v1.TenantMemberResponse, error) {
+func (UnimplementedTenantMemberServiceHandler) Update(context.Context, *v1.TenantMemberServiceUpdateRequest) (*v1.TenantMemberServiceUpdateResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.TenantMemberService.Update is not implemented"))
 }
 
-func (UnimplementedTenantMemberServiceHandler) Delete(context.Context, *v1.TenantMemberServiceDeleteRequest) (*v1.TenantMemberResponse, error) {
+func (UnimplementedTenantMemberServiceHandler) Delete(context.Context, *v1.TenantMemberServiceDeleteRequest) (*v1.TenantMemberServiceDeleteResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.TenantMemberService.Delete is not implemented"))
 }
 
-func (UnimplementedTenantMemberServiceHandler) Get(context.Context, *v1.TenantMemberServiceGetRequest) (*v1.TenantMemberResponse, error) {
+func (UnimplementedTenantMemberServiceHandler) Get(context.Context, *v1.TenantMemberServiceGetRequest) (*v1.TenantMemberServiceGetResponse, error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.TenantMemberService.Get is not implemented"))
 }
 
-func (UnimplementedTenantMemberServiceHandler) Find(context.Context, *v1.TenantMemberServiceFindRequest) (*v1.TenantMemberListResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.TenantMemberService.Find is not implemented"))
+func (UnimplementedTenantMemberServiceHandler) List(context.Context, *v1.TenantMemberServiceListRequest) (*v1.TenantMemberServiceListResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("api.v1.TenantMemberService.List is not implemented"))
 }

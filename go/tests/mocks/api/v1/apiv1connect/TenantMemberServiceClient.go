@@ -39,23 +39,23 @@ func (_m *TenantMemberServiceClient) EXPECT() *TenantMemberServiceClient_Expecte
 }
 
 // Create provides a mock function for the type TenantMemberServiceClient
-func (_mock *TenantMemberServiceClient) Create(context1 context.Context, tenantMemberServiceCreateRequest *apiv1.TenantMemberServiceCreateRequest) (*apiv1.TenantMemberResponse, error) {
+func (_mock *TenantMemberServiceClient) Create(context1 context.Context, tenantMemberServiceCreateRequest *apiv1.TenantMemberServiceCreateRequest) (*apiv1.TenantMemberServiceCreateResponse, error) {
 	ret := _mock.Called(context1, tenantMemberServiceCreateRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Create")
 	}
 
-	var r0 *apiv1.TenantMemberResponse
+	var r0 *apiv1.TenantMemberServiceCreateResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceCreateRequest) (*apiv1.TenantMemberResponse, error)); ok {
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceCreateRequest) (*apiv1.TenantMemberServiceCreateResponse, error)); ok {
 		return returnFunc(context1, tenantMemberServiceCreateRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceCreateRequest) *apiv1.TenantMemberResponse); ok {
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceCreateRequest) *apiv1.TenantMemberServiceCreateResponse); ok {
 		r0 = returnFunc(context1, tenantMemberServiceCreateRequest)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*apiv1.TenantMemberResponse)
+			r0 = ret.Get(0).(*apiv1.TenantMemberServiceCreateResponse)
 		}
 	}
 	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.TenantMemberServiceCreateRequest) error); ok {
@@ -96,34 +96,34 @@ func (_c *TenantMemberServiceClient_Create_Call) Run(run func(context1 context.C
 	return _c
 }
 
-func (_c *TenantMemberServiceClient_Create_Call) Return(tenantMemberResponse *apiv1.TenantMemberResponse, err error) *TenantMemberServiceClient_Create_Call {
-	_c.Call.Return(tenantMemberResponse, err)
+func (_c *TenantMemberServiceClient_Create_Call) Return(tenantMemberServiceCreateResponse *apiv1.TenantMemberServiceCreateResponse, err error) *TenantMemberServiceClient_Create_Call {
+	_c.Call.Return(tenantMemberServiceCreateResponse, err)
 	return _c
 }
 
-func (_c *TenantMemberServiceClient_Create_Call) RunAndReturn(run func(context1 context.Context, tenantMemberServiceCreateRequest *apiv1.TenantMemberServiceCreateRequest) (*apiv1.TenantMemberResponse, error)) *TenantMemberServiceClient_Create_Call {
+func (_c *TenantMemberServiceClient_Create_Call) RunAndReturn(run func(context1 context.Context, tenantMemberServiceCreateRequest *apiv1.TenantMemberServiceCreateRequest) (*apiv1.TenantMemberServiceCreateResponse, error)) *TenantMemberServiceClient_Create_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // Delete provides a mock function for the type TenantMemberServiceClient
-func (_mock *TenantMemberServiceClient) Delete(context1 context.Context, tenantMemberServiceDeleteRequest *apiv1.TenantMemberServiceDeleteRequest) (*apiv1.TenantMemberResponse, error) {
+func (_mock *TenantMemberServiceClient) Delete(context1 context.Context, tenantMemberServiceDeleteRequest *apiv1.TenantMemberServiceDeleteRequest) (*apiv1.TenantMemberServiceDeleteResponse, error) {
 	ret := _mock.Called(context1, tenantMemberServiceDeleteRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Delete")
 	}
 
-	var r0 *apiv1.TenantMemberResponse
+	var r0 *apiv1.TenantMemberServiceDeleteResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceDeleteRequest) (*apiv1.TenantMemberResponse, error)); ok {
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceDeleteRequest) (*apiv1.TenantMemberServiceDeleteResponse, error)); ok {
 		return returnFunc(context1, tenantMemberServiceDeleteRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceDeleteRequest) *apiv1.TenantMemberResponse); ok {
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceDeleteRequest) *apiv1.TenantMemberServiceDeleteResponse); ok {
 		r0 = returnFunc(context1, tenantMemberServiceDeleteRequest)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*apiv1.TenantMemberResponse)
+			r0 = ret.Get(0).(*apiv1.TenantMemberServiceDeleteResponse)
 		}
 	}
 	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.TenantMemberServiceDeleteRequest) error); ok {
@@ -164,102 +164,34 @@ func (_c *TenantMemberServiceClient_Delete_Call) Run(run func(context1 context.C
 	return _c
 }
 
-func (_c *TenantMemberServiceClient_Delete_Call) Return(tenantMemberResponse *apiv1.TenantMemberResponse, err error) *TenantMemberServiceClient_Delete_Call {
-	_c.Call.Return(tenantMemberResponse, err)
+func (_c *TenantMemberServiceClient_Delete_Call) Return(tenantMemberServiceDeleteResponse *apiv1.TenantMemberServiceDeleteResponse, err error) *TenantMemberServiceClient_Delete_Call {
+	_c.Call.Return(tenantMemberServiceDeleteResponse, err)
 	return _c
 }
 
-func (_c *TenantMemberServiceClient_Delete_Call) RunAndReturn(run func(context1 context.Context, tenantMemberServiceDeleteRequest *apiv1.TenantMemberServiceDeleteRequest) (*apiv1.TenantMemberResponse, error)) *TenantMemberServiceClient_Delete_Call {
-	_c.Call.Return(run)
-	return _c
-}
-
-// Find provides a mock function for the type TenantMemberServiceClient
-func (_mock *TenantMemberServiceClient) Find(context1 context.Context, tenantMemberServiceFindRequest *apiv1.TenantMemberServiceFindRequest) (*apiv1.TenantMemberListResponse, error) {
-	ret := _mock.Called(context1, tenantMemberServiceFindRequest)
-
-	if len(ret) == 0 {
-		panic("no return value specified for Find")
-	}
-
-	var r0 *apiv1.TenantMemberListResponse
-	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceFindRequest) (*apiv1.TenantMemberListResponse, error)); ok {
-		return returnFunc(context1, tenantMemberServiceFindRequest)
-	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceFindRequest) *apiv1.TenantMemberListResponse); ok {
-		r0 = returnFunc(context1, tenantMemberServiceFindRequest)
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*apiv1.TenantMemberListResponse)
-		}
-	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.TenantMemberServiceFindRequest) error); ok {
-		r1 = returnFunc(context1, tenantMemberServiceFindRequest)
-	} else {
-		r1 = ret.Error(1)
-	}
-	return r0, r1
-}
-
-// TenantMemberServiceClient_Find_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'Find'
-type TenantMemberServiceClient_Find_Call struct {
-	*mock.Call
-}
-
-// Find is a helper method to define mock.On call
-//   - context1 context.Context
-//   - tenantMemberServiceFindRequest *apiv1.TenantMemberServiceFindRequest
-func (_e *TenantMemberServiceClient_Expecter) Find(context1 interface{}, tenantMemberServiceFindRequest interface{}) *TenantMemberServiceClient_Find_Call {
-	return &TenantMemberServiceClient_Find_Call{Call: _e.mock.On("Find", context1, tenantMemberServiceFindRequest)}
-}
-
-func (_c *TenantMemberServiceClient_Find_Call) Run(run func(context1 context.Context, tenantMemberServiceFindRequest *apiv1.TenantMemberServiceFindRequest)) *TenantMemberServiceClient_Find_Call {
-	_c.Call.Run(func(args mock.Arguments) {
-		var arg0 context.Context
-		if args[0] != nil {
-			arg0 = args[0].(context.Context)
-		}
-		var arg1 *apiv1.TenantMemberServiceFindRequest
-		if args[1] != nil {
-			arg1 = args[1].(*apiv1.TenantMemberServiceFindRequest)
-		}
-		run(
-			arg0,
-			arg1,
-		)
-	})
-	return _c
-}
-
-func (_c *TenantMemberServiceClient_Find_Call) Return(tenantMemberListResponse *apiv1.TenantMemberListResponse, err error) *TenantMemberServiceClient_Find_Call {
-	_c.Call.Return(tenantMemberListResponse, err)
-	return _c
-}
-
-func (_c *TenantMemberServiceClient_Find_Call) RunAndReturn(run func(context1 context.Context, tenantMemberServiceFindRequest *apiv1.TenantMemberServiceFindRequest) (*apiv1.TenantMemberListResponse, error)) *TenantMemberServiceClient_Find_Call {
+func (_c *TenantMemberServiceClient_Delete_Call) RunAndReturn(run func(context1 context.Context, tenantMemberServiceDeleteRequest *apiv1.TenantMemberServiceDeleteRequest) (*apiv1.TenantMemberServiceDeleteResponse, error)) *TenantMemberServiceClient_Delete_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // Get provides a mock function for the type TenantMemberServiceClient
-func (_mock *TenantMemberServiceClient) Get(context1 context.Context, tenantMemberServiceGetRequest *apiv1.TenantMemberServiceGetRequest) (*apiv1.TenantMemberResponse, error) {
+func (_mock *TenantMemberServiceClient) Get(context1 context.Context, tenantMemberServiceGetRequest *apiv1.TenantMemberServiceGetRequest) (*apiv1.TenantMemberServiceGetResponse, error) {
 	ret := _mock.Called(context1, tenantMemberServiceGetRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Get")
 	}
 
-	var r0 *apiv1.TenantMemberResponse
+	var r0 *apiv1.TenantMemberServiceGetResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceGetRequest) (*apiv1.TenantMemberResponse, error)); ok {
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceGetRequest) (*apiv1.TenantMemberServiceGetResponse, error)); ok {
 		return returnFunc(context1, tenantMemberServiceGetRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceGetRequest) *apiv1.TenantMemberResponse); ok {
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceGetRequest) *apiv1.TenantMemberServiceGetResponse); ok {
 		r0 = returnFunc(context1, tenantMemberServiceGetRequest)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*apiv1.TenantMemberResponse)
+			r0 = ret.Get(0).(*apiv1.TenantMemberServiceGetResponse)
 		}
 	}
 	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.TenantMemberServiceGetRequest) error); ok {
@@ -300,34 +232,102 @@ func (_c *TenantMemberServiceClient_Get_Call) Run(run func(context1 context.Cont
 	return _c
 }
 
-func (_c *TenantMemberServiceClient_Get_Call) Return(tenantMemberResponse *apiv1.TenantMemberResponse, err error) *TenantMemberServiceClient_Get_Call {
-	_c.Call.Return(tenantMemberResponse, err)
+func (_c *TenantMemberServiceClient_Get_Call) Return(tenantMemberServiceGetResponse *apiv1.TenantMemberServiceGetResponse, err error) *TenantMemberServiceClient_Get_Call {
+	_c.Call.Return(tenantMemberServiceGetResponse, err)
 	return _c
 }
 
-func (_c *TenantMemberServiceClient_Get_Call) RunAndReturn(run func(context1 context.Context, tenantMemberServiceGetRequest *apiv1.TenantMemberServiceGetRequest) (*apiv1.TenantMemberResponse, error)) *TenantMemberServiceClient_Get_Call {
+func (_c *TenantMemberServiceClient_Get_Call) RunAndReturn(run func(context1 context.Context, tenantMemberServiceGetRequest *apiv1.TenantMemberServiceGetRequest) (*apiv1.TenantMemberServiceGetResponse, error)) *TenantMemberServiceClient_Get_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// List provides a mock function for the type TenantMemberServiceClient
+func (_mock *TenantMemberServiceClient) List(context1 context.Context, tenantMemberServiceListRequest *apiv1.TenantMemberServiceListRequest) (*apiv1.TenantMemberServiceListResponse, error) {
+	ret := _mock.Called(context1, tenantMemberServiceListRequest)
+
+	if len(ret) == 0 {
+		panic("no return value specified for List")
+	}
+
+	var r0 *apiv1.TenantMemberServiceListResponse
+	var r1 error
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceListRequest) (*apiv1.TenantMemberServiceListResponse, error)); ok {
+		return returnFunc(context1, tenantMemberServiceListRequest)
+	}
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceListRequest) *apiv1.TenantMemberServiceListResponse); ok {
+		r0 = returnFunc(context1, tenantMemberServiceListRequest)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*apiv1.TenantMemberServiceListResponse)
+		}
+	}
+	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.TenantMemberServiceListRequest) error); ok {
+		r1 = returnFunc(context1, tenantMemberServiceListRequest)
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
+// TenantMemberServiceClient_List_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'List'
+type TenantMemberServiceClient_List_Call struct {
+	*mock.Call
+}
+
+// List is a helper method to define mock.On call
+//   - context1 context.Context
+//   - tenantMemberServiceListRequest *apiv1.TenantMemberServiceListRequest
+func (_e *TenantMemberServiceClient_Expecter) List(context1 interface{}, tenantMemberServiceListRequest interface{}) *TenantMemberServiceClient_List_Call {
+	return &TenantMemberServiceClient_List_Call{Call: _e.mock.On("List", context1, tenantMemberServiceListRequest)}
+}
+
+func (_c *TenantMemberServiceClient_List_Call) Run(run func(context1 context.Context, tenantMemberServiceListRequest *apiv1.TenantMemberServiceListRequest)) *TenantMemberServiceClient_List_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		var arg0 context.Context
+		if args[0] != nil {
+			arg0 = args[0].(context.Context)
+		}
+		var arg1 *apiv1.TenantMemberServiceListRequest
+		if args[1] != nil {
+			arg1 = args[1].(*apiv1.TenantMemberServiceListRequest)
+		}
+		run(
+			arg0,
+			arg1,
+		)
+	})
+	return _c
+}
+
+func (_c *TenantMemberServiceClient_List_Call) Return(tenantMemberServiceListResponse *apiv1.TenantMemberServiceListResponse, err error) *TenantMemberServiceClient_List_Call {
+	_c.Call.Return(tenantMemberServiceListResponse, err)
+	return _c
+}
+
+func (_c *TenantMemberServiceClient_List_Call) RunAndReturn(run func(context1 context.Context, tenantMemberServiceListRequest *apiv1.TenantMemberServiceListRequest) (*apiv1.TenantMemberServiceListResponse, error)) *TenantMemberServiceClient_List_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // Update provides a mock function for the type TenantMemberServiceClient
-func (_mock *TenantMemberServiceClient) Update(context1 context.Context, tenantMemberServiceUpdateRequest *apiv1.TenantMemberServiceUpdateRequest) (*apiv1.TenantMemberResponse, error) {
+func (_mock *TenantMemberServiceClient) Update(context1 context.Context, tenantMemberServiceUpdateRequest *apiv1.TenantMemberServiceUpdateRequest) (*apiv1.TenantMemberServiceUpdateResponse, error) {
 	ret := _mock.Called(context1, tenantMemberServiceUpdateRequest)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Update")
 	}
 
-	var r0 *apiv1.TenantMemberResponse
+	var r0 *apiv1.TenantMemberServiceUpdateResponse
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceUpdateRequest) (*apiv1.TenantMemberResponse, error)); ok {
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceUpdateRequest) (*apiv1.TenantMemberServiceUpdateResponse, error)); ok {
 		return returnFunc(context1, tenantMemberServiceUpdateRequest)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceUpdateRequest) *apiv1.TenantMemberResponse); ok {
+	if returnFunc, ok := ret.Get(0).(func(context.Context, *apiv1.TenantMemberServiceUpdateRequest) *apiv1.TenantMemberServiceUpdateResponse); ok {
 		r0 = returnFunc(context1, tenantMemberServiceUpdateRequest)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(*apiv1.TenantMemberResponse)
+			r0 = ret.Get(0).(*apiv1.TenantMemberServiceUpdateResponse)
 		}
 	}
 	if returnFunc, ok := ret.Get(1).(func(context.Context, *apiv1.TenantMemberServiceUpdateRequest) error); ok {
@@ -368,12 +368,12 @@ func (_c *TenantMemberServiceClient_Update_Call) Run(run func(context1 context.C
 	return _c
 }
 
-func (_c *TenantMemberServiceClient_Update_Call) Return(tenantMemberResponse *apiv1.TenantMemberResponse, err error) *TenantMemberServiceClient_Update_Call {
-	_c.Call.Return(tenantMemberResponse, err)
+func (_c *TenantMemberServiceClient_Update_Call) Return(tenantMemberServiceUpdateResponse *apiv1.TenantMemberServiceUpdateResponse, err error) *TenantMemberServiceClient_Update_Call {
+	_c.Call.Return(tenantMemberServiceUpdateResponse, err)
 	return _c
 }
 
-func (_c *TenantMemberServiceClient_Update_Call) RunAndReturn(run func(context1 context.Context, tenantMemberServiceUpdateRequest *apiv1.TenantMemberServiceUpdateRequest) (*apiv1.TenantMemberResponse, error)) *TenantMemberServiceClient_Update_Call {
+func (_c *TenantMemberServiceClient_Update_Call) RunAndReturn(run func(context1 context.Context, tenantMemberServiceUpdateRequest *apiv1.TenantMemberServiceUpdateRequest) (*apiv1.TenantMemberServiceUpdateResponse, error)) *TenantMemberServiceClient_Update_Call {
 	_c.Call.Return(run)
 	return _c
 }

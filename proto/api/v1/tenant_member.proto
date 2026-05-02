@@ -7,15 +7,15 @@ import "api/v1/meta.proto";
 // TenantMemberService provides service methods to work with tenant members
 service TenantMemberService {
   // Create a tenant member
-  rpc Create(TenantMemberServiceCreateRequest) returns (TenantMemberResponse);
+  rpc Create(TenantMemberServiceCreateRequest) returns (TenantMemberServiceCreateResponse);
   // Update a tenant member
-  rpc Update(TenantMemberServiceUpdateRequest) returns (TenantMemberResponse);
+  rpc Update(TenantMemberServiceUpdateRequest) returns (TenantMemberServiceUpdateResponse);
   // Delete a tenant member
-  rpc Delete(TenantMemberServiceDeleteRequest) returns (TenantMemberResponse);
+  rpc Delete(TenantMemberServiceDeleteRequest) returns (TenantMemberServiceDeleteResponse);
   // Get a tenant member
-  rpc Get(TenantMemberServiceGetRequest) returns (TenantMemberResponse);
-  // Find tenant members
-  rpc Find(TenantMemberServiceFindRequest) returns (TenantMemberListResponse);
+  rpc Get(TenantMemberServiceGetRequest) returns (TenantMemberServiceGetResponse);
+  // List tenant members
+  rpc List(TenantMemberServiceListRequest) returns (TenantMemberServiceListResponse);
 }
 
 // TenantMember is the database model
@@ -36,9 +36,21 @@ message TenantMemberServiceCreateRequest {
   TenantMember tenant_member = 1;
 }
 
+// TenantMemberServiceCreateResponse is the response payload of requests
+message TenantMemberServiceCreateResponse {
+  // TenantMember
+  TenantMember tenant_member = 1;
+}
+
 // TenantMemberServiceUpdateRequest is the request payload to update a tenant member
 message TenantMemberServiceUpdateRequest {
   // TenantMember to update
+  TenantMember tenant_member = 1;
+}
+
+// TenantMemberServiceUpdateResponse is the response payload of requests
+message TenantMemberServiceUpdateResponse {
+  // TenantMember
   TenantMember tenant_member = 1;
 }
 
@@ -48,32 +60,38 @@ message TenantMemberServiceDeleteRequest {
   string id = 1;
 }
 
+// TenantMemberServiceDeleteResponse is the response payload of requests
+message TenantMemberServiceDeleteResponse {
+  // TenantMember
+  TenantMember tenant_member = 1;
+}
+
 // TenantMemberServiceGetRequest is the request payload to get a tenant member
 message TenantMemberServiceGetRequest {
   // Id of the tenant member to get
   string id = 1;
 }
 
-// TenantMemberServiceFindRequest is the request payload to find tenant members
-message TenantMemberServiceFindRequest {
-  // TenantId of tenant members to find
+// TenantMemberServiceGetResponse is the response payload of requests
+message TenantMemberServiceGetResponse {
+  // TenantMember
+  TenantMember tenant_member = 1;
+}
+
+// TenantMemberServiceListRequest is the request payload to list tenant members
+message TenantMemberServiceListRequest {
+  // TenantId of tenant members to list
   optional string tenant_id = 1;
-  // MemberId of this tenant member to find
+  // MemberId of this tenant member to list
   optional string member_id = 2;
-  // Annotations of tenant members to find
+  // Annotations of tenant members to list
   map<string, string> annotations = 3;
   // Namespace
   string namespace = 4;
 }
 
-// TenantMemberResponse is the response payload of requests
-message TenantMemberResponse {
-  // TenantMember
-  TenantMember tenant_member = 1;
-}
-
-// TenantMemberListResponse is the response payload of find requests
-message TenantMemberListResponse {
+// TenantMemberServiceListResponse is the response payload of list requests
+message TenantMemberServiceListResponse {
   // TenantMembers
   repeated TenantMember tenant_members = 1;
 }

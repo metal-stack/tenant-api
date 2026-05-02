@@ -79,11 +79,11 @@ func NamespaceInterceptor(namespace string) connect.UnaryInterceptorFunc {
 				if r.ProjectMember.Namespace == "" {
 					r.ProjectMember.Namespace = namespace
 				}
-			case *v1.TenantMemberServiceFindRequest:
+			case *v1.TenantMemberServiceListRequest:
 				if r.Namespace == "" {
 					r.Namespace = namespace
 				}
-			case *v1.ProjectMemberServiceFindRequest:
+			case *v1.ProjectMemberServiceListRequest:
 				if r.Namespace == "" {
 					r.Namespace = namespace
 				}

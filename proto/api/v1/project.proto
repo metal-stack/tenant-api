@@ -9,17 +9,17 @@ import "google/protobuf/timestamp.proto";
 // ProjectService provides service methods to work with projects
 service ProjectService {
   // Create a project
-  rpc Create(ProjectServiceCreateRequest) returns (ProjectResponse);
+  rpc Create(ProjectServiceCreateRequest) returns (ProjectServiceCreateResponse);
   // Update a project
-  rpc Update(ProjectServiceUpdateRequest) returns (ProjectResponse);
+  rpc Update(ProjectServiceUpdateRequest) returns (ProjectServiceUpdateResponse);
   // Delete a project
-  rpc Delete(ProjectServiceDeleteRequest) returns (ProjectResponse);
+  rpc Delete(ProjectServiceDeleteRequest) returns (ProjectServiceDeleteResponse);
   // Get a project
-  rpc Get(ProjectServiceGetRequest) returns (ProjectResponse);
+  rpc Get(ProjectServiceGetRequest) returns (ProjectServiceGetResponse);
   // GetHistory of a project
-  rpc GetHistory(ProjectServiceGetHistoryRequest) returns (ProjectResponse);
-  // Find projects
-  rpc Find(ProjectServiceFindRequest) returns (ProjectListResponse);
+  rpc GetHistory(ProjectServiceGetHistoryRequest) returns (ProjectServiceGetHistoryResponse);
+  // List projects
+  rpc List(ProjectServiceListRequest) returns (ProjectServiceListResponse);
 }
 
 // Project is the database model
@@ -40,9 +40,21 @@ message ProjectServiceCreateRequest {
   Project project = 1;
 }
 
+// ProjectServiceCreateResponse contains the response payload of a project create request
+message ProjectServiceCreateResponse {
+  // Project is the response
+  Project project = 1;
+}
+
 // ProjectServiceUpdateRequest is the request payload to update a project
 message ProjectServiceUpdateRequest {
   // Project to update
+  Project project = 1;
+}
+
+// ProjectServiceUpdateResponse contains the response payload of a project update request
+message ProjectServiceUpdateResponse {
+  // Project is the response
   Project project = 1;
 }
 
@@ -52,10 +64,22 @@ message ProjectServiceDeleteRequest {
   string id = 1;
 }
 
+// ProjectServiceDeleteResponse contains the response payload of a project delete request
+message ProjectServiceDeleteResponse {
+  // Project is the response
+  Project project = 1;
+}
+
 // ProjectServiceGetRequest is the request payload to get a project
 message ProjectServiceGetRequest {
   // Id of the project to get
   string id = 1;
+}
+
+// ProjectServiceGetResponse contains the response payload of a project get request
+message ProjectServiceGetResponse {
+  // Project is the response
+  Project project = 1;
 }
 
 // ProjectServiceGetHistoryRequest is the request payload to get the history of a project
@@ -66,8 +90,14 @@ message ProjectServiceGetHistoryRequest {
   google.protobuf.Timestamp at = 2;
 }
 
-// ProjectServiceFindRequest is the request payload to find projects
-message ProjectServiceFindRequest {
+// ProjectServiceGetHistoryResponse contains the response payload of a project get history request
+message ProjectServiceGetHistoryResponse {
+  // Project is the response
+  Project project = 1;
+}
+
+// ProjectServiceListRequest is the request payload to list projects
+message ProjectServiceListRequest {
   // Paging spec of this find request
   Paging paging = 1;
   // Annotations of projects to find
@@ -85,14 +115,8 @@ message ProjectServiceFindRequest {
   repeated string labels = 7;
 }
 
-// ProjectResponse contains the project
-message ProjectResponse {
-  // Project is the response
-  Project project = 1;
-}
-
 // ProjectListResponse contains the projects
-message ProjectListResponse {
+message ProjectServiceListResponse {
   // Projects is the response
   repeated Project projects = 1;
   // next_page_token is used for pagination, returns the next page to be fetched and must then be provided in the list request.

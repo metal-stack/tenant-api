@@ -11,23 +11,23 @@ import "google/protobuf/timestamp.proto";
 // TenantService provides service methods to work with tenants
 service TenantService {
   // Create a tenant
-  rpc Create(TenantServiceCreateRequest) returns (TenantResponse);
+  rpc Create(TenantServiceCreateRequest) returns (TenantServiceCreateResponse);
   // Update a tenant
-  rpc Update(TenantServiceUpdateRequest) returns (TenantResponse);
+  rpc Update(TenantServiceUpdateRequest) returns (TenantServiceUpdateResponse);
   // Delete a tenant
-  rpc Delete(TenantServiceDeleteRequest) returns (TenantResponse);
+  rpc Delete(TenantServiceDeleteRequest) returns (TenantServiceDeleteResponse);
   // Get a tenant
-  rpc Get(TenantServiceGetRequest) returns (TenantResponse);
+  rpc Get(TenantServiceGetRequest) returns (TenantServiceGetResponse);
   // GetHistory of a tenant
-  rpc GetHistory(TenantServiceGetHistoryRequest) returns (TenantResponse);
-  // Find tenants
-  rpc Find(TenantServiceFindRequest) returns (TenantListResponse);
+  rpc GetHistory(TenantServiceGetHistoryRequest) returns (TenantServiceGetHistoryResponse);
+  // List tenants
+  rpc List(TenantServiceListRequest) returns (TenantServiceListResponse);
   // ListTenantMembers list all members of a tenant
-  rpc ListTenantMembers(TenantServiceListTenantMembersRequest) returns (ListTenantMembersResponse);
+  rpc ListTenantMembers(TenantServiceListTenantMembersRequest) returns (TenantServiceListTenantMembersResponse);
   // FindParticipatingProjects returns projects which are participating to the tenant
-  rpc FindParticipatingProjects(TenantServiceFindParticipatingProjectsRequest) returns (FindParticipatingProjectsResponse);
+  rpc FindParticipatingProjects(TenantServiceFindParticipatingProjectsRequest) returns (TenantServiceFindParticipatingProjectsResponse);
   // FindParticipatingTenants returns tenants which are participating to the tenant
-  rpc FindParticipatingTenants(TenantServiceFindParticipatingTenantsRequest) returns (FindParticipatingTenantsResponse);
+  rpc FindParticipatingTenants(TenantServiceFindParticipatingTenantsRequest) returns (TenantServiceFindParticipatingTenantsResponse);
 }
 
 // TenantServiceFindParticipatingProjectsRequest is the request payload to find participating projects
@@ -60,20 +60,20 @@ message TenantServiceListTenantMembersRequest {
   string namespace = 3;
 }
 
-// ListTenantMembersResponse is the response payload to a list tenant member request
-message ListTenantMembersResponse {
+// TenantServiceLListTenantMembersResponse is the response payload to a list tenant member request
+message TenantServiceListTenantMembersResponse {
   // Tenants
   repeated TenantWithMembershipAnnotations tenants = 1;
 }
 
-// FindParticipatingProjectsResponse is the response payload to a find participating project request
-message FindParticipatingProjectsResponse {
+// TenantServiceLFindParticipatingProjectsResponse is the response payload to a find participating project request
+message TenantServiceFindParticipatingProjectsResponse {
   // Projects
   repeated ProjectWithMembershipAnnotations projects = 1;
 }
 
-// FindParticipatingTenantsResponse is the response payload to a find participating tenant request
-message FindParticipatingTenantsResponse {
+// TenantServiceLFindParticipatingTenantsResponse is the response payload to a find participating tenant request
+message TenantServiceFindParticipatingTenantsResponse {
   // Tenants
   repeated TenantWithMembershipAnnotations tenants = 1;
 }
@@ -118,8 +118,20 @@ message TenantServiceCreateRequest {
   Tenant tenant = 1;
 }
 
+// TenantServiceCreateResponse is the response payload of requests
+message TenantServiceCreateResponse {
+  // Tenant
+  Tenant tenant = 1;
+}
+
 // TenantServiceUpdateRequest is the request payload to update a tenant
 message TenantServiceUpdateRequest {
+  // Tenant
+  Tenant tenant = 1;
+}
+
+// TenantServiceUpdateResponse is the response payload of requests
+message TenantServiceUpdateResponse {
   // Tenant
   Tenant tenant = 1;
 }
@@ -130,10 +142,22 @@ message TenantServiceDeleteRequest {
   string id = 1;
 }
 
+// TenantServiceDeleteResponse is the response payload of requests
+message TenantServiceDeleteResponse {
+  // Tenant
+  Tenant tenant = 1;
+}
+
 // TenantServiceGetRequest is the request payload to get a tenant
 message TenantServiceGetRequest {
   // Id of the tenant to get
   string id = 1;
+}
+
+// TenantServiceGetResponse is the response payload of requests
+message TenantServiceGetResponse {
+  // Tenant
+  Tenant tenant = 1;
 }
 
 // TenantServiceGetHistoryRequest is the request payload to get the history of a tenant
@@ -144,29 +168,29 @@ message TenantServiceGetHistoryRequest {
   google.protobuf.Timestamp at = 2;
 }
 
-// TenantServiceFindRequest is the request payload to find tenants
-message TenantServiceFindRequest {
-  // Paging spec of this find request
-  Paging paging = 1;
-  // Annotations of tenants to find
-  map<string, string> annotations = 2;
-
-  // Id of the tenant to find
-  optional string id = 3;
-  // Name of tenants to find
-  optional string name = 4;
-  // Labels of tenants to find
-  repeated string labels = 5;
-}
-
-// TenantResponse is the response payload of requests
-message TenantResponse {
+// TenantServiceGetHistoryResponse is the response payload of requests
+message TenantServiceGetHistoryResponse {
   // Tenant
   Tenant tenant = 1;
 }
 
-// TenantListResponse is the response payload of tenant find requests
-message TenantListResponse {
+// TenantServiceListRequest is the request payload to list tenants
+message TenantServiceListRequest {
+  // Paging spec of this list request
+  Paging paging = 1;
+  // Annotations of tenants to list
+  map<string, string> annotations = 2;
+
+  // Id of the tenant to list
+  optional string id = 3;
+  // Name of tenants to list
+  optional string name = 4;
+  // Labels of tenants to list
+  repeated string labels = 5;
+}
+
+// TenantServiceListResponse is the response payload of tenant list requests
+message TenantServiceListResponse {
   // Tenants
   repeated Tenant tenants = 1;
   // next_page is used for pagination, returns the next page to be fetched and must then be provided in the list request.
