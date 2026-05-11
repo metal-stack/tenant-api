@@ -40,11 +40,6 @@ type (
 )
 
 func New(config *DialConfig) (Client, error) {
-	err := config.parse()
-	if err != nil {
-		return nil, err
-	}
-
 	c := &client{
 		config:       config,
 		interceptors: []connect.Interceptor{},
