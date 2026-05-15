@@ -72,11 +72,11 @@ func NamespaceInterceptor(namespace string) connect.UnaryInterceptorFunc {
 		return func(ctx context.Context, ar connect.AnyRequest) (connect.AnyResponse, error) {
 			switch r := ar.Any().(type) {
 			case *v1.TenantMemberServiceCreateRequest:
-				if r.TenantMember.Namespace == "" {
+				if r.TenantMember != nil && r.TenantMember.Namespace == "" {
 					r.TenantMember.Namespace = namespace
 				}
 			case *v1.ProjectMemberServiceCreateRequest:
-				if r.ProjectMember.Namespace == "" {
+				if r.ProjectMember != nil && r.ProjectMember.Namespace == "" {
 					r.ProjectMember.Namespace = namespace
 				}
 			case *v1.TenantMemberServiceListRequest:
@@ -100,6 +100,15 @@ func NamespaceInterceptor(namespace string) connect.UnaryInterceptorFunc {
 					r.Namespace = namespace
 				}
 			}
+			return uf(ctx, ar)
+		}
+	}
+}
+
+func userAgentInterceptor(userAgent string) connect.UnaryInterceptorFunc {
+	return func(uf connect.UnaryFunc) connect.UnaryFunc {
+		return func(ctx context.Context, ar connect.AnyRequest) (connect.AnyResponse, error) {
+			ar.Header().Add("User-Agent", userAgent)
 			return uf(ctx, ar)
 		}
 	}

@@ -6,7 +6,6 @@ require (
 	connectrpc.com/connect v1.19.2
 	github.com/bufbuild/protocompile v0.14.1
 	github.com/go-task/slim-sprig/v3 v3.0.0
-	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/google/go-cmp v0.7.0
 	github.com/klauspost/connect-compress/v2 v2.1.1
 	github.com/stretchr/testify v1.11.1

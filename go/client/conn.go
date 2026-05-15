@@ -8,7 +8,7 @@ import (
 )
 
 type (
-	// DialConfig is the configuration to create a api-server connection
+	// DialConfig is the configuration to create an tenant-apiserver connection
 	DialConfig struct {
 		BaseURL string
 		Token   string

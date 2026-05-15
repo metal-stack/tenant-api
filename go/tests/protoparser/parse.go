@@ -14,7 +14,9 @@ func Parse(filename string) (*descriptorpb.FileDescriptorProto, error) {
 		return nil, err
 	}
 	defer func() {
-		_ = f.Close()
+		if f != nil {
+			_ = f.Close()
+		}
 	}()
 	errHandler := reporter.NewHandler(nil)
 	p, err := parser.Parse(filename, f, errHandler)

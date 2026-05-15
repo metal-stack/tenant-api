@@ -214,7 +214,7 @@ func (x *TenantServiceListTenantMembersRequest) GetNamespace() string {
 	return ""
 }
 
-// TenantServiceLListTenantMembersResponse is the response payload to a list tenant member request
+// TenantServiceListTenantMembersResponse is the response payload to a list tenant member request
 type TenantServiceListTenantMembersResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Tenants
@@ -260,7 +260,7 @@ func (x *TenantServiceListTenantMembersResponse) GetTenants() []*TenantWithMembe
 	return nil
 }
 
-// TenantServiceLFindParticipatingProjectsResponse is the response payload to a find participating project request
+// TenantServiceFindParticipatingProjectsResponse is the response payload to a find participating project request
 type TenantServiceFindParticipatingProjectsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Projects
@@ -306,7 +306,7 @@ func (x *TenantServiceFindParticipatingProjectsResponse) GetProjects() []*Projec
 	return nil
 }
 
-// TenantServiceLFindParticipatingTenantsResponse is the response payload to a find participating tenant request
+// TenantServiceFindParticipatingTenantsResponse is the response payload to a find participating tenant request
 type TenantServiceFindParticipatingTenantsResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Tenants

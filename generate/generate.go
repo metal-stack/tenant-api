@@ -122,5 +122,5 @@ func writeTemplate(dest, text string, data any) error {
 
 	fmt.Println("wrote " + dest)
 
-	return os.WriteFile(dest, p, 0755) // nolint:gosec
+	return os.WriteFile(dest, p, 0644)
 }

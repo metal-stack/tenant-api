@@ -53,6 +53,12 @@ func New(config *DialConfig) (Client, error) {
 		loggingInterceptor := &loggingInterceptor{config: config}
 		c.interceptors = append(c.interceptors, loggingInterceptor)
 	}
+	if config.Namespace != "" {
+		c.interceptors = append(c.interceptors, NamespaceInterceptor(config.Namespace))
+	}
+	if config.UserAgent != "" {
+		c.interceptors = append(c.interceptors, userAgentInterceptor(config.UserAgent))
+	}
 	c.interceptors = append(c.interceptors, config.Interceptors...)
 
 	return c, nil

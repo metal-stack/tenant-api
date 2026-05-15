@@ -60,19 +60,19 @@ message TenantServiceListTenantMembersRequest {
   string namespace = 3;
 }
 
-// TenantServiceLListTenantMembersResponse is the response payload to a list tenant member request
+// TenantServiceListTenantMembersResponse is the response payload to a list tenant member request
 message TenantServiceListTenantMembersResponse {
   // Tenants
   repeated TenantWithMembershipAnnotations tenants = 1;
 }
 
-// TenantServiceLFindParticipatingProjectsResponse is the response payload to a find participating project request
+// TenantServiceFindParticipatingProjectsResponse is the response payload to a find participating project request
 message TenantServiceFindParticipatingProjectsResponse {
   // Projects
   repeated ProjectWithMembershipAnnotations projects = 1;
 }
 
-// TenantServiceLFindParticipatingTenantsResponse is the response payload to a find participating tenant request
+// TenantServiceFindParticipatingTenantsResponse is the response payload to a find participating tenant request
 message TenantServiceFindParticipatingTenantsResponse {
   // Tenants
   repeated TenantWithMembershipAnnotations tenants = 1;
