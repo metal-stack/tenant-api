@@ -24,6 +24,7 @@ type (
 		t *testing.T
 	}
 	apiv1 struct {
+		healthservice        *apiv1mocks.HealthServiceClient
 		projectservice       *apiv1mocks.ProjectServiceClient
 		projectmemberservice *apiv1mocks.ProjectMemberServiceClient
 		tenantservice        *apiv1mocks.TenantServiceClient
@@ -32,6 +33,7 @@ type (
 	}
 
 	Apiv1MockFns struct {
+		Health        func(m *mock.Mock)
 		Project       func(m *mock.Mock)
 		ProjectMember func(m *mock.Mock)
 		Tenant        func(m *mock.Mock)
@@ -60,6 +62,7 @@ func (w wrapper) Apiv1(fns *Apiv1MockFns) *apiv1 {
 
 func newapiv1(t *testing.T, fns *Apiv1MockFns) *apiv1 {
 	a := &apiv1{
+		healthservice:        apiv1mocks.NewHealthServiceClient(t),
 		projectservice:       apiv1mocks.NewProjectServiceClient(t),
 		projectmemberservice: apiv1mocks.NewProjectMemberServiceClient(t),
 		tenantservice:        apiv1mocks.NewTenantServiceClient(t),
@@ -68,6 +71,9 @@ func newapiv1(t *testing.T, fns *Apiv1MockFns) *apiv1 {
 	}
 
 	if fns != nil {
+		if fns.Health != nil {
+			fns.Health(&a.healthservice.Mock)
+		}
 		if fns.Project != nil {
 			fns.Project(&a.projectservice.Mock)
 		}
@@ -89,6 +95,9 @@ func newapiv1(t *testing.T, fns *Apiv1MockFns) *apiv1 {
 	return a
 }
 
+func (c *apiv1) Health() apiv1connect.HealthServiceClient {
+	return c.healthservice
+}
 func (c *apiv1) Project() apiv1connect.ProjectServiceClient {
 	return c.projectservice
 }

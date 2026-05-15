@@ -19,6 +19,7 @@ type (
 		interceptors []connect.Interceptor
 	}
 	Apiv1 interface {
+		Health() apiv1connect.HealthServiceClient
 		Project() apiv1connect.ProjectServiceClient
 		ProjectMember() apiv1connect.ProjectMemberServiceClient
 		Tenant() apiv1connect.TenantServiceClient
@@ -27,6 +28,7 @@ type (
 	}
 
 	apiv1 struct {
+		healthservice        apiv1connect.HealthServiceClient
 		projectservice       apiv1connect.ProjectServiceClient
 		projectmemberservice apiv1connect.ProjectMemberServiceClient
 		tenantservice        apiv1connect.TenantServiceClient
@@ -62,6 +64,12 @@ func New(config *DialConfig) (Client, error) {
 
 func (c *client) Apiv1() Apiv1 {
 	a := &apiv1{
+		healthservice: apiv1connect.NewHealthServiceClient(
+			c.config.HttpClient(),
+			c.config.BaseURL,
+			connect.WithInterceptors(c.interceptors...),
+			compress.WithAll(compress.LevelBalanced),
+		),
 		projectservice: apiv1connect.NewProjectServiceClient(
 			c.config.HttpClient(),
 			c.config.BaseURL,
@@ -96,6 +104,9 @@ func (c *client) Apiv1() Apiv1 {
 	return a
 }
 
+func (c *apiv1) Health() apiv1connect.HealthServiceClient {
+	return c.healthservice
+}
 func (c *apiv1) Project() apiv1connect.ProjectServiceClient {
 	return c.projectservice
 }
