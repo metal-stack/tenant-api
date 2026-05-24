@@ -36,6 +36,52 @@ func (_m *Apiv1) EXPECT() *Apiv1_Expecter {
 	return &Apiv1_Expecter{mock: &_m.Mock}
 }
 
+// Health provides a mock function for the type Apiv1
+func (_mock *Apiv1) Health() apiv1connect.HealthServiceClient {
+	ret := _mock.Called()
+
+	if len(ret) == 0 {
+		panic("no return value specified for Health")
+	}
+
+	var r0 apiv1connect.HealthServiceClient
+	if returnFunc, ok := ret.Get(0).(func() apiv1connect.HealthServiceClient); ok {
+		r0 = returnFunc()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(apiv1connect.HealthServiceClient)
+		}
+	}
+	return r0
+}
+
+// Apiv1_Health_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'Health'
+type Apiv1_Health_Call struct {
+	*mock.Call
+}
+
+// Health is a helper method to define mock.On call
+func (_e *Apiv1_Expecter) Health() *Apiv1_Health_Call {
+	return &Apiv1_Health_Call{Call: _e.mock.On("Health")}
+}
+
+func (_c *Apiv1_Health_Call) Run(run func()) *Apiv1_Health_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *Apiv1_Health_Call) Return(healthServiceClient apiv1connect.HealthServiceClient) *Apiv1_Health_Call {
+	_c.Call.Return(healthServiceClient)
+	return _c
+}
+
+func (_c *Apiv1_Health_Call) RunAndReturn(run func() apiv1connect.HealthServiceClient) *Apiv1_Health_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // Project provides a mock function for the type Apiv1
 func (_mock *Apiv1) Project() apiv1connect.ProjectServiceClient {
 	ret := _mock.Called()

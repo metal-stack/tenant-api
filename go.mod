@@ -3,7 +3,7 @@ module github.com/metal-stack/tenant-api
 go 1.26
 
 require (
-	connectrpc.com/connect v1.19.2
+	connectrpc.com/connect v1.20.0
 	github.com/bufbuild/protocompile v0.14.1
 	github.com/go-task/slim-sprig/v3 v3.0.0
 	github.com/google/go-cmp v0.7.0
