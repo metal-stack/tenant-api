@@ -1,4 +1,5 @@
 name: build
+
 on:
   pull_request:
     branches:
@@ -9,9 +10,6 @@ on:
   push:
     branches:
       - main
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   generate:
@@ -34,23 +32,16 @@ jobs:
       run: |
         git diff --exit-code --compact-summary
 
-  go:
-    name: Go
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v6
+  go-build:
+    uses: metal-stack/actions-common/.github/workflows/go-build.yaml@v1
+    secrets: inherit
+    with:
+      build: false
+      test: false
+      lint: true
 
-    - name: Check spelling
-      uses: crate-ci/typos@master
+  spell-check:
+    uses: metal-stack/actions-common/.github/workflows/spell-check.yaml@v1
 
-    - name: Set up Go
-      uses: actions/setup-go@v6
-      with:
-        go-version-file: 'go.mod'
-        cache: false
-
-    - name: Lint
-      uses: golangci/golangci-lint-action@v9
-      with:
-        args: -D protogetter --timeout=5m
+  draft:
+    uses: metal-stack/actions-common/.github/workflows/release-drafter.yaml@v1
