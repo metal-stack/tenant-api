@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+	"reflect"
 
 	"connectrpc.com/connect"
 	v1 "github.com/metal-stack/tenant-api/go/api/v1"
@@ -71,35 +72,26 @@ func NamespaceInterceptor(namespace string) connect.UnaryInterceptorFunc {
 	return func(uf connect.UnaryFunc) connect.UnaryFunc {
 		return func(ctx context.Context, ar connect.AnyRequest) (connect.AnyResponse, error) {
 			switch r := ar.Any().(type) {
-			case *v1.TenantMemberServiceCreateRequest:
-				if r.TenantMember != nil && r.TenantMember.Namespace == "" {
-					r.TenantMember.Namespace = namespace
+			case interface {
+				GetNamespace() string
+			}:
+				if r.GetNamespace() == "" {
+					reflect.Indirect(reflect.ValueOf(r)).FieldByName("Namespace").Set(reflect.ValueOf(namespace))
 				}
-			case *v1.ProjectMemberServiceCreateRequest:
-				if r.ProjectMember != nil && r.ProjectMember.Namespace == "" {
-					r.ProjectMember.Namespace = namespace
+			case interface {
+				GetProjectMember() *v1.ProjectMember
+			}:
+				if r.GetProjectMember().Namespace == "" {
+					r.GetProjectMember().Namespace = namespace
 				}
-			case *v1.TenantMemberServiceListRequest:
-				if r.Namespace == "" {
-					r.Namespace = namespace
-				}
-			case *v1.ProjectMemberServiceListRequest:
-				if r.Namespace == "" {
-					r.Namespace = namespace
-				}
-			case *v1.TenantServiceFindParticipatingProjectsRequest:
-				if r.Namespace == "" {
-					r.Namespace = namespace
-				}
-			case *v1.TenantServiceFindParticipatingTenantsRequest:
-				if r.Namespace == "" {
-					r.Namespace = namespace
-				}
-			case *v1.TenantServiceListTenantMembersRequest:
-				if r.Namespace == "" {
-					r.Namespace = namespace
+			case interface {
+				GetTenantMember() *v1.TenantMember
+			}:
+				if r.GetTenantMember().Namespace == "" {
+					r.GetTenantMember().Namespace = namespace
 				}
 			}
+
 			return uf(ctx, ar)
 		}
 	}
