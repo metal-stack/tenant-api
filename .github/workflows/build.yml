@@ -37,7 +37,8 @@ jobs:
     secrets: inherit
     with:
       build: false
-      test: false
+      test: true
+      test-command: make test
       lint: true
 
   spell-check:
