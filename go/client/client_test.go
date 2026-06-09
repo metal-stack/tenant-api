@@ -97,6 +97,7 @@ func Test_Client(t *testing.T) {
 				}),
 			},
 		})
+		require.NoError(t, err)
 
 		_, err = client.Apiv1().ProjectMember().Create(t.Context(), &v1.ProjectMemberServiceCreateRequest{
 			ProjectMember: &v1.ProjectMember{
@@ -219,6 +220,7 @@ func Test_Client(t *testing.T) {
 				}),
 			},
 		})
+		require.NoError(t, err)
 
 		_, err = client.Apiv1().ProjectMember().Create(t.Context(), &v1.ProjectMemberServiceCreateRequest{
 			ProjectMember: &v1.ProjectMember{
