@@ -1,0 +1,124 @@
+syntax = "proto3";
+
+package tenant.api.v1;
+
+import "google/protobuf/timestamp.proto";
+import "tenant/api/v1/common.proto";
+import "tenant/api/v1/meta.proto";
+
+// ProjectService provides service methods to work with projects
+service ProjectService {
+  // Create a project
+  rpc Create(ProjectServiceCreateRequest) returns (ProjectServiceCreateResponse);
+  // Update a project
+  rpc Update(ProjectServiceUpdateRequest) returns (ProjectServiceUpdateResponse);
+  // Delete a project
+  rpc Delete(ProjectServiceDeleteRequest) returns (ProjectServiceDeleteResponse);
+  // Get a project
+  rpc Get(ProjectServiceGetRequest) returns (ProjectServiceGetResponse);
+  // GetHistory of a project
+  rpc GetHistory(ProjectServiceGetHistoryRequest) returns (ProjectServiceGetHistoryResponse);
+  // List projects
+  rpc List(ProjectServiceListRequest) returns (ProjectServiceListResponse);
+}
+
+// Project is the database model
+message Project {
+  // Meta for a project
+  Meta meta = 1;
+  // Name of the project
+  string name = 2;
+  // Description of this project
+  string description = 3;
+  // TenantId to which this project belongs to
+  string tenant_id = 4;
+}
+
+// ProjectServiceCreateRequest is the request payload to create a new project
+message ProjectServiceCreateRequest {
+  // Project to create
+  Project project = 1;
+}
+
+// ProjectServiceCreateResponse contains the response payload of a project create request
+message ProjectServiceCreateResponse {
+  // Project is the response
+  Project project = 1;
+}
+
+// ProjectServiceUpdateRequest is the request payload to update a project
+message ProjectServiceUpdateRequest {
+  // Project to update
+  Project project = 1;
+}
+
+// ProjectServiceUpdateResponse contains the response payload of a project update request
+message ProjectServiceUpdateResponse {
+  // Project is the response
+  Project project = 1;
+}
+
+// ProjectServiceDeleteRequest is the request payload to delete a project
+message ProjectServiceDeleteRequest {
+  // Id of the project to delete
+  string id = 1;
+}
+
+// ProjectServiceDeleteResponse contains the response payload of a project delete request
+message ProjectServiceDeleteResponse {
+  // Project is the response
+  Project project = 1;
+}
+
+// ProjectServiceGetRequest is the request payload to get a project
+message ProjectServiceGetRequest {
+  // Id of the project to get
+  string id = 1;
+}
+
+// ProjectServiceGetResponse contains the response payload of a project get request
+message ProjectServiceGetResponse {
+  // Project is the response
+  Project project = 1;
+}
+
+// ProjectServiceGetHistoryRequest is the request payload to get the history of a project
+message ProjectServiceGetHistoryRequest {
+  // Id of the project to get the history for
+  string id = 1;
+  // At the timestamp at which the history should get returned
+  google.protobuf.Timestamp at = 2;
+}
+
+// ProjectServiceGetHistoryResponse contains the response payload of a project get history request
+message ProjectServiceGetHistoryResponse {
+  // Project is the response
+  Project project = 1;
+}
+
+// ProjectServiceListRequest is the request payload to list projects
+message ProjectServiceListRequest {
+  // Paging spec of this find request
+  Paging paging = 1;
+  // Annotations of projects to find
+  map<string, string> annotations = 2;
+
+  // Id of the project to find
+  optional string id = 3;
+  // Name of the project to find
+  optional string name = 4;
+  // Description of the project to find
+  optional string description = 5;
+  // TenantId of the projects to find
+  optional string tenant_id = 6;
+  // Labels of the projects to find
+  repeated string labels = 7;
+}
+
+// ProjectListResponse contains the projects
+message ProjectServiceListResponse {
+  // Projects is the response
+  repeated Project projects = 1;
+  // next_page_token is used for pagination, returns the next page to be fetched and must then be provided in the list request.
+  optional uint64 next_page = 2;
+}

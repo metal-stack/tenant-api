@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package tenant.api.v1;
+
+// IAMConfig
+message IAMConfig {
+  // IssuerConfig
+  IssuerConfig issuer_config = 1;
+  // IDMConfig
+  IDMConfig idm_config = 2;
+  // GroupConfig
+  NamespaceGroupConfig group_config = 3;
+}
+
+// IssuerConfig
+message IssuerConfig {
+  // URL
+  string url = 1;
+  // ClientId
+  string client_id = 2;
+}
+
+// mandatory config
+message IDMConfig {
+  // IDMType
+  string idm_type = 1;
+
+  // optional
+  ConnectorConfig connector_config = 2;
+}
+
+// Config for group-rolebinding-controller
+message NamespaceGroupConfig {
+  // no action is taken or any namespace in this list
+  string excluded_namespaces = 1;
+
+  // for each element a RoleBinding is created in any Namespace - ClusterRoles are bound with this name
+  // admin,edit,view
+  string expected_groups_list = 2;
+
+  // Maximum length of namespace-part in clusterGroupname and therefore in the corresponding groupname in the directory.
+  // 20 chars für AD, given the naming-conventions
+  int32 namespace_max_length = 3;
+
+  // The created RoleBindings will reference this group (from token).
+  // oidc:{{ .Namespace }}-{{ .Group }}
+  string cluster_groupname_template = 4;
+
+  // The RoleBindings will created with this name.
+  // oidc-{{ .Namespace }}-{{ .Group }}
+  string rolebinding_name_template = 5;
+}
+
+// optional config if idm webhook is used to automatically create/delete groups/roles in the tenant idm
+message ConnectorConfig {
+  // APIUrl the api url of the idm
+  string idm_api_url = 1;
+  // User of the idm
+  string idm_api_user = 2;
+  // Password for the idm
+  string idm_api_password = 3;
+
+  // SystemId of the idm
+  string idm_system_id = 4;
+  // AccessCode of the idm
+  string idm_access_code = 5;
+  // CustomerId of the idm
+  string idm_customer_id = 6;
+  // GroupOU of the idm
+  string idm_group_ou = 7;
+
+  // DomainName of the idm
+  string idm_domain_name = 8;
+  // TenantPrefix of the idm
+  string idm_tenant_prefix = 9;
+
+  // Submitter
+  string idm_submitter = 10;
+  // JobInfo
+  string idm_job_info = 11;
+  // ReqSystem
+  string idm_req_system = 12;
+  // ReqUser
+  string idm_req_user = 13;
+  // ReqEmail
+  string idm_req_email = 14;
+}

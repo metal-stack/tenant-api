@@ -4,9 +4,9 @@ package apitests
 import (
 	"testing"
 
-	"github.com/metal-stack/tenant-api/go/api/v1/apiv1connect"
 	apiclient "github.com/metal-stack/tenant-api/go/client"
-	apiv1mocks "github.com/metal-stack/tenant-api/go/tests/mocks/api/v1/apiv1connect"
+	"github.com/metal-stack/tenant-api/go/tenant/api/v1/apiv1connect"
+	apiv1mocks "github.com/metal-stack/tenant-api/go/tests/mocks/tenant/api/v1/apiv1connect"
 
 	"github.com/stretchr/testify/mock"
 )

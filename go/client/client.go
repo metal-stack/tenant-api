@@ -5,7 +5,7 @@ import (
 	"connectrpc.com/connect"
 	compress "github.com/klauspost/connect-compress/v2"
 
-	"github.com/metal-stack/tenant-api/go/api/v1/apiv1connect"
+	"github.com/metal-stack/tenant-api/go/tenant/api/v1/apiv1connect"
 )
 
 type (

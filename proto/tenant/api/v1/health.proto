@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package tenant.api.v1;
+
+// HealthService provides health status monitoring operations.
+service HealthService {
+  // Returns the health status of the platform.
+  rpc Get(HealthServiceGetRequest) returns (HealthServiceGetResponse) {}
+}
+
+// ServiceStatus defines the status of a service.
+enum ServiceStatus {
+  // SERVICE_STATUS_UNSPECIFIED service status is not known or unspecified
+  SERVICE_STATUS_UNSPECIFIED = 0;
+  // SERVICE_STATUS_DEGRADED the service is in degraded status, not the whole functionality is available
+  SERVICE_STATUS_DEGRADED = 1;
+  // SERVICE_STATUS_UNHEALTHY the service is in unhealthy status, serious impact is expected
+  SERVICE_STATUS_UNHEALTHY = 2;
+  // SERVICE_STATUS_HEALTHY the service is in healthy status, for example fully functional
+  SERVICE_STATUS_HEALTHY = 3;
+}
+
+// Service defines the service for which the healthiness is reported.
+enum Service {
+  // SERVICE_UNSPECIFIED is a unknown service
+  SERVICE_UNSPECIFIED = 0;
+  // SERVICE_POSTGRES is the database backend
+  SERVICE_POSTGRES = 1;
+}
+
+// Health reports the health status of all services.
+message Health {
+  // Services contains the health of all individual services
+  repeated HealthStatus services = 1;
+}
+
+// HealthStatus represents the health status of one service.
+message HealthStatus {
+  // Name is the name of the service
+  Service name = 1;
+  // Status is the status of this service
+  ServiceStatus status = 2;
+  // Message describes the reason for the unhealthy status if possible
+  string message = 3;
+}
+
+// HealthServiceGetRequest is the request payload for getting the health of the system.
+message HealthServiceGetRequest {}
+
+// HealthServiceGetResponse is the response payload for getting the health of the system.
+message HealthServiceGetResponse {
+  // Health contains the overall health of the system
+  Health health = 1;
+}
