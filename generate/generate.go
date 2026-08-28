@@ -80,7 +80,8 @@ func svcs(root string) (map[string]api, error) {
 		if err != nil {
 			return nil, err
 		}
-		name := strings.ReplaceAll(*fd.Package, ".", "")
+		_, name, _ := strings.Cut(*fd.Package, "tenant.")
+		name = strings.ReplaceAll(name, ".", "")
 
 		a, ok := result[name]
 		if !ok {

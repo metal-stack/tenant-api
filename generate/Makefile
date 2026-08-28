@@ -7,10 +7,10 @@ generate: go-mocks
 
 	go run ./generate.go
 
-	go run ./genscanvaluer.go -package apiv1 -type Project -output ../go/api/v1/project_scanvaluer.go
-	go run ./genscanvaluer.go -package apiv1 -type ProjectMember -output ../go/api/v1/project_member_scanvaluer.go
-	go run ./genscanvaluer.go -package apiv1 -type Tenant -output ../go/api/v1/tenant_scanvaluer.go
-	go run ./genscanvaluer.go -package apiv1 -type TenantMember -output ../go/api/v1/tenant_member_scanvaluer.go
+	go run ./genscanvaluer.go -package apiv1 -type Project -output ../go/tenant/api/v1/project_scanvaluer.go
+	go run ./genscanvaluer.go -package apiv1 -type ProjectMember -output ../go/tenant/api/v1/project_member_scanvaluer.go
+	go run ./genscanvaluer.go -package apiv1 -type Tenant -output ../go/tenant/api/v1/tenant_scanvaluer.go
+	go run ./genscanvaluer.go -package apiv1 -type TenantMember -output ../go/tenant/api/v1/tenant_member_scanvaluer.go
 
 .PHONY: go-mocks
 go-mocks:
@@ -22,4 +22,4 @@ go-mocks:
 		--tmpfs /.cache:uid=$$(id -u),gid=$$(id -g) \
 		-w /work \
 		-v ${PWD}:/work \
-		vektra/mockery:v3.7.0
+		vektra/mockery:v3.7.2

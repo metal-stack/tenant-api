@@ -5,7 +5,7 @@
 package client
 
 import (
-	"github.com/metal-stack/tenant-api/go/api/v1/apiv1connect"
+	"github.com/metal-stack/tenant-api/go/tenant/api/v1/apiv1connect"
 	mock "github.com/stretchr/testify/mock"
 )
 

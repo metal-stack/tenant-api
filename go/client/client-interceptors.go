@@ -5,7 +5,7 @@ import (
 	"reflect"
 
 	"connectrpc.com/connect"
-	v1 "github.com/metal-stack/tenant-api/go/api/v1"
+	v1 "github.com/metal-stack/tenant-api/go/tenant/api/v1"
 )
 
 // authinterceptor adds the required auth headers
