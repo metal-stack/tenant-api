@@ -4,12 +4,13 @@ import (
 	"log/slog"
 	"testing"
 
-	"connectrpc.com/connect"
+	"connectrpc.com/connect/v2"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	client "github.com/metal-stack/tenant-api/go/client"
 	apiv1 "github.com/metal-stack/tenant-api/go/tenant/api/v1"
 	"github.com/stretchr/testify/require"
+	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/runtime/protoimpl"
 	"google.golang.org/protobuf/testing/protocmp"
 )
@@ -17,19 +18,19 @@ import (
 func TestInterceptor(t *testing.T) {
 	cl, err := client.New(&client.DialConfig{
 		BaseURL: "http://this-is-just-for-testing",
-		Interceptors: []connect.Interceptor{
+		Interceptors: []connect.ClientInterceptor{
 			client.NewTestInterceptor(t, []client.ClientCall{
 				{
 					WantRequest: &apiv1.TenantServiceGetRequest{
 						Id: "t1",
 					},
-					WantResponse: func() connect.AnyResponse {
-						return connect.NewResponse(&apiv1.TenantServiceGetResponse{
+					WantResponse: func() proto.Message {
+						return &apiv1.TenantServiceGetResponse{
 							Tenant: &apiv1.Tenant{
 								Meta: &apiv1.Meta{Id: "t1"},
 								Name: "T1",
 							},
-						})
+						}
 					},
 				},
 			}),

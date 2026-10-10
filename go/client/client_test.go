@@ -4,9 +4,10 @@ import (
 	"log/slog"
 	"testing"
 
-	"connectrpc.com/connect"
+	"connectrpc.com/connect/v2"
 	v1 "github.com/metal-stack/tenant-api/go/tenant/api/v1"
 	"github.com/stretchr/testify/require"
+	"google.golang.org/protobuf/proto"
 )
 
 func Test_Client(t *testing.T) {
@@ -23,7 +24,7 @@ func Test_Client(t *testing.T) {
 			BaseURL:   "http://localhost",
 			Log:       log,
 			Namespace: namespace,
-			Interceptors: []connect.Interceptor{
+			Interceptors: []connect.ClientInterceptor{
 				NewTestInterceptor(t, []ClientCall{
 					{
 						WantRequest: &v1.ProjectMemberServiceCreateRequest{
@@ -33,8 +34,8 @@ func Test_Client(t *testing.T) {
 								Namespace: namespace,
 							},
 						},
-						WantResponse: func() connect.AnyResponse {
-							return connect.NewResponse(&v1.ProjectMemberServiceCreateResponse{})
+						WantResponse: func() proto.Message {
+							return &v1.ProjectMemberServiceCreateResponse{}
 						},
 					},
 					{
@@ -43,8 +44,8 @@ func Test_Client(t *testing.T) {
 							TenantId:  new("tenant-a"),
 							Namespace: namespace,
 						},
-						WantResponse: func() connect.AnyResponse {
-							return connect.NewResponse(&v1.ProjectMemberServiceListResponse{})
+						WantResponse: func() proto.Message {
+							return &v1.ProjectMemberServiceListResponse{}
 						},
 					},
 					{
@@ -54,8 +55,8 @@ func Test_Client(t *testing.T) {
 								Namespace: namespace,
 							},
 						},
-						WantResponse: func() connect.AnyResponse {
-							return connect.NewResponse(&v1.TenantMemberServiceCreateResponse{})
+						WantResponse: func() proto.Message {
+							return &v1.TenantMemberServiceCreateResponse{}
 						},
 					},
 					{
@@ -63,8 +64,8 @@ func Test_Client(t *testing.T) {
 							TenantId:  new("tenant-a"),
 							Namespace: namespace,
 						},
-						WantResponse: func() connect.AnyResponse {
-							return connect.NewResponse(&v1.TenantMemberServiceListResponse{})
+						WantResponse: func() proto.Message {
+							return &v1.TenantMemberServiceListResponse{}
 						},
 					},
 					{
@@ -72,8 +73,8 @@ func Test_Client(t *testing.T) {
 							TenantId:  "tenant-a",
 							Namespace: namespace,
 						},
-						WantResponse: func() connect.AnyResponse {
-							return connect.NewResponse(&v1.TenantServiceFindParticipatingProjectsResponse{})
+						WantResponse: func() proto.Message {
+							return &v1.TenantServiceFindParticipatingProjectsResponse{}
 						},
 					},
 					{
@@ -81,8 +82,8 @@ func Test_Client(t *testing.T) {
 							TenantId:  "tenant-a",
 							Namespace: namespace,
 						},
-						WantResponse: func() connect.AnyResponse {
-							return connect.NewResponse(&v1.TenantServiceFindParticipatingTenantsResponse{})
+						WantResponse: func() proto.Message {
+							return &v1.TenantServiceFindParticipatingTenantsResponse{}
 						},
 					},
 					{
@@ -90,8 +91,8 @@ func Test_Client(t *testing.T) {
 							TenantId:  "tenant-a",
 							Namespace: namespace,
 						},
-						WantResponse: func() connect.AnyResponse {
-							return connect.NewResponse(&v1.TenantServiceListTenantMembersResponse{})
+						WantResponse: func() proto.Message {
+							return &v1.TenantServiceListTenantMembersResponse{}
 						},
 					},
 				}),
@@ -146,7 +147,7 @@ func Test_Client(t *testing.T) {
 			BaseURL:   "http://localhost",
 			Log:       log,
 			Namespace: namespace,
-			Interceptors: []connect.Interceptor{
+			Interceptors: []connect.ClientInterceptor{
 				NewTestInterceptor(t, []ClientCall{
 					{
 						WantRequest: &v1.ProjectMemberServiceCreateRequest{
@@ -156,8 +157,8 @@ func Test_Client(t *testing.T) {
 								Namespace: "b",
 							},
 						},
-						WantResponse: func() connect.AnyResponse {
-							return connect.NewResponse(&v1.ProjectMemberServiceCreateResponse{})
+						WantResponse: func() proto.Message {
+							return &v1.ProjectMemberServiceCreateResponse{}
 						},
 					},
 					{
@@ -166,8 +167,8 @@ func Test_Client(t *testing.T) {
 							TenantId:  new("tenant-a"),
 							Namespace: "b",
 						},
-						WantResponse: func() connect.AnyResponse {
-							return connect.NewResponse(&v1.ProjectMemberServiceListResponse{})
+						WantResponse: func() proto.Message {
+							return &v1.ProjectMemberServiceListResponse{}
 						},
 					},
 					{
@@ -177,8 +178,8 @@ func Test_Client(t *testing.T) {
 								Namespace: "b",
 							},
 						},
-						WantResponse: func() connect.AnyResponse {
-							return connect.NewResponse(&v1.TenantMemberServiceCreateResponse{})
+						WantResponse: func() proto.Message {
+							return &v1.TenantMemberServiceCreateResponse{}
 						},
 					},
 					{
@@ -186,8 +187,8 @@ func Test_Client(t *testing.T) {
 							TenantId:  new("tenant-a"),
 							Namespace: "b",
 						},
-						WantResponse: func() connect.AnyResponse {
-							return connect.NewResponse(&v1.TenantMemberServiceListResponse{})
+						WantResponse: func() proto.Message {
+							return &v1.TenantMemberServiceListResponse{}
 						},
 					},
 					{
@@ -195,8 +196,8 @@ func Test_Client(t *testing.T) {
 							TenantId:  "tenant-a",
 							Namespace: "b",
 						},
-						WantResponse: func() connect.AnyResponse {
-							return connect.NewResponse(&v1.TenantServiceFindParticipatingProjectsResponse{})
+						WantResponse: func() proto.Message {
+							return &v1.TenantServiceFindParticipatingProjectsResponse{}
 						},
 					},
 					{
@@ -204,8 +205,8 @@ func Test_Client(t *testing.T) {
 							TenantId:  "tenant-a",
 							Namespace: "b",
 						},
-						WantResponse: func() connect.AnyResponse {
-							return connect.NewResponse(&v1.TenantServiceFindParticipatingTenantsResponse{})
+						WantResponse: func() proto.Message {
+							return &v1.TenantServiceFindParticipatingTenantsResponse{}
 						},
 					},
 					{
@@ -213,8 +214,8 @@ func Test_Client(t *testing.T) {
 							TenantId:  "tenant-a",
 							Namespace: "b",
 						},
-						WantResponse: func() connect.AnyResponse {
-							return connect.NewResponse(&v1.TenantServiceListTenantMembersResponse{})
+						WantResponse: func() proto.Message {
+							return &v1.TenantServiceListTenantMembersResponse{}
 						},
 					},
 				}),

@@ -35,37 +35,70 @@ func newUserAgentInterceptor(userAgent string) connect.ClientInterceptor {
 func newLoggingInterceptor(log *slog.Logger) connect.ClientInterceptor {
 	return func(next connect.ClientFunc) connect.ClientFunc {
 		return func(ctx context.Context, spec connect.Spec) (connect.ClientStream, error) {
-			log.Debug("intercept", "request procedure", spec.Procedure)
-			return next(ctx, spec)
+			stream, err := next(ctx, spec)
+			if err != nil {
+				return nil, err
+			}
+			return &loggingClientStream{ClientStream: stream, log: log, procedure: spec.Procedure}, nil
 		}
 	}
 }
 
-func NamespaceInterceptor(namespace string) connect.UnaryInterceptorFunc {
-	return func(uf connect.UnaryFunc) connect.UnaryFunc {
-		return func(ctx context.Context, ar connect.AnyRequest) (connect.AnyResponse, error) {
-			switch r := ar.Any().(type) {
-			case interface {
-				GetNamespace() string
-			}:
-				if r.GetNamespace() == "" {
-					reflect.Indirect(reflect.ValueOf(r)).FieldByName("Namespace").Set(reflect.ValueOf(namespace))
-				}
-			case interface {
-				GetProjectMember() *v1.ProjectMember
-			}:
-				if r.GetProjectMember().Namespace == "" {
-					r.GetProjectMember().Namespace = namespace
-				}
-			case interface {
-				GetTenantMember() *v1.TenantMember
-			}:
-				if r.GetTenantMember().Namespace == "" {
-					r.GetTenantMember().Namespace = namespace
-				}
-			}
+type loggingClientStream struct {
+	connect.ClientStream
+	log       *slog.Logger
+	procedure string
+}
 
-			return uf(ctx, ar)
+func (s *loggingClientStream) Send(msg any) error {
+	s.log.Debug("request", "procedure", s.procedure, "payload", msg)
+	return s.ClientStream.Send(msg)
+}
+
+func (s *loggingClientStream) Receive(msg any) error {
+	err := s.ClientStream.Receive(msg)
+	s.log.Debug("response", "procedure", s.procedure, "payload", msg, "error", err)
+	return err
+}
+
+func NamespaceInterceptor(namespace string) connect.ClientInterceptor {
+	return func(next connect.ClientFunc) connect.ClientFunc {
+		return func(ctx context.Context, spec connect.Spec) (connect.ClientStream, error) {
+			stream, err := next(ctx, spec)
+			if err != nil {
+				return nil, err
+			}
+			return &namespaceClientStream{ClientStream: stream, namespace: namespace}, nil
 		}
 	}
+}
+
+type namespaceClientStream struct {
+	connect.ClientStream
+	namespace string
+}
+
+func (s *namespaceClientStream) Send(msg any) error {
+	switch r := msg.(type) {
+	case interface {
+		GetNamespace() string
+	}:
+		if r.GetNamespace() == "" {
+			reflect.Indirect(reflect.ValueOf(r)).FieldByName("Namespace").Set(reflect.ValueOf(s.namespace))
+		}
+	case interface {
+		GetProjectMember() *v1.ProjectMember
+	}:
+		if r.GetProjectMember().Namespace == "" {
+			r.GetProjectMember().Namespace = s.namespace
+		}
+	case interface {
+		GetTenantMember() *v1.TenantMember
+	}:
+		if r.GetTenantMember().Namespace == "" {
+			r.GetTenantMember().Namespace = s.namespace
+		}
+	}
+
+	return s.ClientStream.Send(msg)
 }
