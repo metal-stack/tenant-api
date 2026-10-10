@@ -5,36 +5,37 @@
 package apiv1connect
 
 import (
-	connect "connectrpc.com/connect"
+	connect "connectrpc.com/connect/v2"
 	context "context"
-	errors "errors"
 	v1 "github.com/metal-stack/tenant-api/go/tenant/api/v1"
-	http "net/http"
-	strings "strings"
+	sync "sync"
 )
-
-// This is a compile-time assertion to ensure that this generated file and the connect package are
-// compatible. If you get a compiler error that this constant is not defined, this code was
-// generated with a version of connect newer than the one compiled into your binary. You can fix the
-// problem by either regenerating this code with an older version of connect or updating the connect
-// version compiled into your binary.
-const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// HealthServiceName is the fully-qualified name of the HealthService service.
 	HealthServiceName = "tenant.api.v1.HealthService"
 )
 
-// These constants are the fully-qualified names of the RPCs defined in this package. They're
-// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+// These constants are the procedure names of the RPCs defined in this package. They're exposed at
+// runtime as Spec.Procedure and as the final two segments of the HTTP route.
 //
 // Note that these are different from the fully-qualified method names used by
 // google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// HealthServiceGetProcedure is the fully-qualified name of the HealthService's Get RPC.
+	// HealthServiceGetProcedure is the procedure name of the HealthService's Get RPC.
 	HealthServiceGetProcedure = "/tenant.api.v1.HealthService/Get"
+)
+
+var (
+	healthServiceGetSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_health_proto.Services().ByName("HealthService").Methods().ByName("Get"),
+			Procedure:  HealthServiceGetProcedure,
+		}
+	})
 )
 
 // HealthServiceClient is a client for the tenant.api.v1.HealthService service.
@@ -43,38 +44,10 @@ type HealthServiceClient interface {
 	Get(context.Context, *v1.HealthServiceGetRequest) (*v1.HealthServiceGetResponse, error)
 }
 
-// NewHealthServiceClient constructs a client for the tenant.api.v1.HealthService service. By
-// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
-// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
-// connect.WithGRPC() or connect.WithGRPCWeb() options.
-//
-// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
-// http://api.acme.com or https://acme.com/grpc).
-func NewHealthServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) HealthServiceClient {
-	baseURL = strings.TrimRight(baseURL, "/")
-	healthServiceMethods := v1.File_tenant_api_v1_health_proto.Services().ByName("HealthService").Methods()
-	return &healthServiceClient{
-		get: connect.NewClient[v1.HealthServiceGetRequest, v1.HealthServiceGetResponse](
-			httpClient,
-			baseURL+HealthServiceGetProcedure,
-			connect.WithSchema(healthServiceMethods.ByName("Get")),
-			connect.WithClientOptions(opts...),
-		),
-	}
-}
-
-// healthServiceClient implements HealthServiceClient.
-type healthServiceClient struct {
-	get *connect.Client[v1.HealthServiceGetRequest, v1.HealthServiceGetResponse]
-}
-
-// Get calls tenant.api.v1.HealthService.Get.
-func (c *healthServiceClient) Get(ctx context.Context, req *v1.HealthServiceGetRequest) (*v1.HealthServiceGetResponse, error) {
-	response, err := c.get.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
+// NewHealthServiceClient constructs a client for the tenant.api.v1.HealthService service. Multiple
+// service clients may share a single connect.Client.
+func NewHealthServiceClient(client *connect.Client) HealthServiceClient {
+	return &healthServiceClient{client: client}
 }
 
 // HealthServiceHandler is an implementation of the tenant.api.v1.HealthService service.
@@ -83,32 +56,44 @@ type HealthServiceHandler interface {
 	Get(context.Context, *v1.HealthServiceGetRequest) (*v1.HealthServiceGetResponse, error)
 }
 
-// NewHealthServiceHandler builds an HTTP handler from the service implementation. It returns the
-// path on which to mount the handler and the handler itself.
-//
-// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
-// and JSON codecs. They also support gzip compression.
-func NewHealthServiceHandler(svc HealthServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	healthServiceMethods := v1.File_tenant_api_v1_health_proto.Services().ByName("HealthService").Methods()
-	healthServiceGetHandler := connect.NewUnaryHandlerSimple(
-		HealthServiceGetProcedure,
-		svc.Get,
-		connect.WithSchema(healthServiceMethods.ByName("Get")),
-		connect.WithHandlerOptions(opts...),
+// RegisterHealthServiceHandler registers svc as the tenant.api.v1.HealthService implementation on
+// server.
+func RegisterHealthServiceHandler(server *connect.Server, svc HealthServiceHandler) {
+	adapter := healthServiceHandler{svc: svc}
+	server.Register(
+		connect.Method{Spec: healthServiceGetSpec(), Handler: adapter.get},
 	)
-	return "/tenant.api.v1.HealthService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		switch r.URL.Path {
-		case HealthServiceGetProcedure:
-			healthServiceGetHandler.ServeHTTP(w, r)
-		default:
-			http.NotFound(w, r)
-		}
-	})
 }
 
 // UnimplementedHealthServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedHealthServiceHandler struct{}
 
 func (UnimplementedHealthServiceHandler) Get(context.Context, *v1.HealthServiceGetRequest) (*v1.HealthServiceGetResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.HealthService.Get is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.HealthService.Get is not implemented")
+}
+
+type healthServiceClient struct {
+	client *connect.Client
+}
+
+func (c *healthServiceClient) Get(ctx context.Context, req *v1.HealthServiceGetRequest) (*v1.HealthServiceGetResponse, error) {
+	var res v1.HealthServiceGetResponse
+	if err := c.client.CallUnary(ctx, healthServiceGetSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+type healthServiceHandler struct{ svc HealthServiceHandler }
+
+func (h healthServiceHandler) get(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.HealthServiceGetRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Get(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
 }
