@@ -5,47 +5,82 @@
 package apiv1connect
 
 import (
-	connect "connectrpc.com/connect"
+	connect "connectrpc.com/connect/v2"
 	context "context"
-	errors "errors"
 	v1 "github.com/metal-stack/tenant-api/go/tenant/api/v1"
-	http "net/http"
-	strings "strings"
+	sync "sync"
 )
-
-// This is a compile-time assertion to ensure that this generated file and the connect package are
-// compatible. If you get a compiler error that this constant is not defined, this code was
-// generated with a version of connect newer than the one compiled into your binary. You can fix the
-// problem by either regenerating this code with an older version of connect or updating the connect
-// version compiled into your binary.
-const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// ProjectServiceName is the fully-qualified name of the ProjectService service.
 	ProjectServiceName = "tenant.api.v1.ProjectService"
 )
 
-// These constants are the fully-qualified names of the RPCs defined in this package. They're
-// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+// These constants are the procedure names of the RPCs defined in this package. They're exposed at
+// runtime as Spec.Procedure and as the final two segments of the HTTP route.
 //
 // Note that these are different from the fully-qualified method names used by
 // google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// ProjectServiceCreateProcedure is the fully-qualified name of the ProjectService's Create RPC.
+	// ProjectServiceCreateProcedure is the procedure name of the ProjectService's Create RPC.
 	ProjectServiceCreateProcedure = "/tenant.api.v1.ProjectService/Create"
-	// ProjectServiceUpdateProcedure is the fully-qualified name of the ProjectService's Update RPC.
+	// ProjectServiceUpdateProcedure is the procedure name of the ProjectService's Update RPC.
 	ProjectServiceUpdateProcedure = "/tenant.api.v1.ProjectService/Update"
-	// ProjectServiceDeleteProcedure is the fully-qualified name of the ProjectService's Delete RPC.
+	// ProjectServiceDeleteProcedure is the procedure name of the ProjectService's Delete RPC.
 	ProjectServiceDeleteProcedure = "/tenant.api.v1.ProjectService/Delete"
-	// ProjectServiceGetProcedure is the fully-qualified name of the ProjectService's Get RPC.
+	// ProjectServiceGetProcedure is the procedure name of the ProjectService's Get RPC.
 	ProjectServiceGetProcedure = "/tenant.api.v1.ProjectService/Get"
-	// ProjectServiceGetHistoryProcedure is the fully-qualified name of the ProjectService's GetHistory
-	// RPC.
+	// ProjectServiceGetHistoryProcedure is the procedure name of the ProjectService's GetHistory RPC.
 	ProjectServiceGetHistoryProcedure = "/tenant.api.v1.ProjectService/GetHistory"
-	// ProjectServiceListProcedure is the fully-qualified name of the ProjectService's List RPC.
+	// ProjectServiceListProcedure is the procedure name of the ProjectService's List RPC.
 	ProjectServiceListProcedure = "/tenant.api.v1.ProjectService/List"
+)
+
+var (
+	projectServiceCreateSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_project_proto.Services().ByName("ProjectService").Methods().ByName("Create"),
+			Procedure:  ProjectServiceCreateProcedure,
+		}
+	})
+	projectServiceUpdateSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_project_proto.Services().ByName("ProjectService").Methods().ByName("Update"),
+			Procedure:  ProjectServiceUpdateProcedure,
+		}
+	})
+	projectServiceDeleteSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_project_proto.Services().ByName("ProjectService").Methods().ByName("Delete"),
+			Procedure:  ProjectServiceDeleteProcedure,
+		}
+	})
+	projectServiceGetSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_project_proto.Services().ByName("ProjectService").Methods().ByName("Get"),
+			Procedure:  ProjectServiceGetProcedure,
+		}
+	})
+	projectServiceGetHistorySpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_project_proto.Services().ByName("ProjectService").Methods().ByName("GetHistory"),
+			Procedure:  ProjectServiceGetHistoryProcedure,
+		}
+	})
+	projectServiceListSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_project_proto.Services().ByName("ProjectService").Methods().ByName("List"),
+			Procedure:  ProjectServiceListProcedure,
+		}
+	})
 )
 
 // ProjectServiceClient is a client for the tenant.api.v1.ProjectService service.
@@ -64,118 +99,10 @@ type ProjectServiceClient interface {
 	List(context.Context, *v1.ProjectServiceListRequest) (*v1.ProjectServiceListResponse, error)
 }
 
-// NewProjectServiceClient constructs a client for the tenant.api.v1.ProjectService service. By
-// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
-// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
-// connect.WithGRPC() or connect.WithGRPCWeb() options.
-//
-// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
-// http://api.acme.com or https://acme.com/grpc).
-func NewProjectServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ProjectServiceClient {
-	baseURL = strings.TrimRight(baseURL, "/")
-	projectServiceMethods := v1.File_tenant_api_v1_project_proto.Services().ByName("ProjectService").Methods()
-	return &projectServiceClient{
-		create: connect.NewClient[v1.ProjectServiceCreateRequest, v1.ProjectServiceCreateResponse](
-			httpClient,
-			baseURL+ProjectServiceCreateProcedure,
-			connect.WithSchema(projectServiceMethods.ByName("Create")),
-			connect.WithClientOptions(opts...),
-		),
-		update: connect.NewClient[v1.ProjectServiceUpdateRequest, v1.ProjectServiceUpdateResponse](
-			httpClient,
-			baseURL+ProjectServiceUpdateProcedure,
-			connect.WithSchema(projectServiceMethods.ByName("Update")),
-			connect.WithClientOptions(opts...),
-		),
-		delete: connect.NewClient[v1.ProjectServiceDeleteRequest, v1.ProjectServiceDeleteResponse](
-			httpClient,
-			baseURL+ProjectServiceDeleteProcedure,
-			connect.WithSchema(projectServiceMethods.ByName("Delete")),
-			connect.WithClientOptions(opts...),
-		),
-		get: connect.NewClient[v1.ProjectServiceGetRequest, v1.ProjectServiceGetResponse](
-			httpClient,
-			baseURL+ProjectServiceGetProcedure,
-			connect.WithSchema(projectServiceMethods.ByName("Get")),
-			connect.WithClientOptions(opts...),
-		),
-		getHistory: connect.NewClient[v1.ProjectServiceGetHistoryRequest, v1.ProjectServiceGetHistoryResponse](
-			httpClient,
-			baseURL+ProjectServiceGetHistoryProcedure,
-			connect.WithSchema(projectServiceMethods.ByName("GetHistory")),
-			connect.WithClientOptions(opts...),
-		),
-		list: connect.NewClient[v1.ProjectServiceListRequest, v1.ProjectServiceListResponse](
-			httpClient,
-			baseURL+ProjectServiceListProcedure,
-			connect.WithSchema(projectServiceMethods.ByName("List")),
-			connect.WithClientOptions(opts...),
-		),
-	}
-}
-
-// projectServiceClient implements ProjectServiceClient.
-type projectServiceClient struct {
-	create     *connect.Client[v1.ProjectServiceCreateRequest, v1.ProjectServiceCreateResponse]
-	update     *connect.Client[v1.ProjectServiceUpdateRequest, v1.ProjectServiceUpdateResponse]
-	delete     *connect.Client[v1.ProjectServiceDeleteRequest, v1.ProjectServiceDeleteResponse]
-	get        *connect.Client[v1.ProjectServiceGetRequest, v1.ProjectServiceGetResponse]
-	getHistory *connect.Client[v1.ProjectServiceGetHistoryRequest, v1.ProjectServiceGetHistoryResponse]
-	list       *connect.Client[v1.ProjectServiceListRequest, v1.ProjectServiceListResponse]
-}
-
-// Create calls tenant.api.v1.ProjectService.Create.
-func (c *projectServiceClient) Create(ctx context.Context, req *v1.ProjectServiceCreateRequest) (*v1.ProjectServiceCreateResponse, error) {
-	response, err := c.create.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// Update calls tenant.api.v1.ProjectService.Update.
-func (c *projectServiceClient) Update(ctx context.Context, req *v1.ProjectServiceUpdateRequest) (*v1.ProjectServiceUpdateResponse, error) {
-	response, err := c.update.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// Delete calls tenant.api.v1.ProjectService.Delete.
-func (c *projectServiceClient) Delete(ctx context.Context, req *v1.ProjectServiceDeleteRequest) (*v1.ProjectServiceDeleteResponse, error) {
-	response, err := c.delete.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// Get calls tenant.api.v1.ProjectService.Get.
-func (c *projectServiceClient) Get(ctx context.Context, req *v1.ProjectServiceGetRequest) (*v1.ProjectServiceGetResponse, error) {
-	response, err := c.get.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// GetHistory calls tenant.api.v1.ProjectService.GetHistory.
-func (c *projectServiceClient) GetHistory(ctx context.Context, req *v1.ProjectServiceGetHistoryRequest) (*v1.ProjectServiceGetHistoryResponse, error) {
-	response, err := c.getHistory.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// List calls tenant.api.v1.ProjectService.List.
-func (c *projectServiceClient) List(ctx context.Context, req *v1.ProjectServiceListRequest) (*v1.ProjectServiceListResponse, error) {
-	response, err := c.list.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
+// NewProjectServiceClient constructs a client for the tenant.api.v1.ProjectService service.
+// Multiple service clients may share a single connect.Client.
+func NewProjectServiceClient(client *connect.Client) ProjectServiceClient {
+	return &projectServiceClient{client: client}
 }
 
 // ProjectServiceHandler is an implementation of the tenant.api.v1.ProjectService service.
@@ -194,92 +121,169 @@ type ProjectServiceHandler interface {
 	List(context.Context, *v1.ProjectServiceListRequest) (*v1.ProjectServiceListResponse, error)
 }
 
-// NewProjectServiceHandler builds an HTTP handler from the service implementation. It returns the
-// path on which to mount the handler and the handler itself.
-//
-// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
-// and JSON codecs. They also support gzip compression.
-func NewProjectServiceHandler(svc ProjectServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	projectServiceMethods := v1.File_tenant_api_v1_project_proto.Services().ByName("ProjectService").Methods()
-	projectServiceCreateHandler := connect.NewUnaryHandlerSimple(
-		ProjectServiceCreateProcedure,
-		svc.Create,
-		connect.WithSchema(projectServiceMethods.ByName("Create")),
-		connect.WithHandlerOptions(opts...),
+// RegisterProjectServiceHandler registers svc as the tenant.api.v1.ProjectService implementation on
+// server.
+func RegisterProjectServiceHandler(server *connect.Server, svc ProjectServiceHandler) {
+	adapter := projectServiceHandler{svc: svc}
+	server.Register(
+		connect.Method{Spec: projectServiceCreateSpec(), Handler: adapter.create},
+		connect.Method{Spec: projectServiceUpdateSpec(), Handler: adapter.update},
+		connect.Method{Spec: projectServiceDeleteSpec(), Handler: adapter.delete},
+		connect.Method{Spec: projectServiceGetSpec(), Handler: adapter.get},
+		connect.Method{Spec: projectServiceGetHistorySpec(), Handler: adapter.getHistory},
+		connect.Method{Spec: projectServiceListSpec(), Handler: adapter.list},
 	)
-	projectServiceUpdateHandler := connect.NewUnaryHandlerSimple(
-		ProjectServiceUpdateProcedure,
-		svc.Update,
-		connect.WithSchema(projectServiceMethods.ByName("Update")),
-		connect.WithHandlerOptions(opts...),
-	)
-	projectServiceDeleteHandler := connect.NewUnaryHandlerSimple(
-		ProjectServiceDeleteProcedure,
-		svc.Delete,
-		connect.WithSchema(projectServiceMethods.ByName("Delete")),
-		connect.WithHandlerOptions(opts...),
-	)
-	projectServiceGetHandler := connect.NewUnaryHandlerSimple(
-		ProjectServiceGetProcedure,
-		svc.Get,
-		connect.WithSchema(projectServiceMethods.ByName("Get")),
-		connect.WithHandlerOptions(opts...),
-	)
-	projectServiceGetHistoryHandler := connect.NewUnaryHandlerSimple(
-		ProjectServiceGetHistoryProcedure,
-		svc.GetHistory,
-		connect.WithSchema(projectServiceMethods.ByName("GetHistory")),
-		connect.WithHandlerOptions(opts...),
-	)
-	projectServiceListHandler := connect.NewUnaryHandlerSimple(
-		ProjectServiceListProcedure,
-		svc.List,
-		connect.WithSchema(projectServiceMethods.ByName("List")),
-		connect.WithHandlerOptions(opts...),
-	)
-	return "/tenant.api.v1.ProjectService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		switch r.URL.Path {
-		case ProjectServiceCreateProcedure:
-			projectServiceCreateHandler.ServeHTTP(w, r)
-		case ProjectServiceUpdateProcedure:
-			projectServiceUpdateHandler.ServeHTTP(w, r)
-		case ProjectServiceDeleteProcedure:
-			projectServiceDeleteHandler.ServeHTTP(w, r)
-		case ProjectServiceGetProcedure:
-			projectServiceGetHandler.ServeHTTP(w, r)
-		case ProjectServiceGetHistoryProcedure:
-			projectServiceGetHistoryHandler.ServeHTTP(w, r)
-		case ProjectServiceListProcedure:
-			projectServiceListHandler.ServeHTTP(w, r)
-		default:
-			http.NotFound(w, r)
-		}
-	})
 }
 
 // UnimplementedProjectServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedProjectServiceHandler struct{}
 
 func (UnimplementedProjectServiceHandler) Create(context.Context, *v1.ProjectServiceCreateRequest) (*v1.ProjectServiceCreateResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.ProjectService.Create is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.ProjectService.Create is not implemented")
 }
 
 func (UnimplementedProjectServiceHandler) Update(context.Context, *v1.ProjectServiceUpdateRequest) (*v1.ProjectServiceUpdateResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.ProjectService.Update is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.ProjectService.Update is not implemented")
 }
 
 func (UnimplementedProjectServiceHandler) Delete(context.Context, *v1.ProjectServiceDeleteRequest) (*v1.ProjectServiceDeleteResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.ProjectService.Delete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.ProjectService.Delete is not implemented")
 }
 
 func (UnimplementedProjectServiceHandler) Get(context.Context, *v1.ProjectServiceGetRequest) (*v1.ProjectServiceGetResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.ProjectService.Get is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.ProjectService.Get is not implemented")
 }
 
 func (UnimplementedProjectServiceHandler) GetHistory(context.Context, *v1.ProjectServiceGetHistoryRequest) (*v1.ProjectServiceGetHistoryResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.ProjectService.GetHistory is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.ProjectService.GetHistory is not implemented")
 }
 
 func (UnimplementedProjectServiceHandler) List(context.Context, *v1.ProjectServiceListRequest) (*v1.ProjectServiceListResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.ProjectService.List is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.ProjectService.List is not implemented")
+}
+
+type projectServiceClient struct {
+	client *connect.Client
+}
+
+func (c *projectServiceClient) Create(ctx context.Context, req *v1.ProjectServiceCreateRequest) (*v1.ProjectServiceCreateResponse, error) {
+	var res v1.ProjectServiceCreateResponse
+	if err := c.client.CallUnary(ctx, projectServiceCreateSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *projectServiceClient) Update(ctx context.Context, req *v1.ProjectServiceUpdateRequest) (*v1.ProjectServiceUpdateResponse, error) {
+	var res v1.ProjectServiceUpdateResponse
+	if err := c.client.CallUnary(ctx, projectServiceUpdateSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *projectServiceClient) Delete(ctx context.Context, req *v1.ProjectServiceDeleteRequest) (*v1.ProjectServiceDeleteResponse, error) {
+	var res v1.ProjectServiceDeleteResponse
+	if err := c.client.CallUnary(ctx, projectServiceDeleteSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *projectServiceClient) Get(ctx context.Context, req *v1.ProjectServiceGetRequest) (*v1.ProjectServiceGetResponse, error) {
+	var res v1.ProjectServiceGetResponse
+	if err := c.client.CallUnary(ctx, projectServiceGetSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *projectServiceClient) GetHistory(ctx context.Context, req *v1.ProjectServiceGetHistoryRequest) (*v1.ProjectServiceGetHistoryResponse, error) {
+	var res v1.ProjectServiceGetHistoryResponse
+	if err := c.client.CallUnary(ctx, projectServiceGetHistorySpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *projectServiceClient) List(ctx context.Context, req *v1.ProjectServiceListRequest) (*v1.ProjectServiceListResponse, error) {
+	var res v1.ProjectServiceListResponse
+	if err := c.client.CallUnary(ctx, projectServiceListSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+type projectServiceHandler struct{ svc ProjectServiceHandler }
+
+func (h projectServiceHandler) create(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.ProjectServiceCreateRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Create(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h projectServiceHandler) update(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.ProjectServiceUpdateRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Update(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h projectServiceHandler) delete(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.ProjectServiceDeleteRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Delete(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h projectServiceHandler) get(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.ProjectServiceGetRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Get(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h projectServiceHandler) getHistory(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.ProjectServiceGetHistoryRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.GetHistory(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h projectServiceHandler) list(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.ProjectServiceListRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.List(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
 }

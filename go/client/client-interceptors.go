@@ -2,70 +2,43 @@ package client
 
 import (
 	"context"
+	"log/slog"
 	"reflect"
 
-	"connectrpc.com/connect"
+	"connectrpc.com/connect/v2"
 	v1 "github.com/metal-stack/tenant-api/go/tenant/api/v1"
 )
 
 // authinterceptor adds the required auth headers
-type authInterceptor struct {
-	config *DialConfig
-}
-
-func (i *authInterceptor) WrapUnary(next connect.UnaryFunc) connect.UnaryFunc {
-	return connect.UnaryFunc(func(ctx context.Context, request connect.AnyRequest) (connect.AnyResponse, error) {
-		request.Header().Add("Authorization", "Bearer "+i.config.Token)
-		return next(ctx, request)
-	})
-}
-
-func (i *authInterceptor) WrapStreamingClient(next connect.StreamingClientFunc) connect.StreamingClientFunc {
-	return func(ctx context.Context, spec connect.Spec) connect.StreamingClientConn {
-		return &streamingInterceptorConn{
-			StreamingClientConn: next(ctx, spec),
-			token:               i.config.Token,
+func newAuthInterceptor(token string) connect.ClientInterceptor {
+	return func(next connect.ClientFunc) connect.ClientFunc {
+		return func(ctx context.Context, spec connect.Spec) (connect.ClientStream, error) {
+			if info, ok := connect.CallInfoForClientContext(ctx); ok {
+				info.RequestHeader().Add("Authorization", "Bearer "+token)
+			}
+			return next(ctx, spec)
 		}
 	}
 }
 
-func (i *authInterceptor) WrapStreamingHandler(next connect.StreamingHandlerFunc) connect.StreamingHandlerFunc {
-	return next
-}
-
-type streamingInterceptorConn struct {
-	connect.StreamingClientConn
-	token string
-}
-
-func (conn *streamingInterceptorConn) Send(m any) error {
-	conn.RequestHeader().Add("Authorization", "Bearer "+conn.token)
-	return conn.StreamingClientConn.Send(m)
-}
-
-type loggingInterceptor struct {
-	config *DialConfig
-}
-
-func (i *loggingInterceptor) WrapUnary(next connect.UnaryFunc) connect.UnaryFunc {
-	return connect.UnaryFunc(func(ctx context.Context, request connect.AnyRequest) (connect.AnyResponse, error) {
-		i.config.Log.Debug("intercept", "request procedure", request.Spec().Procedure, "body", request.Any())
-		response, err := next(ctx, request)
-		if err != nil {
-			return nil, err
+func newUserAgentInterceptor(userAgent string) connect.ClientInterceptor {
+	return func(next connect.ClientFunc) connect.ClientFunc {
+		return func(ctx context.Context, spec connect.Spec) (connect.ClientStream, error) {
+			if info, ok := connect.CallInfoForClientContext(ctx); ok {
+				info.RequestHeader().Add("User-Agent", userAgent)
+			}
+			return next(ctx, spec)
 		}
-		i.config.Log.Debug("intercept", "request procedure", request.Spec().Procedure, "response", response.Any())
-		return response, err
-	})
+	}
 }
 
-func (i *loggingInterceptor) WrapStreamingClient(next connect.StreamingClientFunc) connect.StreamingClientFunc {
-	// TODO also log here
-	return next
-}
-
-func (i *loggingInterceptor) WrapStreamingHandler(next connect.StreamingHandlerFunc) connect.StreamingHandlerFunc {
-	return next
+func newLoggingInterceptor(log *slog.Logger) connect.ClientInterceptor {
+	return func(next connect.ClientFunc) connect.ClientFunc {
+		return func(ctx context.Context, spec connect.Spec) (connect.ClientStream, error) {
+			log.Debug("intercept", "request procedure", spec.Procedure)
+			return next(ctx, spec)
+		}
+	}
 }
 
 func NamespaceInterceptor(namespace string) connect.UnaryInterceptorFunc {
@@ -92,15 +65,6 @@ func NamespaceInterceptor(namespace string) connect.UnaryInterceptorFunc {
 				}
 			}
 
-			return uf(ctx, ar)
-		}
-	}
-}
-
-func userAgentInterceptor(userAgent string) connect.UnaryInterceptorFunc {
-	return func(uf connect.UnaryFunc) connect.UnaryFunc {
-		return func(ctx context.Context, ar connect.AnyRequest) (connect.AnyResponse, error) {
-			ar.Header().Add("User-Agent", userAgent)
 			return uf(ctx, ar)
 		}
 	}
