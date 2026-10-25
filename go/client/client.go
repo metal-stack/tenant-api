@@ -2,9 +2,6 @@
 package client
 
 import (
-	"connectrpc.com/connect"
-	compress "github.com/klauspost/connect-compress/v2"
-
 	"github.com/metal-stack/tenant-api/go/tenant/api/v1/apiv1connect"
 )
 
@@ -13,11 +10,6 @@ type (
 		Apiv1() Apiv1
 	}
 
-	client struct {
-		config *DialConfig
-
-		interceptors []connect.Interceptor
-	}
 	Apiv1 interface {
 		Health() apiv1connect.HealthServiceClient
 		Project() apiv1connect.ProjectServiceClient
@@ -37,69 +29,14 @@ type (
 	}
 )
 
-func New(config *DialConfig) (Client, error) {
-	c := &client{
-		config:       config,
-		interceptors: []connect.Interceptor{},
-	}
-
-	if config.Token != "" {
-		authInterceptor := &authInterceptor{config: config}
-		c.interceptors = append(c.interceptors, authInterceptor)
-	}
-	if config.Log != nil {
-		loggingInterceptor := &loggingInterceptor{config: config}
-		c.interceptors = append(c.interceptors, loggingInterceptor)
-	}
-	if config.Namespace != "" {
-		c.interceptors = append(c.interceptors, NamespaceInterceptor(config.Namespace))
-	}
-	if config.UserAgent != "" {
-		c.interceptors = append(c.interceptors, userAgentInterceptor(config.UserAgent))
-	}
-	c.interceptors = append(c.interceptors, config.Interceptors...)
-
-	return c, nil
-}
-
 func (c *client) Apiv1() Apiv1 {
 	a := &apiv1{
-		healthservice: apiv1connect.NewHealthServiceClient(
-			c.config.HttpClient(),
-			c.config.BaseURL,
-			connect.WithInterceptors(c.interceptors...),
-			compress.WithAll(compress.LevelBalanced),
-		),
-		projectservice: apiv1connect.NewProjectServiceClient(
-			c.config.HttpClient(),
-			c.config.BaseURL,
-			connect.WithInterceptors(c.interceptors...),
-			compress.WithAll(compress.LevelBalanced),
-		),
-		projectmemberservice: apiv1connect.NewProjectMemberServiceClient(
-			c.config.HttpClient(),
-			c.config.BaseURL,
-			connect.WithInterceptors(c.interceptors...),
-			compress.WithAll(compress.LevelBalanced),
-		),
-		tenantservice: apiv1connect.NewTenantServiceClient(
-			c.config.HttpClient(),
-			c.config.BaseURL,
-			connect.WithInterceptors(c.interceptors...),
-			compress.WithAll(compress.LevelBalanced),
-		),
-		tenantmemberservice: apiv1connect.NewTenantMemberServiceClient(
-			c.config.HttpClient(),
-			c.config.BaseURL,
-			connect.WithInterceptors(c.interceptors...),
-			compress.WithAll(compress.LevelBalanced),
-		),
-		versionservice: apiv1connect.NewVersionServiceClient(
-			c.config.HttpClient(),
-			c.config.BaseURL,
-			connect.WithInterceptors(c.interceptors...),
-			compress.WithAll(compress.LevelBalanced),
-		),
+		healthservice:        apiv1connect.NewHealthServiceClient(c.httpClient),
+		projectservice:       apiv1connect.NewProjectServiceClient(c.httpClient),
+		projectmemberservice: apiv1connect.NewProjectMemberServiceClient(c.httpClient),
+		tenantservice:        apiv1connect.NewTenantServiceClient(c.httpClient),
+		tenantmemberservice:  apiv1connect.NewTenantMemberServiceClient(c.httpClient),
+		versionservice:       apiv1connect.NewVersionServiceClient(c.httpClient),
 	}
 	return a
 }

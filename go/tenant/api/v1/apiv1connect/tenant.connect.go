@@ -5,56 +5,112 @@
 package apiv1connect
 
 import (
-	connect "connectrpc.com/connect"
+	connect "connectrpc.com/connect/v2"
 	context "context"
-	errors "errors"
 	v1 "github.com/metal-stack/tenant-api/go/tenant/api/v1"
-	http "net/http"
-	strings "strings"
+	sync "sync"
 )
-
-// This is a compile-time assertion to ensure that this generated file and the connect package are
-// compatible. If you get a compiler error that this constant is not defined, this code was
-// generated with a version of connect newer than the one compiled into your binary. You can fix the
-// problem by either regenerating this code with an older version of connect or updating the connect
-// version compiled into your binary.
-const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// TenantServiceName is the fully-qualified name of the TenantService service.
 	TenantServiceName = "tenant.api.v1.TenantService"
 )
 
-// These constants are the fully-qualified names of the RPCs defined in this package. They're
-// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+// These constants are the procedure names of the RPCs defined in this package. They're exposed at
+// runtime as Spec.Procedure and as the final two segments of the HTTP route.
 //
 // Note that these are different from the fully-qualified method names used by
 // google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// TenantServiceCreateProcedure is the fully-qualified name of the TenantService's Create RPC.
+	// TenantServiceCreateProcedure is the procedure name of the TenantService's Create RPC.
 	TenantServiceCreateProcedure = "/tenant.api.v1.TenantService/Create"
-	// TenantServiceUpdateProcedure is the fully-qualified name of the TenantService's Update RPC.
+	// TenantServiceUpdateProcedure is the procedure name of the TenantService's Update RPC.
 	TenantServiceUpdateProcedure = "/tenant.api.v1.TenantService/Update"
-	// TenantServiceDeleteProcedure is the fully-qualified name of the TenantService's Delete RPC.
+	// TenantServiceDeleteProcedure is the procedure name of the TenantService's Delete RPC.
 	TenantServiceDeleteProcedure = "/tenant.api.v1.TenantService/Delete"
-	// TenantServiceGetProcedure is the fully-qualified name of the TenantService's Get RPC.
+	// TenantServiceGetProcedure is the procedure name of the TenantService's Get RPC.
 	TenantServiceGetProcedure = "/tenant.api.v1.TenantService/Get"
-	// TenantServiceGetHistoryProcedure is the fully-qualified name of the TenantService's GetHistory
-	// RPC.
+	// TenantServiceGetHistoryProcedure is the procedure name of the TenantService's GetHistory RPC.
 	TenantServiceGetHistoryProcedure = "/tenant.api.v1.TenantService/GetHistory"
-	// TenantServiceListProcedure is the fully-qualified name of the TenantService's List RPC.
+	// TenantServiceListProcedure is the procedure name of the TenantService's List RPC.
 	TenantServiceListProcedure = "/tenant.api.v1.TenantService/List"
-	// TenantServiceListTenantMembersProcedure is the fully-qualified name of the TenantService's
+	// TenantServiceListTenantMembersProcedure is the procedure name of the TenantService's
 	// ListTenantMembers RPC.
 	TenantServiceListTenantMembersProcedure = "/tenant.api.v1.TenantService/ListTenantMembers"
-	// TenantServiceFindParticipatingProjectsProcedure is the fully-qualified name of the
-	// TenantService's FindParticipatingProjects RPC.
+	// TenantServiceFindParticipatingProjectsProcedure is the procedure name of the TenantService's
+	// FindParticipatingProjects RPC.
 	TenantServiceFindParticipatingProjectsProcedure = "/tenant.api.v1.TenantService/FindParticipatingProjects"
-	// TenantServiceFindParticipatingTenantsProcedure is the fully-qualified name of the TenantService's
+	// TenantServiceFindParticipatingTenantsProcedure is the procedure name of the TenantService's
 	// FindParticipatingTenants RPC.
 	TenantServiceFindParticipatingTenantsProcedure = "/tenant.api.v1.TenantService/FindParticipatingTenants"
+)
+
+var (
+	tenantServiceCreateSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_tenant_proto.Services().ByName("TenantService").Methods().ByName("Create"),
+			Procedure:  TenantServiceCreateProcedure,
+		}
+	})
+	tenantServiceUpdateSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_tenant_proto.Services().ByName("TenantService").Methods().ByName("Update"),
+			Procedure:  TenantServiceUpdateProcedure,
+		}
+	})
+	tenantServiceDeleteSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_tenant_proto.Services().ByName("TenantService").Methods().ByName("Delete"),
+			Procedure:  TenantServiceDeleteProcedure,
+		}
+	})
+	tenantServiceGetSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_tenant_proto.Services().ByName("TenantService").Methods().ByName("Get"),
+			Procedure:  TenantServiceGetProcedure,
+		}
+	})
+	tenantServiceGetHistorySpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_tenant_proto.Services().ByName("TenantService").Methods().ByName("GetHistory"),
+			Procedure:  TenantServiceGetHistoryProcedure,
+		}
+	})
+	tenantServiceListSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_tenant_proto.Services().ByName("TenantService").Methods().ByName("List"),
+			Procedure:  TenantServiceListProcedure,
+		}
+	})
+	tenantServiceListTenantMembersSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_tenant_proto.Services().ByName("TenantService").Methods().ByName("ListTenantMembers"),
+			Procedure:  TenantServiceListTenantMembersProcedure,
+		}
+	})
+	tenantServiceFindParticipatingProjectsSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_tenant_proto.Services().ByName("TenantService").Methods().ByName("FindParticipatingProjects"),
+			Procedure:  TenantServiceFindParticipatingProjectsProcedure,
+		}
+	})
+	tenantServiceFindParticipatingTenantsSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_tenant_proto.Services().ByName("TenantService").Methods().ByName("FindParticipatingTenants"),
+			Procedure:  TenantServiceFindParticipatingTenantsProcedure,
+		}
+	})
 )
 
 // TenantServiceClient is a client for the tenant.api.v1.TenantService service.
@@ -79,166 +135,10 @@ type TenantServiceClient interface {
 	FindParticipatingTenants(context.Context, *v1.TenantServiceFindParticipatingTenantsRequest) (*v1.TenantServiceFindParticipatingTenantsResponse, error)
 }
 
-// NewTenantServiceClient constructs a client for the tenant.api.v1.TenantService service. By
-// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
-// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
-// connect.WithGRPC() or connect.WithGRPCWeb() options.
-//
-// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
-// http://api.acme.com or https://acme.com/grpc).
-func NewTenantServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) TenantServiceClient {
-	baseURL = strings.TrimRight(baseURL, "/")
-	tenantServiceMethods := v1.File_tenant_api_v1_tenant_proto.Services().ByName("TenantService").Methods()
-	return &tenantServiceClient{
-		create: connect.NewClient[v1.TenantServiceCreateRequest, v1.TenantServiceCreateResponse](
-			httpClient,
-			baseURL+TenantServiceCreateProcedure,
-			connect.WithSchema(tenantServiceMethods.ByName("Create")),
-			connect.WithClientOptions(opts...),
-		),
-		update: connect.NewClient[v1.TenantServiceUpdateRequest, v1.TenantServiceUpdateResponse](
-			httpClient,
-			baseURL+TenantServiceUpdateProcedure,
-			connect.WithSchema(tenantServiceMethods.ByName("Update")),
-			connect.WithClientOptions(opts...),
-		),
-		delete: connect.NewClient[v1.TenantServiceDeleteRequest, v1.TenantServiceDeleteResponse](
-			httpClient,
-			baseURL+TenantServiceDeleteProcedure,
-			connect.WithSchema(tenantServiceMethods.ByName("Delete")),
-			connect.WithClientOptions(opts...),
-		),
-		get: connect.NewClient[v1.TenantServiceGetRequest, v1.TenantServiceGetResponse](
-			httpClient,
-			baseURL+TenantServiceGetProcedure,
-			connect.WithSchema(tenantServiceMethods.ByName("Get")),
-			connect.WithClientOptions(opts...),
-		),
-		getHistory: connect.NewClient[v1.TenantServiceGetHistoryRequest, v1.TenantServiceGetHistoryResponse](
-			httpClient,
-			baseURL+TenantServiceGetHistoryProcedure,
-			connect.WithSchema(tenantServiceMethods.ByName("GetHistory")),
-			connect.WithClientOptions(opts...),
-		),
-		list: connect.NewClient[v1.TenantServiceListRequest, v1.TenantServiceListResponse](
-			httpClient,
-			baseURL+TenantServiceListProcedure,
-			connect.WithSchema(tenantServiceMethods.ByName("List")),
-			connect.WithClientOptions(opts...),
-		),
-		listTenantMembers: connect.NewClient[v1.TenantServiceListTenantMembersRequest, v1.TenantServiceListTenantMembersResponse](
-			httpClient,
-			baseURL+TenantServiceListTenantMembersProcedure,
-			connect.WithSchema(tenantServiceMethods.ByName("ListTenantMembers")),
-			connect.WithClientOptions(opts...),
-		),
-		findParticipatingProjects: connect.NewClient[v1.TenantServiceFindParticipatingProjectsRequest, v1.TenantServiceFindParticipatingProjectsResponse](
-			httpClient,
-			baseURL+TenantServiceFindParticipatingProjectsProcedure,
-			connect.WithSchema(tenantServiceMethods.ByName("FindParticipatingProjects")),
-			connect.WithClientOptions(opts...),
-		),
-		findParticipatingTenants: connect.NewClient[v1.TenantServiceFindParticipatingTenantsRequest, v1.TenantServiceFindParticipatingTenantsResponse](
-			httpClient,
-			baseURL+TenantServiceFindParticipatingTenantsProcedure,
-			connect.WithSchema(tenantServiceMethods.ByName("FindParticipatingTenants")),
-			connect.WithClientOptions(opts...),
-		),
-	}
-}
-
-// tenantServiceClient implements TenantServiceClient.
-type tenantServiceClient struct {
-	create                    *connect.Client[v1.TenantServiceCreateRequest, v1.TenantServiceCreateResponse]
-	update                    *connect.Client[v1.TenantServiceUpdateRequest, v1.TenantServiceUpdateResponse]
-	delete                    *connect.Client[v1.TenantServiceDeleteRequest, v1.TenantServiceDeleteResponse]
-	get                       *connect.Client[v1.TenantServiceGetRequest, v1.TenantServiceGetResponse]
-	getHistory                *connect.Client[v1.TenantServiceGetHistoryRequest, v1.TenantServiceGetHistoryResponse]
-	list                      *connect.Client[v1.TenantServiceListRequest, v1.TenantServiceListResponse]
-	listTenantMembers         *connect.Client[v1.TenantServiceListTenantMembersRequest, v1.TenantServiceListTenantMembersResponse]
-	findParticipatingProjects *connect.Client[v1.TenantServiceFindParticipatingProjectsRequest, v1.TenantServiceFindParticipatingProjectsResponse]
-	findParticipatingTenants  *connect.Client[v1.TenantServiceFindParticipatingTenantsRequest, v1.TenantServiceFindParticipatingTenantsResponse]
-}
-
-// Create calls tenant.api.v1.TenantService.Create.
-func (c *tenantServiceClient) Create(ctx context.Context, req *v1.TenantServiceCreateRequest) (*v1.TenantServiceCreateResponse, error) {
-	response, err := c.create.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// Update calls tenant.api.v1.TenantService.Update.
-func (c *tenantServiceClient) Update(ctx context.Context, req *v1.TenantServiceUpdateRequest) (*v1.TenantServiceUpdateResponse, error) {
-	response, err := c.update.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// Delete calls tenant.api.v1.TenantService.Delete.
-func (c *tenantServiceClient) Delete(ctx context.Context, req *v1.TenantServiceDeleteRequest) (*v1.TenantServiceDeleteResponse, error) {
-	response, err := c.delete.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// Get calls tenant.api.v1.TenantService.Get.
-func (c *tenantServiceClient) Get(ctx context.Context, req *v1.TenantServiceGetRequest) (*v1.TenantServiceGetResponse, error) {
-	response, err := c.get.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// GetHistory calls tenant.api.v1.TenantService.GetHistory.
-func (c *tenantServiceClient) GetHistory(ctx context.Context, req *v1.TenantServiceGetHistoryRequest) (*v1.TenantServiceGetHistoryResponse, error) {
-	response, err := c.getHistory.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// List calls tenant.api.v1.TenantService.List.
-func (c *tenantServiceClient) List(ctx context.Context, req *v1.TenantServiceListRequest) (*v1.TenantServiceListResponse, error) {
-	response, err := c.list.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// ListTenantMembers calls tenant.api.v1.TenantService.ListTenantMembers.
-func (c *tenantServiceClient) ListTenantMembers(ctx context.Context, req *v1.TenantServiceListTenantMembersRequest) (*v1.TenantServiceListTenantMembersResponse, error) {
-	response, err := c.listTenantMembers.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// FindParticipatingProjects calls tenant.api.v1.TenantService.FindParticipatingProjects.
-func (c *tenantServiceClient) FindParticipatingProjects(ctx context.Context, req *v1.TenantServiceFindParticipatingProjectsRequest) (*v1.TenantServiceFindParticipatingProjectsResponse, error) {
-	response, err := c.findParticipatingProjects.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// FindParticipatingTenants calls tenant.api.v1.TenantService.FindParticipatingTenants.
-func (c *tenantServiceClient) FindParticipatingTenants(ctx context.Context, req *v1.TenantServiceFindParticipatingTenantsRequest) (*v1.TenantServiceFindParticipatingTenantsResponse, error) {
-	response, err := c.findParticipatingTenants.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
+// NewTenantServiceClient constructs a client for the tenant.api.v1.TenantService service. Multiple
+// service clients may share a single connect.Client.
+func NewTenantServiceClient(client *connect.Client) TenantServiceClient {
+	return &tenantServiceClient{client: client}
 }
 
 // TenantServiceHandler is an implementation of the tenant.api.v1.TenantService service.
@@ -263,128 +163,244 @@ type TenantServiceHandler interface {
 	FindParticipatingTenants(context.Context, *v1.TenantServiceFindParticipatingTenantsRequest) (*v1.TenantServiceFindParticipatingTenantsResponse, error)
 }
 
-// NewTenantServiceHandler builds an HTTP handler from the service implementation. It returns the
-// path on which to mount the handler and the handler itself.
-//
-// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
-// and JSON codecs. They also support gzip compression.
-func NewTenantServiceHandler(svc TenantServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	tenantServiceMethods := v1.File_tenant_api_v1_tenant_proto.Services().ByName("TenantService").Methods()
-	tenantServiceCreateHandler := connect.NewUnaryHandlerSimple(
-		TenantServiceCreateProcedure,
-		svc.Create,
-		connect.WithSchema(tenantServiceMethods.ByName("Create")),
-		connect.WithHandlerOptions(opts...),
+// RegisterTenantServiceHandler registers svc as the tenant.api.v1.TenantService implementation on
+// server.
+func RegisterTenantServiceHandler(server *connect.Server, svc TenantServiceHandler) {
+	adapter := tenantServiceHandler{svc: svc}
+	server.Register(
+		connect.Method{Spec: tenantServiceCreateSpec(), Handler: adapter.create},
+		connect.Method{Spec: tenantServiceUpdateSpec(), Handler: adapter.update},
+		connect.Method{Spec: tenantServiceDeleteSpec(), Handler: adapter.delete},
+		connect.Method{Spec: tenantServiceGetSpec(), Handler: adapter.get},
+		connect.Method{Spec: tenantServiceGetHistorySpec(), Handler: adapter.getHistory},
+		connect.Method{Spec: tenantServiceListSpec(), Handler: adapter.list},
+		connect.Method{Spec: tenantServiceListTenantMembersSpec(), Handler: adapter.listTenantMembers},
+		connect.Method{Spec: tenantServiceFindParticipatingProjectsSpec(), Handler: adapter.findParticipatingProjects},
+		connect.Method{Spec: tenantServiceFindParticipatingTenantsSpec(), Handler: adapter.findParticipatingTenants},
 	)
-	tenantServiceUpdateHandler := connect.NewUnaryHandlerSimple(
-		TenantServiceUpdateProcedure,
-		svc.Update,
-		connect.WithSchema(tenantServiceMethods.ByName("Update")),
-		connect.WithHandlerOptions(opts...),
-	)
-	tenantServiceDeleteHandler := connect.NewUnaryHandlerSimple(
-		TenantServiceDeleteProcedure,
-		svc.Delete,
-		connect.WithSchema(tenantServiceMethods.ByName("Delete")),
-		connect.WithHandlerOptions(opts...),
-	)
-	tenantServiceGetHandler := connect.NewUnaryHandlerSimple(
-		TenantServiceGetProcedure,
-		svc.Get,
-		connect.WithSchema(tenantServiceMethods.ByName("Get")),
-		connect.WithHandlerOptions(opts...),
-	)
-	tenantServiceGetHistoryHandler := connect.NewUnaryHandlerSimple(
-		TenantServiceGetHistoryProcedure,
-		svc.GetHistory,
-		connect.WithSchema(tenantServiceMethods.ByName("GetHistory")),
-		connect.WithHandlerOptions(opts...),
-	)
-	tenantServiceListHandler := connect.NewUnaryHandlerSimple(
-		TenantServiceListProcedure,
-		svc.List,
-		connect.WithSchema(tenantServiceMethods.ByName("List")),
-		connect.WithHandlerOptions(opts...),
-	)
-	tenantServiceListTenantMembersHandler := connect.NewUnaryHandlerSimple(
-		TenantServiceListTenantMembersProcedure,
-		svc.ListTenantMembers,
-		connect.WithSchema(tenantServiceMethods.ByName("ListTenantMembers")),
-		connect.WithHandlerOptions(opts...),
-	)
-	tenantServiceFindParticipatingProjectsHandler := connect.NewUnaryHandlerSimple(
-		TenantServiceFindParticipatingProjectsProcedure,
-		svc.FindParticipatingProjects,
-		connect.WithSchema(tenantServiceMethods.ByName("FindParticipatingProjects")),
-		connect.WithHandlerOptions(opts...),
-	)
-	tenantServiceFindParticipatingTenantsHandler := connect.NewUnaryHandlerSimple(
-		TenantServiceFindParticipatingTenantsProcedure,
-		svc.FindParticipatingTenants,
-		connect.WithSchema(tenantServiceMethods.ByName("FindParticipatingTenants")),
-		connect.WithHandlerOptions(opts...),
-	)
-	return "/tenant.api.v1.TenantService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		switch r.URL.Path {
-		case TenantServiceCreateProcedure:
-			tenantServiceCreateHandler.ServeHTTP(w, r)
-		case TenantServiceUpdateProcedure:
-			tenantServiceUpdateHandler.ServeHTTP(w, r)
-		case TenantServiceDeleteProcedure:
-			tenantServiceDeleteHandler.ServeHTTP(w, r)
-		case TenantServiceGetProcedure:
-			tenantServiceGetHandler.ServeHTTP(w, r)
-		case TenantServiceGetHistoryProcedure:
-			tenantServiceGetHistoryHandler.ServeHTTP(w, r)
-		case TenantServiceListProcedure:
-			tenantServiceListHandler.ServeHTTP(w, r)
-		case TenantServiceListTenantMembersProcedure:
-			tenantServiceListTenantMembersHandler.ServeHTTP(w, r)
-		case TenantServiceFindParticipatingProjectsProcedure:
-			tenantServiceFindParticipatingProjectsHandler.ServeHTTP(w, r)
-		case TenantServiceFindParticipatingTenantsProcedure:
-			tenantServiceFindParticipatingTenantsHandler.ServeHTTP(w, r)
-		default:
-			http.NotFound(w, r)
-		}
-	})
 }
 
 // UnimplementedTenantServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedTenantServiceHandler struct{}
 
 func (UnimplementedTenantServiceHandler) Create(context.Context, *v1.TenantServiceCreateRequest) (*v1.TenantServiceCreateResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.TenantService.Create is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.TenantService.Create is not implemented")
 }
 
 func (UnimplementedTenantServiceHandler) Update(context.Context, *v1.TenantServiceUpdateRequest) (*v1.TenantServiceUpdateResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.TenantService.Update is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.TenantService.Update is not implemented")
 }
 
 func (UnimplementedTenantServiceHandler) Delete(context.Context, *v1.TenantServiceDeleteRequest) (*v1.TenantServiceDeleteResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.TenantService.Delete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.TenantService.Delete is not implemented")
 }
 
 func (UnimplementedTenantServiceHandler) Get(context.Context, *v1.TenantServiceGetRequest) (*v1.TenantServiceGetResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.TenantService.Get is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.TenantService.Get is not implemented")
 }
 
 func (UnimplementedTenantServiceHandler) GetHistory(context.Context, *v1.TenantServiceGetHistoryRequest) (*v1.TenantServiceGetHistoryResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.TenantService.GetHistory is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.TenantService.GetHistory is not implemented")
 }
 
 func (UnimplementedTenantServiceHandler) List(context.Context, *v1.TenantServiceListRequest) (*v1.TenantServiceListResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.TenantService.List is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.TenantService.List is not implemented")
 }
 
 func (UnimplementedTenantServiceHandler) ListTenantMembers(context.Context, *v1.TenantServiceListTenantMembersRequest) (*v1.TenantServiceListTenantMembersResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.TenantService.ListTenantMembers is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.TenantService.ListTenantMembers is not implemented")
 }
 
 func (UnimplementedTenantServiceHandler) FindParticipatingProjects(context.Context, *v1.TenantServiceFindParticipatingProjectsRequest) (*v1.TenantServiceFindParticipatingProjectsResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.TenantService.FindParticipatingProjects is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.TenantService.FindParticipatingProjects is not implemented")
 }
 
 func (UnimplementedTenantServiceHandler) FindParticipatingTenants(context.Context, *v1.TenantServiceFindParticipatingTenantsRequest) (*v1.TenantServiceFindParticipatingTenantsResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.TenantService.FindParticipatingTenants is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.TenantService.FindParticipatingTenants is not implemented")
+}
+
+type tenantServiceClient struct {
+	client *connect.Client
+}
+
+func (c *tenantServiceClient) Create(ctx context.Context, req *v1.TenantServiceCreateRequest) (*v1.TenantServiceCreateResponse, error) {
+	var res v1.TenantServiceCreateResponse
+	if err := c.client.CallUnary(ctx, tenantServiceCreateSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *tenantServiceClient) Update(ctx context.Context, req *v1.TenantServiceUpdateRequest) (*v1.TenantServiceUpdateResponse, error) {
+	var res v1.TenantServiceUpdateResponse
+	if err := c.client.CallUnary(ctx, tenantServiceUpdateSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *tenantServiceClient) Delete(ctx context.Context, req *v1.TenantServiceDeleteRequest) (*v1.TenantServiceDeleteResponse, error) {
+	var res v1.TenantServiceDeleteResponse
+	if err := c.client.CallUnary(ctx, tenantServiceDeleteSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *tenantServiceClient) Get(ctx context.Context, req *v1.TenantServiceGetRequest) (*v1.TenantServiceGetResponse, error) {
+	var res v1.TenantServiceGetResponse
+	if err := c.client.CallUnary(ctx, tenantServiceGetSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *tenantServiceClient) GetHistory(ctx context.Context, req *v1.TenantServiceGetHistoryRequest) (*v1.TenantServiceGetHistoryResponse, error) {
+	var res v1.TenantServiceGetHistoryResponse
+	if err := c.client.CallUnary(ctx, tenantServiceGetHistorySpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *tenantServiceClient) List(ctx context.Context, req *v1.TenantServiceListRequest) (*v1.TenantServiceListResponse, error) {
+	var res v1.TenantServiceListResponse
+	if err := c.client.CallUnary(ctx, tenantServiceListSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *tenantServiceClient) ListTenantMembers(ctx context.Context, req *v1.TenantServiceListTenantMembersRequest) (*v1.TenantServiceListTenantMembersResponse, error) {
+	var res v1.TenantServiceListTenantMembersResponse
+	if err := c.client.CallUnary(ctx, tenantServiceListTenantMembersSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *tenantServiceClient) FindParticipatingProjects(ctx context.Context, req *v1.TenantServiceFindParticipatingProjectsRequest) (*v1.TenantServiceFindParticipatingProjectsResponse, error) {
+	var res v1.TenantServiceFindParticipatingProjectsResponse
+	if err := c.client.CallUnary(ctx, tenantServiceFindParticipatingProjectsSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *tenantServiceClient) FindParticipatingTenants(ctx context.Context, req *v1.TenantServiceFindParticipatingTenantsRequest) (*v1.TenantServiceFindParticipatingTenantsResponse, error) {
+	var res v1.TenantServiceFindParticipatingTenantsResponse
+	if err := c.client.CallUnary(ctx, tenantServiceFindParticipatingTenantsSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+type tenantServiceHandler struct{ svc TenantServiceHandler }
+
+func (h tenantServiceHandler) create(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.TenantServiceCreateRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Create(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h tenantServiceHandler) update(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.TenantServiceUpdateRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Update(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h tenantServiceHandler) delete(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.TenantServiceDeleteRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Delete(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h tenantServiceHandler) get(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.TenantServiceGetRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Get(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h tenantServiceHandler) getHistory(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.TenantServiceGetHistoryRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.GetHistory(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h tenantServiceHandler) list(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.TenantServiceListRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.List(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h tenantServiceHandler) listTenantMembers(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.TenantServiceListTenantMembersRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.ListTenantMembers(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h tenantServiceHandler) findParticipatingProjects(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.TenantServiceFindParticipatingProjectsRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.FindParticipatingProjects(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h tenantServiceHandler) findParticipatingTenants(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.TenantServiceFindParticipatingTenantsRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.FindParticipatingTenants(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
 }

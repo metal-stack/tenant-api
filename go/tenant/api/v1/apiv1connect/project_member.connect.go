@@ -5,49 +5,76 @@
 package apiv1connect
 
 import (
-	connect "connectrpc.com/connect"
+	connect "connectrpc.com/connect/v2"
 	context "context"
-	errors "errors"
 	v1 "github.com/metal-stack/tenant-api/go/tenant/api/v1"
-	http "net/http"
-	strings "strings"
+	sync "sync"
 )
-
-// This is a compile-time assertion to ensure that this generated file and the connect package are
-// compatible. If you get a compiler error that this constant is not defined, this code was
-// generated with a version of connect newer than the one compiled into your binary. You can fix the
-// problem by either regenerating this code with an older version of connect or updating the connect
-// version compiled into your binary.
-const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// ProjectMemberServiceName is the fully-qualified name of the ProjectMemberService service.
 	ProjectMemberServiceName = "tenant.api.v1.ProjectMemberService"
 )
 
-// These constants are the fully-qualified names of the RPCs defined in this package. They're
-// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+// These constants are the procedure names of the RPCs defined in this package. They're exposed at
+// runtime as Spec.Procedure and as the final two segments of the HTTP route.
 //
 // Note that these are different from the fully-qualified method names used by
 // google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// ProjectMemberServiceCreateProcedure is the fully-qualified name of the ProjectMemberService's
-	// Create RPC.
+	// ProjectMemberServiceCreateProcedure is the procedure name of the ProjectMemberService's Create
+	// RPC.
 	ProjectMemberServiceCreateProcedure = "/tenant.api.v1.ProjectMemberService/Create"
-	// ProjectMemberServiceUpdateProcedure is the fully-qualified name of the ProjectMemberService's
-	// Update RPC.
+	// ProjectMemberServiceUpdateProcedure is the procedure name of the ProjectMemberService's Update
+	// RPC.
 	ProjectMemberServiceUpdateProcedure = "/tenant.api.v1.ProjectMemberService/Update"
-	// ProjectMemberServiceDeleteProcedure is the fully-qualified name of the ProjectMemberService's
-	// Delete RPC.
+	// ProjectMemberServiceDeleteProcedure is the procedure name of the ProjectMemberService's Delete
+	// RPC.
 	ProjectMemberServiceDeleteProcedure = "/tenant.api.v1.ProjectMemberService/Delete"
-	// ProjectMemberServiceGetProcedure is the fully-qualified name of the ProjectMemberService's Get
-	// RPC.
+	// ProjectMemberServiceGetProcedure is the procedure name of the ProjectMemberService's Get RPC.
 	ProjectMemberServiceGetProcedure = "/tenant.api.v1.ProjectMemberService/Get"
-	// ProjectMemberServiceListProcedure is the fully-qualified name of the ProjectMemberService's List
-	// RPC.
+	// ProjectMemberServiceListProcedure is the procedure name of the ProjectMemberService's List RPC.
 	ProjectMemberServiceListProcedure = "/tenant.api.v1.ProjectMemberService/List"
+)
+
+var (
+	projectMemberServiceCreateSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_project_member_proto.Services().ByName("ProjectMemberService").Methods().ByName("Create"),
+			Procedure:  ProjectMemberServiceCreateProcedure,
+		}
+	})
+	projectMemberServiceUpdateSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_project_member_proto.Services().ByName("ProjectMemberService").Methods().ByName("Update"),
+			Procedure:  ProjectMemberServiceUpdateProcedure,
+		}
+	})
+	projectMemberServiceDeleteSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_project_member_proto.Services().ByName("ProjectMemberService").Methods().ByName("Delete"),
+			Procedure:  ProjectMemberServiceDeleteProcedure,
+		}
+	})
+	projectMemberServiceGetSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_project_member_proto.Services().ByName("ProjectMemberService").Methods().ByName("Get"),
+			Procedure:  ProjectMemberServiceGetProcedure,
+		}
+	})
+	projectMemberServiceListSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     v1.File_tenant_api_v1_project_member_proto.Services().ByName("ProjectMemberService").Methods().ByName("List"),
+			Procedure:  ProjectMemberServiceListProcedure,
+		}
+	})
 )
 
 // ProjectMemberServiceClient is a client for the tenant.api.v1.ProjectMemberService service.
@@ -65,101 +92,9 @@ type ProjectMemberServiceClient interface {
 }
 
 // NewProjectMemberServiceClient constructs a client for the tenant.api.v1.ProjectMemberService
-// service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
-// gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
-// the connect.WithGRPC() or connect.WithGRPCWeb() options.
-//
-// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
-// http://api.acme.com or https://acme.com/grpc).
-func NewProjectMemberServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ProjectMemberServiceClient {
-	baseURL = strings.TrimRight(baseURL, "/")
-	projectMemberServiceMethods := v1.File_tenant_api_v1_project_member_proto.Services().ByName("ProjectMemberService").Methods()
-	return &projectMemberServiceClient{
-		create: connect.NewClient[v1.ProjectMemberServiceCreateRequest, v1.ProjectMemberServiceCreateResponse](
-			httpClient,
-			baseURL+ProjectMemberServiceCreateProcedure,
-			connect.WithSchema(projectMemberServiceMethods.ByName("Create")),
-			connect.WithClientOptions(opts...),
-		),
-		update: connect.NewClient[v1.ProjectMemberServiceUpdateRequest, v1.ProjectMemberServiceUpdateResponse](
-			httpClient,
-			baseURL+ProjectMemberServiceUpdateProcedure,
-			connect.WithSchema(projectMemberServiceMethods.ByName("Update")),
-			connect.WithClientOptions(opts...),
-		),
-		delete: connect.NewClient[v1.ProjectMemberServiceDeleteRequest, v1.ProjectMemberServiceDeleteResponse](
-			httpClient,
-			baseURL+ProjectMemberServiceDeleteProcedure,
-			connect.WithSchema(projectMemberServiceMethods.ByName("Delete")),
-			connect.WithClientOptions(opts...),
-		),
-		get: connect.NewClient[v1.ProjectMemberServiceGetRequest, v1.ProjectMemberServiceGetResponse](
-			httpClient,
-			baseURL+ProjectMemberServiceGetProcedure,
-			connect.WithSchema(projectMemberServiceMethods.ByName("Get")),
-			connect.WithClientOptions(opts...),
-		),
-		list: connect.NewClient[v1.ProjectMemberServiceListRequest, v1.ProjectMemberServiceListResponse](
-			httpClient,
-			baseURL+ProjectMemberServiceListProcedure,
-			connect.WithSchema(projectMemberServiceMethods.ByName("List")),
-			connect.WithClientOptions(opts...),
-		),
-	}
-}
-
-// projectMemberServiceClient implements ProjectMemberServiceClient.
-type projectMemberServiceClient struct {
-	create *connect.Client[v1.ProjectMemberServiceCreateRequest, v1.ProjectMemberServiceCreateResponse]
-	update *connect.Client[v1.ProjectMemberServiceUpdateRequest, v1.ProjectMemberServiceUpdateResponse]
-	delete *connect.Client[v1.ProjectMemberServiceDeleteRequest, v1.ProjectMemberServiceDeleteResponse]
-	get    *connect.Client[v1.ProjectMemberServiceGetRequest, v1.ProjectMemberServiceGetResponse]
-	list   *connect.Client[v1.ProjectMemberServiceListRequest, v1.ProjectMemberServiceListResponse]
-}
-
-// Create calls tenant.api.v1.ProjectMemberService.Create.
-func (c *projectMemberServiceClient) Create(ctx context.Context, req *v1.ProjectMemberServiceCreateRequest) (*v1.ProjectMemberServiceCreateResponse, error) {
-	response, err := c.create.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// Update calls tenant.api.v1.ProjectMemberService.Update.
-func (c *projectMemberServiceClient) Update(ctx context.Context, req *v1.ProjectMemberServiceUpdateRequest) (*v1.ProjectMemberServiceUpdateResponse, error) {
-	response, err := c.update.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// Delete calls tenant.api.v1.ProjectMemberService.Delete.
-func (c *projectMemberServiceClient) Delete(ctx context.Context, req *v1.ProjectMemberServiceDeleteRequest) (*v1.ProjectMemberServiceDeleteResponse, error) {
-	response, err := c.delete.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// Get calls tenant.api.v1.ProjectMemberService.Get.
-func (c *projectMemberServiceClient) Get(ctx context.Context, req *v1.ProjectMemberServiceGetRequest) (*v1.ProjectMemberServiceGetResponse, error) {
-	response, err := c.get.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
-}
-
-// List calls tenant.api.v1.ProjectMemberService.List.
-func (c *projectMemberServiceClient) List(ctx context.Context, req *v1.ProjectMemberServiceListRequest) (*v1.ProjectMemberServiceListResponse, error) {
-	response, err := c.list.CallUnary(ctx, connect.NewRequest(req))
-	if response != nil {
-		return response.Msg, err
-	}
-	return nil, err
+// service. Multiple service clients may share a single connect.Client.
+func NewProjectMemberServiceClient(client *connect.Client) ProjectMemberServiceClient {
+	return &projectMemberServiceClient{client: client}
 }
 
 // ProjectMemberServiceHandler is an implementation of the tenant.api.v1.ProjectMemberService
@@ -177,80 +112,144 @@ type ProjectMemberServiceHandler interface {
 	List(context.Context, *v1.ProjectMemberServiceListRequest) (*v1.ProjectMemberServiceListResponse, error)
 }
 
-// NewProjectMemberServiceHandler builds an HTTP handler from the service implementation. It returns
-// the path on which to mount the handler and the handler itself.
-//
-// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
-// and JSON codecs. They also support gzip compression.
-func NewProjectMemberServiceHandler(svc ProjectMemberServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	projectMemberServiceMethods := v1.File_tenant_api_v1_project_member_proto.Services().ByName("ProjectMemberService").Methods()
-	projectMemberServiceCreateHandler := connect.NewUnaryHandlerSimple(
-		ProjectMemberServiceCreateProcedure,
-		svc.Create,
-		connect.WithSchema(projectMemberServiceMethods.ByName("Create")),
-		connect.WithHandlerOptions(opts...),
+// RegisterProjectMemberServiceHandler registers svc as the tenant.api.v1.ProjectMemberService
+// implementation on server.
+func RegisterProjectMemberServiceHandler(server *connect.Server, svc ProjectMemberServiceHandler) {
+	adapter := projectMemberServiceHandler{svc: svc}
+	server.Register(
+		connect.Method{Spec: projectMemberServiceCreateSpec(), Handler: adapter.create},
+		connect.Method{Spec: projectMemberServiceUpdateSpec(), Handler: adapter.update},
+		connect.Method{Spec: projectMemberServiceDeleteSpec(), Handler: adapter.delete},
+		connect.Method{Spec: projectMemberServiceGetSpec(), Handler: adapter.get},
+		connect.Method{Spec: projectMemberServiceListSpec(), Handler: adapter.list},
 	)
-	projectMemberServiceUpdateHandler := connect.NewUnaryHandlerSimple(
-		ProjectMemberServiceUpdateProcedure,
-		svc.Update,
-		connect.WithSchema(projectMemberServiceMethods.ByName("Update")),
-		connect.WithHandlerOptions(opts...),
-	)
-	projectMemberServiceDeleteHandler := connect.NewUnaryHandlerSimple(
-		ProjectMemberServiceDeleteProcedure,
-		svc.Delete,
-		connect.WithSchema(projectMemberServiceMethods.ByName("Delete")),
-		connect.WithHandlerOptions(opts...),
-	)
-	projectMemberServiceGetHandler := connect.NewUnaryHandlerSimple(
-		ProjectMemberServiceGetProcedure,
-		svc.Get,
-		connect.WithSchema(projectMemberServiceMethods.ByName("Get")),
-		connect.WithHandlerOptions(opts...),
-	)
-	projectMemberServiceListHandler := connect.NewUnaryHandlerSimple(
-		ProjectMemberServiceListProcedure,
-		svc.List,
-		connect.WithSchema(projectMemberServiceMethods.ByName("List")),
-		connect.WithHandlerOptions(opts...),
-	)
-	return "/tenant.api.v1.ProjectMemberService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		switch r.URL.Path {
-		case ProjectMemberServiceCreateProcedure:
-			projectMemberServiceCreateHandler.ServeHTTP(w, r)
-		case ProjectMemberServiceUpdateProcedure:
-			projectMemberServiceUpdateHandler.ServeHTTP(w, r)
-		case ProjectMemberServiceDeleteProcedure:
-			projectMemberServiceDeleteHandler.ServeHTTP(w, r)
-		case ProjectMemberServiceGetProcedure:
-			projectMemberServiceGetHandler.ServeHTTP(w, r)
-		case ProjectMemberServiceListProcedure:
-			projectMemberServiceListHandler.ServeHTTP(w, r)
-		default:
-			http.NotFound(w, r)
-		}
-	})
 }
 
 // UnimplementedProjectMemberServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedProjectMemberServiceHandler struct{}
 
 func (UnimplementedProjectMemberServiceHandler) Create(context.Context, *v1.ProjectMemberServiceCreateRequest) (*v1.ProjectMemberServiceCreateResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.ProjectMemberService.Create is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.ProjectMemberService.Create is not implemented")
 }
 
 func (UnimplementedProjectMemberServiceHandler) Update(context.Context, *v1.ProjectMemberServiceUpdateRequest) (*v1.ProjectMemberServiceUpdateResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.ProjectMemberService.Update is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.ProjectMemberService.Update is not implemented")
 }
 
 func (UnimplementedProjectMemberServiceHandler) Delete(context.Context, *v1.ProjectMemberServiceDeleteRequest) (*v1.ProjectMemberServiceDeleteResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.ProjectMemberService.Delete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.ProjectMemberService.Delete is not implemented")
 }
 
 func (UnimplementedProjectMemberServiceHandler) Get(context.Context, *v1.ProjectMemberServiceGetRequest) (*v1.ProjectMemberServiceGetResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.ProjectMemberService.Get is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.ProjectMemberService.Get is not implemented")
 }
 
 func (UnimplementedProjectMemberServiceHandler) List(context.Context, *v1.ProjectMemberServiceListRequest) (*v1.ProjectMemberServiceListResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("tenant.api.v1.ProjectMemberService.List is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, "tenant.api.v1.ProjectMemberService.List is not implemented")
+}
+
+type projectMemberServiceClient struct {
+	client *connect.Client
+}
+
+func (c *projectMemberServiceClient) Create(ctx context.Context, req *v1.ProjectMemberServiceCreateRequest) (*v1.ProjectMemberServiceCreateResponse, error) {
+	var res v1.ProjectMemberServiceCreateResponse
+	if err := c.client.CallUnary(ctx, projectMemberServiceCreateSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *projectMemberServiceClient) Update(ctx context.Context, req *v1.ProjectMemberServiceUpdateRequest) (*v1.ProjectMemberServiceUpdateResponse, error) {
+	var res v1.ProjectMemberServiceUpdateResponse
+	if err := c.client.CallUnary(ctx, projectMemberServiceUpdateSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *projectMemberServiceClient) Delete(ctx context.Context, req *v1.ProjectMemberServiceDeleteRequest) (*v1.ProjectMemberServiceDeleteResponse, error) {
+	var res v1.ProjectMemberServiceDeleteResponse
+	if err := c.client.CallUnary(ctx, projectMemberServiceDeleteSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *projectMemberServiceClient) Get(ctx context.Context, req *v1.ProjectMemberServiceGetRequest) (*v1.ProjectMemberServiceGetResponse, error) {
+	var res v1.ProjectMemberServiceGetResponse
+	if err := c.client.CallUnary(ctx, projectMemberServiceGetSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *projectMemberServiceClient) List(ctx context.Context, req *v1.ProjectMemberServiceListRequest) (*v1.ProjectMemberServiceListResponse, error) {
+	var res v1.ProjectMemberServiceListResponse
+	if err := c.client.CallUnary(ctx, projectMemberServiceListSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+type projectMemberServiceHandler struct{ svc ProjectMemberServiceHandler }
+
+func (h projectMemberServiceHandler) create(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.ProjectMemberServiceCreateRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Create(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h projectMemberServiceHandler) update(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.ProjectMemberServiceUpdateRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Update(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h projectMemberServiceHandler) delete(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.ProjectMemberServiceDeleteRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Delete(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h projectMemberServiceHandler) get(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.ProjectMemberServiceGetRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Get(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h projectMemberServiceHandler) list(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req v1.ProjectMemberServiceListRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.List(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
 }

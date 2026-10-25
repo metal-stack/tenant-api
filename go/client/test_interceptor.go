@@ -2,10 +2,11 @@ package client
 
 import (
 	"context"
+	"fmt"
 	"reflect"
 	"testing"
 
-	"connectrpc.com/connect"
+	"connectrpc.com/connect/v2"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"google.golang.org/protobuf/proto"
@@ -21,50 +22,72 @@ type TestClientInterceptor struct {
 
 type ClientCall struct {
 	WantRequest  proto.Message
-	WantResponse func() connect.AnyResponse
+	WantResponse func() proto.Message
 	WantError    *connect.Error
 }
 
-func NewTestInterceptor(t *testing.T, calls []ClientCall) *TestClientInterceptor {
-	return &TestClientInterceptor{
+func NewTestInterceptor(t *testing.T, calls []ClientCall) connect.ClientInterceptor {
+	tci := &TestClientInterceptor{
 		t:     t,
 		calls: calls,
 	}
+	return tci.intercept
 }
 
-func (t *TestClientInterceptor) WrapUnary(next connect.UnaryFunc) connect.UnaryFunc {
-	return func(ctx context.Context, ar connect.AnyRequest) (connect.AnyResponse, error) {
-		defer func() { t.count++ }()
-
+func (t *TestClientInterceptor) intercept(connect.ClientFunc) connect.ClientFunc {
+	return func(ctx context.Context, spec connect.Spec) (connect.ClientStream, error) {
 		if t.count >= len(t.calls) {
-			t.t.Errorf("received an unexpected client call of type %T: %v", ar.Any(), ar.Any())
+			t.t.Errorf("received an unexpected client call: %v", spec.Procedure)
 			t.t.FailNow()
 		}
 
 		call := t.calls[t.count]
+		t.count++
 
-		if diff := cmp.Diff(call.WantRequest, ar.Any(), protocmp.Transform(), IgnoreUnexported(), cmpopts.IgnoreTypes(protoimpl.MessageState{})); diff != "" {
-			t.t.Errorf("request diff (+got -want):\n %s", diff)
-			t.t.FailNow()
-		}
-
-		if call.WantError != nil {
-			return nil, call.WantError
-		}
-
-		return call.WantResponse(), nil
+		return &testClientStream{t: t.t, call: call}, nil
 	}
 }
 
-func (t *TestClientInterceptor) WrapStreamingClient(connect.StreamingClientFunc) connect.StreamingClientFunc {
-	t.t.Errorf("streaming not supported")
+type testClientStream struct {
+	t    *testing.T
+	call ClientCall
+}
+
+func (s *testClientStream) SendHeaders() error { return nil }
+
+func (s *testClientStream) Send(msg any) error {
+	req, ok := msg.(proto.Message)
+	if !ok {
+		s.t.Errorf("request is not a proto.Message: %T", msg)
+		s.t.FailNow()
+	}
+
+	if diff := cmp.Diff(s.call.WantRequest, req, protocmp.Transform(), IgnoreUnexported(), cmpopts.IgnoreTypes(protoimpl.MessageState{})); diff != "" {
+		s.t.Errorf("request diff (+got -want):\n %s", diff)
+		s.t.FailNow()
+	}
+
 	return nil
 }
 
-func (t *TestClientInterceptor) WrapStreamingHandler(connect.StreamingHandlerFunc) connect.StreamingHandlerFunc {
-	t.t.Errorf("streaming not supported")
+func (s *testClientStream) CloseSend() error { return nil }
+
+func (s *testClientStream) Receive(msg any) error {
+	if s.call.WantError != nil {
+		return s.call.WantError
+	}
+
+	res, ok := msg.(proto.Message)
+	if !ok {
+		return connect.NewError(connect.CodeInternal, fmt.Sprintf("response is not a proto.Message: %T", msg))
+	}
+
+	proto.Merge(res, s.call.WantResponse())
+
 	return nil
 }
+
+func (s *testClientStream) Close() error { return nil }
 
 func IgnoreUnexported() cmp.Option {
 	// the exporter opt allows all unexported fields: https://github.com/google/go-cmp/pull/176

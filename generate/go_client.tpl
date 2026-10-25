@@ -2,9 +2,6 @@
 package client
 
 import (
-	"connectrpc.com/connect"
-	compress "github.com/klauspost/connect-compress/v2"
-
 {{ range $name, $api := . -}}
 	"github.com/metal-stack/tenant-api/go{{ $api.Path }}/{{ $api.Name }}connect"
 {{ end }}
@@ -18,11 +15,6 @@ type (
 
 	}
 
-	client struct {
-		config *DialConfig
-
-		interceptors []connect.Interceptor
-	}
 {{ range $name, $api := . -}}
 	{{ $name | title }} interface {
 {{ range $svc := $api.Services -}}
@@ -39,41 +31,11 @@ type (
 {{ end }}
 )
 
-func New(config *DialConfig) (Client, error) {
-	c := &client{
-		config:       config,
-		interceptors: []connect.Interceptor{},
-	}
-
-	if config.Token != "" {
-		authInterceptor := &authInterceptor{config: config}
-		c.interceptors = append(c.interceptors, authInterceptor)
-	}
-	if config.Log != nil {
-		loggingInterceptor := &loggingInterceptor{config: config}
-		c.interceptors = append(c.interceptors, loggingInterceptor)
-	}
-	if config.Namespace != "" {
-		c.interceptors = append(c.interceptors, NamespaceInterceptor(config.Namespace))
-	}
-	if config.UserAgent != "" {
-		c.interceptors = append(c.interceptors, userAgentInterceptor(config.UserAgent))
-	}
-	c.interceptors = append(c.interceptors, config.Interceptors...)
-
-	return c, nil
-}
-
 {{ range $name, $api := . -}}
 func (c *client) {{ $name | title }}() {{ $name | title }} {
 	a := &{{ $name }}{
 {{ range $svc := $api.Services -}}
-	{{ $svc.Name | lower }}:  {{ $name }}connect.New{{ $svc.Name }}Client(
-		c.config.HttpClient(),
-		c.config.BaseURL,
-		connect.WithInterceptors(c.interceptors...),
-		compress.WithAll(compress.LevelBalanced),
-	),
+	{{ $svc.Name | lower }}:  {{ $name }}connect.New{{ $svc.Name }}Client(c.httpClient),
 {{ end }}
 	}
 	return a
