@@ -27,12 +27,15 @@ type ProjectConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Meta of the project config
 	Meta *Meta `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
+	// Id of the project config
+	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 	// Name of the project config
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// ProjectId is the id of the project this config belongs to
-	ProjectId string `protobuf:"bytes,3,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	ProjectId string `protobuf:"bytes,4,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	// Config holds the arbitrary configuration payload for this project
-	Config        *anypb.Any `protobuf:"bytes,4,opt,name=config,proto3" json:"config,omitempty"`
+	// Config contains the value and the type_url, that points to the serialized type of the value.
+	Config        *anypb.Any `protobuf:"bytes,5,opt,name=config,proto3" json:"config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -72,6 +75,13 @@ func (x *ProjectConfig) GetMeta() *Meta {
 		return x.Meta
 	}
 	return nil
+}
+
+func (x *ProjectConfig) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
 
 func (x *ProjectConfig) GetName() string {
@@ -613,13 +623,14 @@ var File_tenant_api_v1_project_config_proto protoreflect.FileDescriptor
 
 const file_tenant_api_v1_project_config_proto_rawDesc = "" +
 	"\n" +
-	"\"tenant/api/v1/project_config.proto\x12\rtenant.api.v1\x1a\x19google/protobuf/any.proto\x1a\x1atenant/api/v1/common.proto\x1a\x18tenant/api/v1/meta.proto\"\x99\x01\n" +
+	"\"tenant/api/v1/project_config.proto\x12\rtenant.api.v1\x1a\x19google/protobuf/any.proto\x1a\x1atenant/api/v1/common.proto\x1a\x18tenant/api/v1/meta.proto\"\xa9\x01\n" +
 	"\rProjectConfig\x12'\n" +
-	"\x04meta\x18\x01 \x01(\v2\x13.tenant.api.v1.MetaR\x04meta\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
+	"\x04meta\x18\x01 \x01(\v2\x13.tenant.api.v1.MetaR\x04meta\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
-	"project_id\x18\x03 \x01(\tR\tprojectId\x12,\n" +
-	"\x06config\x18\x04 \x01(\v2\x14.google.protobuf.AnyR\x06config\"h\n" +
+	"project_id\x18\x04 \x01(\tR\tprojectId\x12,\n" +
+	"\x06config\x18\x05 \x01(\v2\x14.google.protobuf.AnyR\x06config\"h\n" +
 	"!ProjectConfigServiceCreateRequest\x12C\n" +
 	"\x0eproject_config\x18\x01 \x01(\v2\x1c.tenant.api.v1.ProjectConfigR\rprojectConfig\"i\n" +
 	"\"ProjectConfigServiceCreateResponse\x12C\n" +

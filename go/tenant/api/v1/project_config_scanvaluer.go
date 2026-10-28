@@ -44,8 +44,8 @@ func (p *ProjectConfig) APIVersion() string {
 	return "v1"
 }
 
-// Value make the ProjectConfig struct implement the driver.Valuer interface.
-// This method simply returns the JSON-encoded representation of the struct.
+// Value make the ProjectConfig struct implement the driver.Valuer interface. This method
+// simply returns the JSON-encoded representation of the struct.
 func (p *ProjectConfig) Value() (driver.Value, error) {
 	return json.Marshal(p)
 }

@@ -27,12 +27,15 @@ type TenantConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Meta of the tenant config
 	Meta *Meta `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
+	// Id of the tenant config
+	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 	// Name of the tenant config
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	// TenantId is the id of the tenant this config belongs to
-	TenantId string `protobuf:"bytes,3,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
-	// Config holds the arbitrary configuration payload for this tenant
-	Config        *anypb.Any `protobuf:"bytes,4,opt,name=config,proto3" json:"config,omitempty"`
+	TenantId string `protobuf:"bytes,4,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	// Config holds the arbitrary configuration payload for this tenant.
+	// Config contains the value and the type_url, that points to the serialized type of the value.
+	Config        *anypb.Any `protobuf:"bytes,5,opt,name=config,proto3" json:"config,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -72,6 +75,13 @@ func (x *TenantConfig) GetMeta() *Meta {
 		return x.Meta
 	}
 	return nil
+}
+
+func (x *TenantConfig) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
 
 func (x *TenantConfig) GetName() string {
@@ -613,12 +623,13 @@ var File_tenant_api_v1_tenant_config_proto protoreflect.FileDescriptor
 
 const file_tenant_api_v1_tenant_config_proto_rawDesc = "" +
 	"\n" +
-	"!tenant/api/v1/tenant_config.proto\x12\rtenant.api.v1\x1a\x19google/protobuf/any.proto\x1a\x1atenant/api/v1/common.proto\x1a\x18tenant/api/v1/meta.proto\"\x96\x01\n" +
+	"!tenant/api/v1/tenant_config.proto\x12\rtenant.api.v1\x1a\x19google/protobuf/any.proto\x1a\x1atenant/api/v1/common.proto\x1a\x18tenant/api/v1/meta.proto\"\xa6\x01\n" +
 	"\fTenantConfig\x12'\n" +
-	"\x04meta\x18\x01 \x01(\v2\x13.tenant.api.v1.MetaR\x04meta\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
-	"\ttenant_id\x18\x03 \x01(\tR\btenantId\x12,\n" +
-	"\x06config\x18\x04 \x01(\v2\x14.google.protobuf.AnyR\x06config\"d\n" +
+	"\x04meta\x18\x01 \x01(\v2\x13.tenant.api.v1.MetaR\x04meta\x12\x0e\n" +
+	"\x02id\x18\x02 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x1b\n" +
+	"\ttenant_id\x18\x04 \x01(\tR\btenantId\x12,\n" +
+	"\x06config\x18\x05 \x01(\v2\x14.google.protobuf.AnyR\x06config\"d\n" +
 	" TenantConfigServiceCreateRequest\x12@\n" +
 	"\rtenant_config\x18\x01 \x01(\v2\x1b.tenant.api.v1.TenantConfigR\ftenantConfig\"e\n" +
 	"!TenantConfigServiceCreateResponse\x12@\n" +
