@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package tenant.api.v1;
+
+import "google/protobuf/any.proto";
+import "tenant/api/v1/common.proto";
+import "tenant/api/v1/meta.proto";
+
+// TenantConfigService provides service methods to work with tenant configs
+service TenantConfigService {
+  // Create a tenant config
+  rpc Create(TenantConfigServiceCreateRequest) returns (TenantConfigServiceCreateResponse);
+  // Update a tenant config
+  rpc Update(TenantConfigServiceUpdateRequest) returns (TenantConfigServiceUpdateResponse);
+  // Delete a tenant config
+  rpc Delete(TenantConfigServiceDeleteRequest) returns (TenantConfigServiceDeleteResponse);
+  // Get a tenant config
+  rpc Get(TenantConfigServiceGetRequest) returns (TenantConfigServiceGetResponse);
+  // List tenant configs
+  rpc List(TenantConfigServiceListRequest) returns (TenantConfigServiceListResponse);
+}
+
+// TenantConfig is the database model
+message TenantConfig {
+  // Meta of the tenant config
+  Meta meta = 1;
+  // Name of the tenant config
+  string name = 2;
+  // TenantId is the id of the tenant this config belongs to
+  string tenant_id = 3;
+  // Config holds the arbitrary configuration payload for this tenant
+  google.protobuf.Any config = 4;
+}
+
+// TenantConfigServiceCreateRequest is the request payload to create a tenant config
+message TenantConfigServiceCreateRequest {
+  // TenantConfig to create
+  TenantConfig tenant_config = 1;
+}
+
+// TenantConfigServiceCreateResponse is the response payload of requests
+message TenantConfigServiceCreateResponse {
+  // TenantConfig
+  TenantConfig tenant_config = 1;
+}
+
+// TenantConfigServiceUpdateRequest is the request payload to update a tenant config
+message TenantConfigServiceUpdateRequest {
+  // TenantConfig to update
+  TenantConfig tenant_config = 1;
+}
+
+// TenantConfigServiceUpdateResponse is the response payload of requests
+message TenantConfigServiceUpdateResponse {
+  // TenantConfig
+  TenantConfig tenant_config = 1;
+}
+
+// TenantConfigServiceDeleteRequest is the request payload to delete a tenant config
+message TenantConfigServiceDeleteRequest {
+  // Id of the tenant config to delete
+  string id = 1;
+}
+
+// TenantConfigServiceDeleteResponse is the response payload of requests
+message TenantConfigServiceDeleteResponse {
+  // TenantConfig
+  TenantConfig tenant_config = 1;
+}
+
+// TenantConfigServiceGetRequest is the request payload to get a tenant config
+message TenantConfigServiceGetRequest {
+  // Id of the tenant config to get
+  string id = 1;
+}
+
+// TenantConfigServiceGetResponse is the response payload of requests
+message TenantConfigServiceGetResponse {
+  // TenantConfig
+  TenantConfig tenant_config = 1;
+}
+
+// TenantConfigServiceListRequest is the request payload to list tenant configs
+message TenantConfigServiceListRequest {
+  // Paging spec of this list request
+  Paging paging = 1;
+  // Annotations of tenant configs to list
+  map<string, string> annotations = 2;
+
+  // Id of the tenant config to list
+  optional string id = 3;
+  // Name of tenant configs to list
+  optional string name = 4;
+  // Tenant id of the tenant for the configs to list
+  optional string tenant_id = 5;
+  // Labels of tenant configs to list
+  repeated string labels = 6;
+}
+
+// TenantConfigServiceListResponse is the response payload of tenant config list requests
+message TenantConfigServiceListResponse {
+  // TenantConfigs
+  repeated TenantConfig tenant_config = 1;
+  // next_page is used for pagination, returns the next page to be fetched and must then be provided in the list request.
+  optional uint64 next_page = 2;
+}

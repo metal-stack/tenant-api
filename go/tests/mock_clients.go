@@ -26,8 +26,10 @@ type (
 	apiv1 struct {
 		healthservice        *apiv1mocks.HealthServiceClient
 		projectservice       *apiv1mocks.ProjectServiceClient
+		projectconfigservice *apiv1mocks.ProjectConfigServiceClient
 		projectmemberservice *apiv1mocks.ProjectMemberServiceClient
 		tenantservice        *apiv1mocks.TenantServiceClient
+		tenantconfigservice  *apiv1mocks.TenantConfigServiceClient
 		tenantmemberservice  *apiv1mocks.TenantMemberServiceClient
 		versionservice       *apiv1mocks.VersionServiceClient
 	}
@@ -35,8 +37,10 @@ type (
 	Apiv1MockFns struct {
 		Health        func(m *mock.Mock)
 		Project       func(m *mock.Mock)
+		ProjectConfig func(m *mock.Mock)
 		ProjectMember func(m *mock.Mock)
 		Tenant        func(m *mock.Mock)
+		TenantConfig  func(m *mock.Mock)
 		TenantMember  func(m *mock.Mock)
 		Version       func(m *mock.Mock)
 	}
@@ -64,8 +68,10 @@ func newapiv1(t *testing.T, fns *Apiv1MockFns) *apiv1 {
 	a := &apiv1{
 		healthservice:        apiv1mocks.NewHealthServiceClient(t),
 		projectservice:       apiv1mocks.NewProjectServiceClient(t),
+		projectconfigservice: apiv1mocks.NewProjectConfigServiceClient(t),
 		projectmemberservice: apiv1mocks.NewProjectMemberServiceClient(t),
 		tenantservice:        apiv1mocks.NewTenantServiceClient(t),
+		tenantconfigservice:  apiv1mocks.NewTenantConfigServiceClient(t),
 		tenantmemberservice:  apiv1mocks.NewTenantMemberServiceClient(t),
 		versionservice:       apiv1mocks.NewVersionServiceClient(t),
 	}
@@ -77,11 +83,17 @@ func newapiv1(t *testing.T, fns *Apiv1MockFns) *apiv1 {
 		if fns.Project != nil {
 			fns.Project(&a.projectservice.Mock)
 		}
+		if fns.ProjectConfig != nil {
+			fns.ProjectConfig(&a.projectconfigservice.Mock)
+		}
 		if fns.ProjectMember != nil {
 			fns.ProjectMember(&a.projectmemberservice.Mock)
 		}
 		if fns.Tenant != nil {
 			fns.Tenant(&a.tenantservice.Mock)
+		}
+		if fns.TenantConfig != nil {
+			fns.TenantConfig(&a.tenantconfigservice.Mock)
 		}
 		if fns.TenantMember != nil {
 			fns.TenantMember(&a.tenantmemberservice.Mock)
@@ -101,11 +113,17 @@ func (c *apiv1) Health() apiv1connect.HealthServiceClient {
 func (c *apiv1) Project() apiv1connect.ProjectServiceClient {
 	return c.projectservice
 }
+func (c *apiv1) ProjectConfig() apiv1connect.ProjectConfigServiceClient {
+	return c.projectconfigservice
+}
 func (c *apiv1) ProjectMember() apiv1connect.ProjectMemberServiceClient {
 	return c.projectmemberservice
 }
 func (c *apiv1) Tenant() apiv1connect.TenantServiceClient {
 	return c.tenantservice
+}
+func (c *apiv1) TenantConfig() apiv1connect.TenantConfigServiceClient {
+	return c.tenantconfigservice
 }
 func (c *apiv1) TenantMember() apiv1connect.TenantMemberServiceClient {
 	return c.tenantmemberservice
