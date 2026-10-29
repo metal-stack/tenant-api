@@ -128,6 +128,52 @@ func (_c *Apiv1_Project_Call) RunAndReturn(run func() apiv1connect.ProjectServic
 	return _c
 }
 
+// ProjectConfig provides a mock function for the type Apiv1
+func (_mock *Apiv1) ProjectConfig() apiv1connect.ProjectConfigServiceClient {
+	ret := _mock.Called()
+
+	if len(ret) == 0 {
+		panic("no return value specified for ProjectConfig")
+	}
+
+	var r0 apiv1connect.ProjectConfigServiceClient
+	if returnFunc, ok := ret.Get(0).(func() apiv1connect.ProjectConfigServiceClient); ok {
+		r0 = returnFunc()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(apiv1connect.ProjectConfigServiceClient)
+		}
+	}
+	return r0
+}
+
+// Apiv1_ProjectConfig_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'ProjectConfig'
+type Apiv1_ProjectConfig_Call struct {
+	*mock.Call
+}
+
+// ProjectConfig is a helper method to define mock.On call
+func (_e *Apiv1_Expecter) ProjectConfig() *Apiv1_ProjectConfig_Call {
+	return &Apiv1_ProjectConfig_Call{Call: _e.mock.On("ProjectConfig")}
+}
+
+func (_c *Apiv1_ProjectConfig_Call) Run(run func()) *Apiv1_ProjectConfig_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *Apiv1_ProjectConfig_Call) Return(projectConfigServiceClient apiv1connect.ProjectConfigServiceClient) *Apiv1_ProjectConfig_Call {
+	_c.Call.Return(projectConfigServiceClient)
+	return _c
+}
+
+func (_c *Apiv1_ProjectConfig_Call) RunAndReturn(run func() apiv1connect.ProjectConfigServiceClient) *Apiv1_ProjectConfig_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // ProjectMember provides a mock function for the type Apiv1
 func (_mock *Apiv1) ProjectMember() apiv1connect.ProjectMemberServiceClient {
 	ret := _mock.Called()
@@ -216,6 +262,52 @@ func (_c *Apiv1_Tenant_Call) Return(tenantServiceClient apiv1connect.TenantServi
 }
 
 func (_c *Apiv1_Tenant_Call) RunAndReturn(run func() apiv1connect.TenantServiceClient) *Apiv1_Tenant_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// TenantConfig provides a mock function for the type Apiv1
+func (_mock *Apiv1) TenantConfig() apiv1connect.TenantConfigServiceClient {
+	ret := _mock.Called()
+
+	if len(ret) == 0 {
+		panic("no return value specified for TenantConfig")
+	}
+
+	var r0 apiv1connect.TenantConfigServiceClient
+	if returnFunc, ok := ret.Get(0).(func() apiv1connect.TenantConfigServiceClient); ok {
+		r0 = returnFunc()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(apiv1connect.TenantConfigServiceClient)
+		}
+	}
+	return r0
+}
+
+// Apiv1_TenantConfig_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'TenantConfig'
+type Apiv1_TenantConfig_Call struct {
+	*mock.Call
+}
+
+// TenantConfig is a helper method to define mock.On call
+func (_e *Apiv1_Expecter) TenantConfig() *Apiv1_TenantConfig_Call {
+	return &Apiv1_TenantConfig_Call{Call: _e.mock.On("TenantConfig")}
+}
+
+func (_c *Apiv1_TenantConfig_Call) Run(run func()) *Apiv1_TenantConfig_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *Apiv1_TenantConfig_Call) Return(tenantConfigServiceClient apiv1connect.TenantConfigServiceClient) *Apiv1_TenantConfig_Call {
+	_c.Call.Return(tenantConfigServiceClient)
+	return _c
+}
+
+func (_c *Apiv1_TenantConfig_Call) RunAndReturn(run func() apiv1connect.TenantConfigServiceClient) *Apiv1_TenantConfig_Call {
 	_c.Call.Return(run)
 	return _c
 }
