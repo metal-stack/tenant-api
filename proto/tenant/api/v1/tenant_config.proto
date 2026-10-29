@@ -24,15 +24,13 @@ service TenantConfigService {
 message TenantConfig {
   // Meta of the tenant config
   Meta meta = 1;
-  // Id of the tenant config
-  string id = 2;
   // Name of the tenant config
-  string name = 3;
+  string name = 2;
   // TenantId is the id of the tenant this config belongs to
-  string tenant_id = 4;
+  string tenant_id = 3;
   // Config holds the arbitrary configuration payload for this tenant.
   // Config contains the value and the type_url, that points to the serialized type of the value.
-  google.protobuf.Any config = 5;
+  google.protobuf.Any config = 4;
 }
 
 // TenantConfigServiceCreateRequest is the request payload to create a tenant config

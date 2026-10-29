@@ -24,15 +24,13 @@ service ProjectConfigService {
 message ProjectConfig {
   // Meta of the project config
   Meta meta = 1;
-  // Id of the project config
-  string id = 2;
   // Name of the project config
-  string name = 3;
+  string name = 2;
   // ProjectId is the id of the project this config belongs to
-  string project_id = 4;
+  string project_id = 3;
   // Config holds the arbitrary configuration payload for this project
   // Config contains the value and the type_url, that points to the serialized type of the value.
-  google.protobuf.Any config = 5;
+  google.protobuf.Any config = 4;
 }
 
 // ProjectConfigServiceCreateRequest is the request payload to create a project config
