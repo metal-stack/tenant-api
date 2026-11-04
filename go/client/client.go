@@ -21,8 +21,10 @@ type (
 	Apiv1 interface {
 		Health() apiv1connect.HealthServiceClient
 		Project() apiv1connect.ProjectServiceClient
+		ProjectConfig() apiv1connect.ProjectConfigServiceClient
 		ProjectMember() apiv1connect.ProjectMemberServiceClient
 		Tenant() apiv1connect.TenantServiceClient
+		TenantConfig() apiv1connect.TenantConfigServiceClient
 		TenantMember() apiv1connect.TenantMemberServiceClient
 		Version() apiv1connect.VersionServiceClient
 	}
@@ -30,8 +32,10 @@ type (
 	apiv1 struct {
 		healthservice        apiv1connect.HealthServiceClient
 		projectservice       apiv1connect.ProjectServiceClient
+		projectconfigservice apiv1connect.ProjectConfigServiceClient
 		projectmemberservice apiv1connect.ProjectMemberServiceClient
 		tenantservice        apiv1connect.TenantServiceClient
+		tenantconfigservice  apiv1connect.TenantConfigServiceClient
 		tenantmemberservice  apiv1connect.TenantMemberServiceClient
 		versionservice       apiv1connect.VersionServiceClient
 	}
@@ -76,6 +80,12 @@ func (c *client) Apiv1() Apiv1 {
 			connect.WithInterceptors(c.interceptors...),
 			compress.WithAll(compress.LevelBalanced),
 		),
+		projectconfigservice: apiv1connect.NewProjectConfigServiceClient(
+			c.config.HttpClient(),
+			c.config.BaseURL,
+			connect.WithInterceptors(c.interceptors...),
+			compress.WithAll(compress.LevelBalanced),
+		),
 		projectmemberservice: apiv1connect.NewProjectMemberServiceClient(
 			c.config.HttpClient(),
 			c.config.BaseURL,
@@ -83,6 +93,12 @@ func (c *client) Apiv1() Apiv1 {
 			compress.WithAll(compress.LevelBalanced),
 		),
 		tenantservice: apiv1connect.NewTenantServiceClient(
+			c.config.HttpClient(),
+			c.config.BaseURL,
+			connect.WithInterceptors(c.interceptors...),
+			compress.WithAll(compress.LevelBalanced),
+		),
+		tenantconfigservice: apiv1connect.NewTenantConfigServiceClient(
 			c.config.HttpClient(),
 			c.config.BaseURL,
 			connect.WithInterceptors(c.interceptors...),
@@ -110,11 +126,17 @@ func (c *apiv1) Health() apiv1connect.HealthServiceClient {
 func (c *apiv1) Project() apiv1connect.ProjectServiceClient {
 	return c.projectservice
 }
+func (c *apiv1) ProjectConfig() apiv1connect.ProjectConfigServiceClient {
+	return c.projectconfigservice
+}
 func (c *apiv1) ProjectMember() apiv1connect.ProjectMemberServiceClient {
 	return c.projectmemberservice
 }
 func (c *apiv1) Tenant() apiv1connect.TenantServiceClient {
 	return c.tenantservice
+}
+func (c *apiv1) TenantConfig() apiv1connect.TenantConfigServiceClient {
+	return c.tenantconfigservice
 }
 func (c *apiv1) TenantMember() apiv1connect.TenantMemberServiceClient {
 	return c.tenantmemberservice
