@@ -471,14 +471,12 @@ type TenantConfigServiceListRequest struct {
 	Paging *Paging `protobuf:"bytes,1,opt,name=paging,proto3" json:"paging,omitempty"`
 	// Annotations of tenant configs to list
 	Annotations map[string]string `protobuf:"bytes,2,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Id of the tenant config to list
-	Id *string `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`
 	// Name of tenant configs to list
-	Name *string `protobuf:"bytes,4,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Name *string `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
 	// Tenant id of the tenant for the configs to list
-	TenantId *string `protobuf:"bytes,5,opt,name=tenant_id,json=tenantId,proto3,oneof" json:"tenant_id,omitempty"`
+	TenantId *string `protobuf:"bytes,4,opt,name=tenant_id,json=tenantId,proto3,oneof" json:"tenant_id,omitempty"`
 	// Labels of tenant configs to list
-	Labels        []string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty"`
+	Labels        []string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -525,13 +523,6 @@ func (x *TenantConfigServiceListRequest) GetAnnotations() map[string]string {
 		return x.Annotations
 	}
 	return nil
-}
-
-func (x *TenantConfigServiceListRequest) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
-	}
-	return ""
 }
 
 func (x *TenantConfigServiceListRequest) GetName() string {
@@ -635,18 +626,16 @@ const file_tenant_api_v1_tenant_config_proto_rawDesc = "" +
 	"\x1dTenantConfigServiceGetRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"b\n" +
 	"\x1eTenantConfigServiceGetResponse\x12@\n" +
-	"\rtenant_config\x18\x01 \x01(\v2\x1b.tenant.api.v1.TenantConfigR\ftenantConfig\"\xf7\x02\n" +
+	"\rtenant_config\x18\x01 \x01(\v2\x1b.tenant.api.v1.TenantConfigR\ftenantConfig\"\xdb\x02\n" +
 	"\x1eTenantConfigServiceListRequest\x12-\n" +
 	"\x06paging\x18\x01 \x01(\v2\x15.tenant.api.v1.PagingR\x06paging\x12`\n" +
-	"\vannotations\x18\x02 \x03(\v2>.tenant.api.v1.TenantConfigServiceListRequest.AnnotationsEntryR\vannotations\x12\x13\n" +
-	"\x02id\x18\x03 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
-	"\x04name\x18\x04 \x01(\tH\x01R\x04name\x88\x01\x01\x12 \n" +
-	"\ttenant_id\x18\x05 \x01(\tH\x02R\btenantId\x88\x01\x01\x12\x16\n" +
-	"\x06labels\x18\x06 \x03(\tR\x06labels\x1a>\n" +
+	"\vannotations\x18\x02 \x03(\v2>.tenant.api.v1.TenantConfigServiceListRequest.AnnotationsEntryR\vannotations\x12\x17\n" +
+	"\x04name\x18\x03 \x01(\tH\x00R\x04name\x88\x01\x01\x12 \n" +
+	"\ttenant_id\x18\x04 \x01(\tH\x01R\btenantId\x88\x01\x01\x12\x16\n" +
+	"\x06labels\x18\x05 \x03(\tR\x06labels\x1a>\n" +
 	"\x10AnnotationsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x05\n" +
-	"\x03_idB\a\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\a\n" +
 	"\x05_nameB\f\n" +
 	"\n" +
 	"_tenant_id\"\x93\x01\n" +

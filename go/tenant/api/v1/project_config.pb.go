@@ -471,14 +471,12 @@ type ProjectConfigServiceListRequest struct {
 	Paging *Paging `protobuf:"bytes,1,opt,name=paging,proto3" json:"paging,omitempty"`
 	// Annotations of project configs to list
 	Annotations map[string]string `protobuf:"bytes,2,rep,name=annotations,proto3" json:"annotations,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Id of the project config to list
-	Id *string `protobuf:"bytes,3,opt,name=id,proto3,oneof" json:"id,omitempty"`
 	// Name of project configs to list
-	Name *string `protobuf:"bytes,4,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	Name *string `protobuf:"bytes,3,opt,name=name,proto3,oneof" json:"name,omitempty"`
 	// Project id of the project for the configs to list
-	ProjectId *string `protobuf:"bytes,5,opt,name=project_id,json=projectId,proto3,oneof" json:"project_id,omitempty"`
+	ProjectId *string `protobuf:"bytes,4,opt,name=project_id,json=projectId,proto3,oneof" json:"project_id,omitempty"`
 	// Labels of project configs to list
-	Labels        []string `protobuf:"bytes,6,rep,name=labels,proto3" json:"labels,omitempty"`
+	Labels        []string `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -525,13 +523,6 @@ func (x *ProjectConfigServiceListRequest) GetAnnotations() map[string]string {
 		return x.Annotations
 	}
 	return nil
-}
-
-func (x *ProjectConfigServiceListRequest) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
-	}
-	return ""
 }
 
 func (x *ProjectConfigServiceListRequest) GetName() string {
@@ -636,19 +627,17 @@ const file_tenant_api_v1_project_config_proto_rawDesc = "" +
 	"\x1eProjectConfigServiceGetRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"f\n" +
 	"\x1fProjectConfigServiceGetResponse\x12C\n" +
-	"\x0eproject_config\x18\x01 \x01(\v2\x1c.tenant.api.v1.ProjectConfigR\rprojectConfig\"\xfc\x02\n" +
+	"\x0eproject_config\x18\x01 \x01(\v2\x1c.tenant.api.v1.ProjectConfigR\rprojectConfig\"\xe0\x02\n" +
 	"\x1fProjectConfigServiceListRequest\x12-\n" +
 	"\x06paging\x18\x01 \x01(\v2\x15.tenant.api.v1.PagingR\x06paging\x12a\n" +
-	"\vannotations\x18\x02 \x03(\v2?.tenant.api.v1.ProjectConfigServiceListRequest.AnnotationsEntryR\vannotations\x12\x13\n" +
-	"\x02id\x18\x03 \x01(\tH\x00R\x02id\x88\x01\x01\x12\x17\n" +
-	"\x04name\x18\x04 \x01(\tH\x01R\x04name\x88\x01\x01\x12\"\n" +
+	"\vannotations\x18\x02 \x03(\v2?.tenant.api.v1.ProjectConfigServiceListRequest.AnnotationsEntryR\vannotations\x12\x17\n" +
+	"\x04name\x18\x03 \x01(\tH\x00R\x04name\x88\x01\x01\x12\"\n" +
 	"\n" +
-	"project_id\x18\x05 \x01(\tH\x02R\tprojectId\x88\x01\x01\x12\x16\n" +
-	"\x06labels\x18\x06 \x03(\tR\x06labels\x1a>\n" +
+	"project_id\x18\x04 \x01(\tH\x01R\tprojectId\x88\x01\x01\x12\x16\n" +
+	"\x06labels\x18\x05 \x03(\tR\x06labels\x1a>\n" +
 	"\x10AnnotationsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x05\n" +
-	"\x03_idB\a\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\a\n" +
 	"\x05_nameB\r\n" +
 	"\v_project_id\"\x97\x01\n" +
 	" ProjectConfigServiceListResponse\x12C\n" +
