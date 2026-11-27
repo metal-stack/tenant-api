@@ -14,7 +14,7 @@ service TenantService {
   rpc Create(TenantServiceCreateRequest) returns (TenantServiceCreateResponse);
   // Update a tenant
   rpc Update(TenantServiceUpdateRequest) returns (TenantServiceUpdateResponse);
-  // Delete a tenant
+  // Delete a tenant, also deletes all memberships, configs, quotas and quota requests of this tenant
   rpc Delete(TenantServiceDeleteRequest) returns (TenantServiceDeleteResponse);
   // Get a tenant
   rpc Get(TenantServiceGetRequest) returns (TenantServiceGetResponse);

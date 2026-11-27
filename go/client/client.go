@@ -23,6 +23,8 @@ type (
 		Project() apiv1connect.ProjectServiceClient
 		ProjectConfig() apiv1connect.ProjectConfigServiceClient
 		ProjectMember() apiv1connect.ProjectMemberServiceClient
+		Quota() apiv1connect.QuotaServiceClient
+		QuotaRequest() apiv1connect.QuotaRequestServiceClient
 		Tenant() apiv1connect.TenantServiceClient
 		TenantConfig() apiv1connect.TenantConfigServiceClient
 		TenantMember() apiv1connect.TenantMemberServiceClient
@@ -34,6 +36,8 @@ type (
 		projectservice       apiv1connect.ProjectServiceClient
 		projectconfigservice apiv1connect.ProjectConfigServiceClient
 		projectmemberservice apiv1connect.ProjectMemberServiceClient
+		quotaservice         apiv1connect.QuotaServiceClient
+		quotarequestservice  apiv1connect.QuotaRequestServiceClient
 		tenantservice        apiv1connect.TenantServiceClient
 		tenantconfigservice  apiv1connect.TenantConfigServiceClient
 		tenantmemberservice  apiv1connect.TenantMemberServiceClient
@@ -92,6 +96,18 @@ func (c *client) Apiv1() Apiv1 {
 			connect.WithInterceptors(c.interceptors...),
 			compress.WithAll(compress.LevelBalanced),
 		),
+		quotaservice: apiv1connect.NewQuotaServiceClient(
+			c.config.HttpClient(),
+			c.config.BaseURL,
+			connect.WithInterceptors(c.interceptors...),
+			compress.WithAll(compress.LevelBalanced),
+		),
+		quotarequestservice: apiv1connect.NewQuotaRequestServiceClient(
+			c.config.HttpClient(),
+			c.config.BaseURL,
+			connect.WithInterceptors(c.interceptors...),
+			compress.WithAll(compress.LevelBalanced),
+		),
 		tenantservice: apiv1connect.NewTenantServiceClient(
 			c.config.HttpClient(),
 			c.config.BaseURL,
@@ -131,6 +147,12 @@ func (c *apiv1) ProjectConfig() apiv1connect.ProjectConfigServiceClient {
 }
 func (c *apiv1) ProjectMember() apiv1connect.ProjectMemberServiceClient {
 	return c.projectmemberservice
+}
+func (c *apiv1) Quota() apiv1connect.QuotaServiceClient {
+	return c.quotaservice
+}
+func (c *apiv1) QuotaRequest() apiv1connect.QuotaRequestServiceClient {
+	return c.quotarequestservice
 }
 func (c *apiv1) Tenant() apiv1connect.TenantServiceClient {
 	return c.tenantservice

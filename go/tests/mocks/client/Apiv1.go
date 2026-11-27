@@ -220,6 +220,98 @@ func (_c *Apiv1_ProjectMember_Call) RunAndReturn(run func() apiv1connect.Project
 	return _c
 }
 
+// Quota provides a mock function for the type Apiv1
+func (_mock *Apiv1) Quota() apiv1connect.QuotaServiceClient {
+	ret := _mock.Called()
+
+	if len(ret) == 0 {
+		panic("no return value specified for Quota")
+	}
+
+	var r0 apiv1connect.QuotaServiceClient
+	if returnFunc, ok := ret.Get(0).(func() apiv1connect.QuotaServiceClient); ok {
+		r0 = returnFunc()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(apiv1connect.QuotaServiceClient)
+		}
+	}
+	return r0
+}
+
+// Apiv1_Quota_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'Quota'
+type Apiv1_Quota_Call struct {
+	*mock.Call
+}
+
+// Quota is a helper method to define mock.On call
+func (_e *Apiv1_Expecter) Quota() *Apiv1_Quota_Call {
+	return &Apiv1_Quota_Call{Call: _e.mock.On("Quota")}
+}
+
+func (_c *Apiv1_Quota_Call) Run(run func()) *Apiv1_Quota_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *Apiv1_Quota_Call) Return(quotaServiceClient apiv1connect.QuotaServiceClient) *Apiv1_Quota_Call {
+	_c.Call.Return(quotaServiceClient)
+	return _c
+}
+
+func (_c *Apiv1_Quota_Call) RunAndReturn(run func() apiv1connect.QuotaServiceClient) *Apiv1_Quota_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// QuotaRequest provides a mock function for the type Apiv1
+func (_mock *Apiv1) QuotaRequest() apiv1connect.QuotaRequestServiceClient {
+	ret := _mock.Called()
+
+	if len(ret) == 0 {
+		panic("no return value specified for QuotaRequest")
+	}
+
+	var r0 apiv1connect.QuotaRequestServiceClient
+	if returnFunc, ok := ret.Get(0).(func() apiv1connect.QuotaRequestServiceClient); ok {
+		r0 = returnFunc()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(apiv1connect.QuotaRequestServiceClient)
+		}
+	}
+	return r0
+}
+
+// Apiv1_QuotaRequest_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'QuotaRequest'
+type Apiv1_QuotaRequest_Call struct {
+	*mock.Call
+}
+
+// QuotaRequest is a helper method to define mock.On call
+func (_e *Apiv1_Expecter) QuotaRequest() *Apiv1_QuotaRequest_Call {
+	return &Apiv1_QuotaRequest_Call{Call: _e.mock.On("QuotaRequest")}
+}
+
+func (_c *Apiv1_QuotaRequest_Call) Run(run func()) *Apiv1_QuotaRequest_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *Apiv1_QuotaRequest_Call) Return(quotaRequestServiceClient apiv1connect.QuotaRequestServiceClient) *Apiv1_QuotaRequest_Call {
+	_c.Call.Return(quotaRequestServiceClient)
+	return _c
+}
+
+func (_c *Apiv1_QuotaRequest_Call) RunAndReturn(run func() apiv1connect.QuotaRequestServiceClient) *Apiv1_QuotaRequest_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // Tenant provides a mock function for the type Apiv1
 func (_mock *Apiv1) Tenant() apiv1connect.TenantServiceClient {
 	ret := _mock.Called()

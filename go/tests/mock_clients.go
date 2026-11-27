@@ -28,6 +28,8 @@ type (
 		projectservice       *apiv1mocks.ProjectServiceClient
 		projectconfigservice *apiv1mocks.ProjectConfigServiceClient
 		projectmemberservice *apiv1mocks.ProjectMemberServiceClient
+		quotaservice         *apiv1mocks.QuotaServiceClient
+		quotarequestservice  *apiv1mocks.QuotaRequestServiceClient
 		tenantservice        *apiv1mocks.TenantServiceClient
 		tenantconfigservice  *apiv1mocks.TenantConfigServiceClient
 		tenantmemberservice  *apiv1mocks.TenantMemberServiceClient
@@ -39,6 +41,8 @@ type (
 		Project       func(m *mock.Mock)
 		ProjectConfig func(m *mock.Mock)
 		ProjectMember func(m *mock.Mock)
+		Quota         func(m *mock.Mock)
+		QuotaRequest  func(m *mock.Mock)
 		Tenant        func(m *mock.Mock)
 		TenantConfig  func(m *mock.Mock)
 		TenantMember  func(m *mock.Mock)
@@ -70,6 +74,8 @@ func newapiv1(t *testing.T, fns *Apiv1MockFns) *apiv1 {
 		projectservice:       apiv1mocks.NewProjectServiceClient(t),
 		projectconfigservice: apiv1mocks.NewProjectConfigServiceClient(t),
 		projectmemberservice: apiv1mocks.NewProjectMemberServiceClient(t),
+		quotaservice:         apiv1mocks.NewQuotaServiceClient(t),
+		quotarequestservice:  apiv1mocks.NewQuotaRequestServiceClient(t),
 		tenantservice:        apiv1mocks.NewTenantServiceClient(t),
 		tenantconfigservice:  apiv1mocks.NewTenantConfigServiceClient(t),
 		tenantmemberservice:  apiv1mocks.NewTenantMemberServiceClient(t),
@@ -88,6 +94,12 @@ func newapiv1(t *testing.T, fns *Apiv1MockFns) *apiv1 {
 		}
 		if fns.ProjectMember != nil {
 			fns.ProjectMember(&a.projectmemberservice.Mock)
+		}
+		if fns.Quota != nil {
+			fns.Quota(&a.quotaservice.Mock)
+		}
+		if fns.QuotaRequest != nil {
+			fns.QuotaRequest(&a.quotarequestservice.Mock)
 		}
 		if fns.Tenant != nil {
 			fns.Tenant(&a.tenantservice.Mock)
@@ -118,6 +130,12 @@ func (c *apiv1) ProjectConfig() apiv1connect.ProjectConfigServiceClient {
 }
 func (c *apiv1) ProjectMember() apiv1connect.ProjectMemberServiceClient {
 	return c.projectmemberservice
+}
+func (c *apiv1) Quota() apiv1connect.QuotaServiceClient {
+	return c.quotaservice
+}
+func (c *apiv1) QuotaRequest() apiv1connect.QuotaRequestServiceClient {
+	return c.quotarequestservice
 }
 func (c *apiv1) Tenant() apiv1connect.TenantServiceClient {
 	return c.tenantservice
