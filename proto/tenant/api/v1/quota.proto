@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package tenant.api.v1;
+
+import "tenant/api/v1/meta.proto";
+
+// QuotaService provides service methods to work with quotas of tenants
+service QuotaService {
+  // Create a quota, there can only be one quota per tenant and resource
+  rpc Create(QuotaServiceCreateRequest) returns (QuotaServiceCreateResponse);
+  // Update a quota
+  rpc Update(QuotaServiceUpdateRequest) returns (QuotaServiceUpdateResponse);
+  // Delete a quota
+  rpc Delete(QuotaServiceDeleteRequest) returns (QuotaServiceDeleteResponse);
+  // Get a quota
+  rpc Get(QuotaServiceGetRequest) returns (QuotaServiceGetResponse);
+  // List quotas
+  rpc List(QuotaServiceListRequest) returns (QuotaServiceListResponse);
+}
+
+// Quota is the database model
+// It defines the maximum amount of a resource a tenant is allowed to use.
+// Tenant id and resource are unique.
+message Quota {
+  // Meta of the quota
+  Meta meta = 1;
+  // TenantId is the id of the tenant this quota belongs to
+  string tenant_id = 2;
+  // Resource this quota applies to, the tenant-api does not interpret this value, consumers must ensure correct usage
+  string resource = 3;
+  // Max is the maximum amount of the resource, if not set the resource is unlimited
+  optional uint64 max = 4;
+}
+
+// QuotaServiceCreateRequest is the request payload to create a quota
+message QuotaServiceCreateRequest {
+  // Quota to create
+  Quota quota = 1;
+}
+
+// QuotaServiceCreateResponse is the response payload of requests
+message QuotaServiceCreateResponse {
+  // Quota
+  Quota quota = 1;
+}
+
+// QuotaServiceUpdateRequest is the request payload to update a quota
+message QuotaServiceUpdateRequest {
+  // Quota to update
+  Quota quota = 1;
+}
+
+// QuotaServiceUpdateResponse is the response payload of requests
+message QuotaServiceUpdateResponse {
+  // Quota
+  Quota quota = 1;
+}
+
+// QuotaServiceDeleteRequest is the request payload to delete a quota
+message QuotaServiceDeleteRequest {
+  // Id of the quota to delete
+  string id = 1;
+}
+
+// QuotaServiceDeleteResponse is the response payload of requests
+message QuotaServiceDeleteResponse {
+  // Quota
+  Quota quota = 1;
+}
+
+// QuotaServiceGetRequest is the request payload to get a quota
+message QuotaServiceGetRequest {
+  // Id of the quota to get
+  string id = 1;
+}
+
+// QuotaServiceGetResponse is the response payload of requests
+message QuotaServiceGetResponse {
+  // Quota
+  Quota quota = 1;
+}
+
+// QuotaServiceListRequest is the request payload to list quotas
+message QuotaServiceListRequest {
+  // Annotations of quotas to list
+  map<string, string> annotations = 1;
+  // Labels of quotas to list
+  repeated string labels = 2;
+
+  // TenantId of the quotas to list
+  optional string tenant_id = 3;
+  // Resource of the quotas to list
+  optional string resource = 4;
+}
+
+// QuotaServiceListResponse is the response payload of quota list requests
+message QuotaServiceListResponse {
+  // Quotas
+  repeated Quota quotas = 1;
+}

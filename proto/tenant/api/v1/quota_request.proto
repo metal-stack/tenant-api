@@ -1,0 +1,128 @@
+syntax = "proto3";
+
+package tenant.api.v1;
+
+import "google/protobuf/timestamp.proto";
+import "tenant/api/v1/meta.proto";
+
+// QuotaRequestService provides service methods to work with quota requests of tenants
+service QuotaRequestService {
+  // Create a quota request, there can only be one pending request per tenant and resource
+  rpc Create(QuotaRequestServiceCreateRequest) returns (QuotaRequestServiceCreateResponse);
+  // Update a quota request
+  rpc Update(QuotaRequestServiceUpdateRequest) returns (QuotaRequestServiceUpdateResponse);
+  // Delete a quota request
+  rpc Delete(QuotaRequestServiceDeleteRequest) returns (QuotaRequestServiceDeleteResponse);
+  // Get a quota request
+  rpc Get(QuotaRequestServiceGetRequest) returns (QuotaRequestServiceGetResponse);
+  // List quota requests
+  rpc List(QuotaRequestServiceListRequest) returns (QuotaRequestServiceListResponse);
+}
+
+// QuotaRequest is the database model
+// It is a request of a tenant to change the quota of a single resource.
+message QuotaRequest {
+  // Meta of the quota request
+  Meta meta = 1;
+  // TenantId is the id of the tenant this quota request belongs to
+  string tenant_id = 2;
+  // Resource the change is requested for, the tenant-api does not interpret this value, consumers must ensure correct usage
+  string resource = 3;
+  // Max is the requested maximum amount of the resource, if not set unlimited is requested
+  optional uint64 max = 4;
+  // Reason why the change is requested
+  string reason = 5;
+  // State of this quota request
+  QuotaRequestState state = 6;
+  // RequestedBy is the user who issued this request
+  string requested_by = 7;
+  // DecidedBy is the user who admitted or rejected this request
+  optional string decided_by = 8;
+  // DecidedAt is the date when this request was admitted or rejected
+  optional google.protobuf.Timestamp decided_at = 9;
+  // Comment regarding the decision
+  optional string comment = 10;
+}
+
+// QuotaRequestState is the state of a quota request
+enum QuotaRequestState {
+  // QUOTA_REQUEST_STATE_UNSPECIFIED is not specified
+  QUOTA_REQUEST_STATE_UNSPECIFIED = 0;
+  // QUOTA_REQUEST_STATE_PENDING the request awaits a decision
+  QUOTA_REQUEST_STATE_PENDING = 1;
+  // QUOTA_REQUEST_STATE_ADMITTED the request was admitted
+  QUOTA_REQUEST_STATE_ADMITTED = 2;
+  // QUOTA_REQUEST_STATE_REJECTED the request was rejected
+  QUOTA_REQUEST_STATE_REJECTED = 3;
+}
+
+// QuotaRequestServiceCreateRequest is the request payload to create a quota request
+message QuotaRequestServiceCreateRequest {
+  // QuotaRequest to create
+  QuotaRequest quota_request = 1;
+}
+
+// QuotaRequestServiceCreateResponse is the response payload of requests
+message QuotaRequestServiceCreateResponse {
+  // QuotaRequest
+  QuotaRequest quota_request = 1;
+}
+
+// QuotaRequestServiceUpdateRequest is the request payload to update a quota request
+message QuotaRequestServiceUpdateRequest {
+  // QuotaRequest to update
+  QuotaRequest quota_request = 1;
+}
+
+// QuotaRequestServiceUpdateResponse is the response payload of requests
+message QuotaRequestServiceUpdateResponse {
+  // QuotaRequest
+  QuotaRequest quota_request = 1;
+}
+
+// QuotaRequestServiceDeleteRequest is the request payload to delete a quota request
+message QuotaRequestServiceDeleteRequest {
+  // Id of the quota request to delete
+  string id = 1;
+}
+
+// QuotaRequestServiceDeleteResponse is the response payload of requests
+message QuotaRequestServiceDeleteResponse {
+  // QuotaRequest
+  QuotaRequest quota_request = 1;
+}
+
+// QuotaRequestServiceGetRequest is the request payload to get a quota request
+message QuotaRequestServiceGetRequest {
+  // Id of the quota request to get
+  string id = 1;
+}
+
+// QuotaRequestServiceGetResponse is the response payload of requests
+message QuotaRequestServiceGetResponse {
+  // QuotaRequest
+  QuotaRequest quota_request = 1;
+}
+
+// QuotaRequestServiceListRequest is the request payload to list quota requests
+message QuotaRequestServiceListRequest {
+  // Annotations of quota requests to list
+  map<string, string> annotations = 1;
+  // Labels of quota requests to list
+  repeated string labels = 2;
+
+  // TenantId of the quota requests to list
+  optional string tenant_id = 3;
+  // Resource of the quota requests to list
+  optional string resource = 4;
+  // State of the quota requests to list
+  optional QuotaRequestState state = 5;
+  // DecidedBefore lists only quota requests which were decided before the given date
+  optional google.protobuf.Timestamp decided_before = 6;
+}
+
+// QuotaRequestServiceListResponse is the response payload of quota request list requests
+message QuotaRequestServiceListResponse {
+  // QuotaRequests
+  repeated QuotaRequest quota_requests = 1;
+}

@@ -63,7 +63,7 @@ type TenantServiceClient interface {
 	Create(context.Context, *v1.TenantServiceCreateRequest) (*v1.TenantServiceCreateResponse, error)
 	// Update a tenant
 	Update(context.Context, *v1.TenantServiceUpdateRequest) (*v1.TenantServiceUpdateResponse, error)
-	// Delete a tenant
+	// Delete a tenant, also deletes all memberships, configs, quotas and quota requests of this tenant
 	Delete(context.Context, *v1.TenantServiceDeleteRequest) (*v1.TenantServiceDeleteResponse, error)
 	// Get a tenant
 	Get(context.Context, *v1.TenantServiceGetRequest) (*v1.TenantServiceGetResponse, error)
@@ -247,7 +247,7 @@ type TenantServiceHandler interface {
 	Create(context.Context, *v1.TenantServiceCreateRequest) (*v1.TenantServiceCreateResponse, error)
 	// Update a tenant
 	Update(context.Context, *v1.TenantServiceUpdateRequest) (*v1.TenantServiceUpdateResponse, error)
-	// Delete a tenant
+	// Delete a tenant, also deletes all memberships, configs, quotas and quota requests of this tenant
 	Delete(context.Context, *v1.TenantServiceDeleteRequest) (*v1.TenantServiceDeleteResponse, error)
 	// Get a tenant
 	Get(context.Context, *v1.TenantServiceGetRequest) (*v1.TenantServiceGetResponse, error)
